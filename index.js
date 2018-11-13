@@ -1,6 +1,16 @@
-const { server } = require('./server.js');
+const express = require('express');
 
-const port = process.env.PORT || 3300;
-server.listen(port, () => {
-  console.log(`\n=== Server listening on port ${port}\n`);
+const SERVER_CONFIGS = require('./constants/server');
+
+const configureServer = require('./server');
+const configureRoutes = require('./routes');
+
+const app = express();
+
+configureServer(app);
+configureRoutes(app);
+
+app.listen(SERVER_CONFIGS.PORT, error => {
+  if (error) throw error;
+  console.log('Server running on port: ' + SERVER_CONFIGS.PORT);
 });
