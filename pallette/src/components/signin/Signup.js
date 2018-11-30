@@ -6,19 +6,60 @@ class SignUp extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-
+            user:{
+                firstName:'',
+                lastName:'',
+                email: '',
+                password:'',
+                rePassword:''
+            }
         };
     }
+
+    handleChange = event => {
+        this.setState({
+            user: {
+                ...this.state.user,
+                [event.target.name]:event.target.value,
+            }
+        })
+    }
+
     render(){
         return (
             <SignupContainer>
                 <h1>Sign Up</h1>
                 <form action="submit">
-                  <input type="text"/>
-                  <input type="text"/>
-                  <input type="email"/>
-                  <input type="password"/>
-                  <input type="password"/>
+                  <input 
+                    type="text" 
+                    name='firstName' 
+                    onChange={this.handleChange}
+                    value={this.state.firstName}
+                    />
+                  <input 
+                    type="text" 
+                    name='lastName' 
+                    onChange={this.handleChange}
+                    value={this.state.lastName}
+                    />
+                  <input 
+                    type="email" 
+                    name='email' 
+                    onChange={this.handleChange}
+                    value={this.state.email}
+                    />
+                  <input 
+                    type="password" 
+                    name='password' 
+                    onChange={this.handleChange}
+                    value={this.state.password}
+                    />
+                  <input 
+                    type="password" 
+                    name='password' 
+                    onChange={this.handleChange}
+                    value={this.state.rePassword}
+                    />
                   <button>
                       Sign Up
                   </button>
