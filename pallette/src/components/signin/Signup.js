@@ -12,10 +12,16 @@ class SignUp extends React.Component{
     render(){
         return (
             <SignupContainer>
+                <h1>Sign Up</h1>
                 <form action="submit">
                   <input type="text"/>
                   <input type="text"/>
-                  
+                  <input type="email"/>
+                  <input type="password"/>
+                  <input type="password"/>
+                  <button>
+                      Sign Up
+                  </button>
                 </form>
             </SignupContainer>
         )
