@@ -15,6 +15,9 @@ class SignIn extends React.Component{
                 <form action="submit">
                   <input type="email"/>
                   <input type="password"/>
+                  <button>
+                      Sign Up
+                  </button>
                 </form>
             </SigninContainer>
         )
