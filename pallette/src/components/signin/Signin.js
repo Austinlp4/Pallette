@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 class SignIn extends React.Component{
     constructor(props){
@@ -7,13 +8,23 @@ class SignIn extends React.Component{
 
         };
     }
+
     render(){
         return (
-            <div>
-                
-            </div>
+            <SigninContainer>
+                <form action="submit">
+                  <input type="email"/>
+                  <input type="password"/>
+                </form>
+            </SigninContainer>
         )
     }
 }
+
+const SigninContainer = styled.div`
+  height: 400px;
+  width: 400px;
+  border: 1px solid lightgray;
+`;
 
 export default SignIn;

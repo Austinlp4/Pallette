@@ -72,6 +72,7 @@ class SignUp extends React.Component{
 const SignupContainer = styled.div`
   height: 400px;
   width: 400px;
+  border: 1px solid lightgray;
 `;
 
 export default SignUp;
