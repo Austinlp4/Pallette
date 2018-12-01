@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import './App.css';
+import Pallette from '../src/components/pallette/Pallette';
 
 class App extends Component {
   render() {
@@ -10,7 +10,7 @@ class App extends Component {
         <div className="one">
           <div className="two">
             <div className="three">
-              
+              <Pallette />
             </div>
           </div>
         </div>
