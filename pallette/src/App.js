@@ -12,6 +12,10 @@ class App extends Component {
           <div className="two">
             <div className="three">
               <Pallette />
+              <Call>
+              <h1>^</h1>
+              <h2>This Week's Pallete</h2>
+              </Call>
               <Featured />
             </div>
           </div>
@@ -36,7 +40,7 @@ const Home = styled.div`
     display: flex;
     justify-content: center;
     width: 90%;
-    height: 800px;
+    
 
   }
   .three{
@@ -44,6 +48,16 @@ const Home = styled.div`
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+  }
+`;
+
+const Call = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h1, h2{
+    margin: 0;
+    font-size: 1.1rem;
   }
 `;
 

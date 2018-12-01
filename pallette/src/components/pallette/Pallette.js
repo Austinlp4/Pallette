@@ -39,7 +39,10 @@ class Pallette extends React.Component{
 const PalletteContainer = styled.div`
   width: 90%;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
+  margin-bottom: 20px;
 `;
 
 const Pallete = styled.div`
