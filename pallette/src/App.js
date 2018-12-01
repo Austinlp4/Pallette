@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import Pallette from '../src/components/pallette/Pallette';
+import Featured from './components/featured/Featured';
 
 class App extends Component {
   render() {
@@ -11,6 +12,7 @@ class App extends Component {
           <div className="two">
             <div className="three">
               <Pallette />
+              <Featured />
             </div>
           </div>
         </div>
@@ -25,6 +27,7 @@ const Home = styled.div`
   justify-content: center;
   align-items: center;
   padding-top: 5px;
+  z-index: 4;
   .one, .two, .three{
     box-shadow: 0 9px 0px 0px white, 
     inset 0 -9px 0px 0px white, 
@@ -35,6 +38,12 @@ const Home = styled.div`
     width: 90%;
     height: 800px;
 
+  }
+  .three{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
   }
 `;
 

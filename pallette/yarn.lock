@@ -2402,6 +2402,24 @@ cyclist@~0.2.2:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-0.2.2.tgz#1b33792e11e914a2fd6d6ed6447464444e5fa640"
 
+d3-color@1:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/d3-color/-/d3-color-1.2.3.tgz#6c67bb2af6df3cc8d79efcc4d3a3e83e28c8048f"
+
+d3-ease@^1.0.3:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/d3-ease/-/d3-ease-1.0.5.tgz#8ce59276d81241b1b72042d6af2d40e76d936ffb"
+
+d3-interpolate@^1.2.0:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/d3-interpolate/-/d3-interpolate-1.3.2.tgz#417d3ebdeb4bc4efcc8fd4361c55e4040211fd68"
+  dependencies:
+    d3-color "1"
+
+d3-timer@^1.0.4:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/d3-timer/-/d3-timer-1.0.9.tgz#f7bb8c0d597d792ff7131e1c24a36dd471a471ba"
+
 damerau-levenshtein@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/damerau-levenshtein/-/damerau-levenshtein-1.0.4.tgz#03191c432cb6eea168bb77f3a55ffdccb8978514"
@@ -2641,6 +2659,12 @@ dom-serializer@0:
 dom-walk@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/dom-walk/-/dom-walk-0.1.1.tgz#672226dc74c8f799ad35307df936aba11acd6018"
+
+dom7@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/dom7/-/dom7-2.1.2.tgz#a914070c0abe8465384997a9c4f34475f67f75bd"
+  dependencies:
+    ssr-window "^1.0.1"
 
 domain-browser@^1.1.1:
   version "1.2.0"
@@ -3053,6 +3077,10 @@ execa@^0.7.0:
     p-finally "^1.0.0"
     signal-exit "^3.0.0"
     strip-eof "^1.0.0"
+
+exenv@^1.2.0:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/exenv/-/exenv-1.2.2.tgz#2ae78e85d9894158670b03d47bec1f03bd91bb9d"
 
 exit@^0.1.2:
   version "0.1.2"
@@ -5618,6 +5646,15 @@ nth-check@^1.0.1, nth-check@~1.0.1:
   dependencies:
     boolbase "~1.0.0"
 
+nuka-carousel@^4.4.3:
+  version "4.4.3"
+  resolved "https://registry.yarnpkg.com/nuka-carousel/-/nuka-carousel-4.4.3.tgz#ae815cb7ffa2ae2d4b2572da244d85a1574d8a31"
+  dependencies:
+    d3-ease "^1.0.3"
+    exenv "^1.2.0"
+    prop-types "^15.6.0"
+    react-move "^2.7.0"
+
 num2fraction@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/num2fraction/-/num2fraction-1.2.2.tgz#6f682b6a027a4e9ddfa4564cd2589d1d4e669ede"
@@ -6684,7 +6721,7 @@ prompts@^0.1.9:
     kleur "^2.0.1"
     sisteransi "^0.1.1"
 
-prop-types@^15.5.4, prop-types@^15.6.1, prop-types@^15.6.2:
+prop-types@^15.5.4, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   dependencies:
@@ -6882,9 +6919,24 @@ react-error-overlay@^5.0.5:
   version "5.0.5"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-5.0.5.tgz#716ff1a92fda76bb89a39adf9ce046a5d740e71a"
 
+react-id-swiper@^1.6.8:
+  version "1.6.8"
+  resolved "https://registry.yarnpkg.com/react-id-swiper/-/react-id-swiper-1.6.8.tgz#0b04def5333be75f698b061e18522fc5e52a4b6e"
+  dependencies:
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    swiper "4.4.1"
+
 react-is@^16.3.1:
   version "16.6.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.6.0.tgz#456645144581a6e99f6816ae2bd24ee94bdd0c01"
+
+react-move@^2.7.0:
+  version "2.8.0"
+  resolved "https://registry.yarnpkg.com/react-move/-/react-move-2.8.0.tgz#63deaf6a0e58ca6769357abfcd91dde44d83a596"
+  dependencies:
+    d3-interpolate "^1.2.0"
+    d3-timer "^1.0.4"
 
 react-router-dom@^4.3.1:
   version "4.3.1"
@@ -7715,6 +7767,10 @@ sshpk@^1.7.0:
     safer-buffer "^2.0.2"
     tweetnacl "~0.14.0"
 
+ssr-window@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/ssr-window/-/ssr-window-1.0.1.tgz#30752a6a4666e7767f0b7e6aa6fc2fdbd0d9b369"
+
 ssri@^5.2.4:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/ssri/-/ssri-5.3.0.tgz#ba3872c9c6d33a0704a7d71ff045e5ec48999d06"
@@ -7933,6 +7989,13 @@ svgo@^1.0.0, svgo@^1.0.5:
     stable "~0.1.6"
     unquote "~1.1.1"
     util.promisify "~1.0.0"
+
+swiper@4.4.1:
+  version "4.4.1"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-4.4.1.tgz#9eeca17c5bfa4a27663963b2640119e5fc668255"
+  dependencies:
+    dom7 "^2.1.2"
+    ssr-window "^1.0.1"
 
 symbol-tree@^3.2.2:
   version "3.2.2"
