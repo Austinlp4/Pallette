@@ -20,7 +20,7 @@ class SignUp extends React.Component{
         this.setState({
             user: {
                 ...this.state.user,
-                [event.target.value]:event.target.value,
+                [event.target.name]:event.target.value,
             }
         })
     }
@@ -35,30 +35,35 @@ class SignUp extends React.Component{
                     name='firstName' 
                     onChange={this.handleChange}
                     value={this.state.firstName}
+                    placeholder='First Name'
                     />
                   <input 
                     type="text" 
                     name='lastName' 
                     onChange={this.handleChange}
                     value={this.state.lastName}
+                    placeholder='Last Name'
                     />
                   <input 
                     type="email" 
                     name='email' 
                     onChange={this.handleChange}
                     value={this.state.email}
+                    placeholder='E-mail'
                     />
                   <input 
                     type="password" 
                     name='password' 
                     onChange={this.handleChange}
                     value={this.state.password}
+                    placeholder='New Password'
                     />
                   <input 
                     type="password" 
                     name='password' 
                     onChange={this.handleChange}
                     value={this.state.rePassword}
+                    placeholder='Re-Enter Password'
                     />
                   <button>
                       Sign Up
@@ -80,10 +85,13 @@ const SignupContainer = styled.div`
   form{
       display: flex;
       flex-direction: column;
+      width: 90%;
       input{
           height: 35px;
           width: 90%;
           border-radius: 8px;
+          margin: 4% 0;
+          border: .2 solid lightgray;
       }
   }
 `;
