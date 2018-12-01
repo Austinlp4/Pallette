@@ -1,22 +1,42 @@
 import React, { Component } from 'react';
+import { Route, withRouter, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-import Pallette from '../src/components/pallette/Pallette';
-import Featured from './components/featured/Featured';
+// import Pallette from '../src/components/pallette/Pallette';
+// import Featured from './components/featured/Featured';
+// import firebase, { auth, provider } from './firebase.js';
+import SignUp from './components/signin/Signup';
+import SignIn from './components/signin/Signin';
+import MainPage from './components/Home/MainPage';
 
 class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      user: null
+    }
+  }
+
   render() {
     return (
       <Home className="App">
+      <Nav>
        <h1>Pallette</h1>
+       <NavLink to='/signup'>
+         Sign Up
+       </NavLink>
+       </Nav>
         <div className="one">
           <div className="two">
             <div className="three">
-              <Pallette />
+              {/* <Pallette />
               <Call>
               <h1>^</h1>
               <h2>This Week's Pallete</h2>
               </Call>
-              <Featured />
+              <Featured /> */}
+              <Route exact path='/' component={MainPage}/>
+              <Route path='/signup' component={SignUp}/>
+              <Route path='/signin' component={SignIn}/>
             </div>
           </div>
         </div>
@@ -51,14 +71,17 @@ const Home = styled.div`
   }
 `;
 
-const Call = styled.div`
+const Nav = styled.div`
   display: flex;
-  flex-direction: column;
+  width: 90%;
+  justify-content: space-between;
   align-items: center;
-  h1, h2{
-    margin: 0;
+  a{
+    text-decoration: none;
+    color: black;
     font-size: 1.1rem;
+    font-weight: bold;
   }
 `;
 
-export default App;
+export default withRouter(App);

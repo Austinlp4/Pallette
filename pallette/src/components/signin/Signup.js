@@ -70,9 +70,10 @@ class SignUp extends React.Component{
 }
 
 const SignupContainer = styled.div`
-  height: 400px;
-  width: 400px;
+  height: 600px;
+  width: 600px;
   border: 1px solid lightgray;
+  margin: 75px auto;
 `;
 
 export default SignUp;
