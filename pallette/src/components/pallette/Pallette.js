@@ -47,8 +47,10 @@ const PalletteContainer = styled.div`
 
 const Pallete = styled.div`
   display: flex;
+  justify-content: center;
+  width: 80%;
   div{
-      width: 75px;
+      width: 18%;
       height: 75px;
   }
 `;
