@@ -74,6 +74,18 @@ const SignupContainer = styled.div`
   width: 600px;
   border: 1px solid lightgray;
   margin: 75px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  form{
+      display: flex;
+      flex-direction: column;
+      input{
+          height: 35px;
+          width: 90%;
+          border-radius: 8px;
+      }
+  }
 `;
 
 export default SignUp;
