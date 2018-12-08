@@ -8,7 +8,7 @@ import SignUp from './components/signin/Signup';
 import SignIn from './components/signin/Signin';
 import MainPage from './components/Home/MainPage';
 
-import * as ROUTES from '../../routes';
+import * as ROUTES from '../src/components/routes';
 
 class App extends Component {
   constructor() {
@@ -37,7 +37,7 @@ class App extends Component {
               </Call>
               <Featured /> */}
               <Route exact path={ROUTES.LANDING} component={MainPage}/>
-              <Route path={ROUTES.SIGN_UP} component={SignUp}/>
+              <Route path='/signup' component={SignUp}/>
               <Route path={ROUTES.SIGN_IN} component={SignIn}/>
             </div>
           </div>

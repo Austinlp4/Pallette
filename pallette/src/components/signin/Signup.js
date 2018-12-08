@@ -1,76 +1,97 @@
 import React from 'react';
 import styled from 'styled-components';
 import firebase from '../../firebase';
+import { FirebaseContext } from '../Firebase';
+import * as ROUTES from '../routes';
+
+const INITIAL_STATE = {
+    username: '',
+    email: '',
+    passwordOne: '',
+    passwordTwo: '',
+    error: null,
+  };
 
 class SignUp extends React.Component{
     constructor(props){
         super(props);
-        this.state = {
-            user:{
-                firstName:'',
-                lastName:'',
-                email: '',
-            }
-        };
+        this.state = {...INITIAL_STATE};
     }
 
-    handleChange = (event) => {
+    onChange = (event) => {
         this.setState({
-            user: {
-                ...this.state.user,
-                [event.target.name]:event.target.value,
-            }
+            [event.target.name]: event.target.value 
         })
     }
 
-    handleSubmit = event => {
+    onSubmit = event => {
+        const { username, email, passwordOne } = this.state;
+
+        this.props.firebase
+        .doCreateUserWithEmailAndPassword(email, passwordOne)
+        .then(authUser => {
+            this.setState({ ...INITIAL_STATE });
+            this.props.history.push(ROUTES.HOME);
+        })
+        .catch(error => {
+            this.setState({ error });
+        });
+
         event.preventDefault();
-        const itemsRef = firebase.database().ref('users');
-        const user = {
-            bio: '',
-            email: this.state.user.email,
-            facebook: '',
-            firstName: this.state.user.firstName,
-            instagram: '',
-            lastName: this.state.user.lastName
         }
 
-        itemsRef.push(user);
-        this.setState({
-            user: {firstName:'', lastName:'',email: ''}
-        })
-    }
-
     render(){
+        const {
+            username,
+            email,
+            passwordOne,
+            passwordTwo,
+            error,
+          } = this.state;
+          
+          const isInvalid =
+          passwordOne !== passwordTwo ||
+          passwordOne === '' ||
+          email === '' ||
+          username === '';
         return (
             <SignupContainer>
+                {/* <FirebaseContext.Consumer> */}
                 <h1>Sign Up</h1>
-                <form action="submit" onSubmit={this.handleSubmit}>
-                  <input 
-                    type="text" 
-                    name='firstName' 
-                    onChange={this.handleChange}
-                    value={this.state.firstName}
-                    placeholder='First Name'
-                    />
-                  <input 
-                    type="text" 
-                    name='lastName' 
-                    onChange={this.handleChange}
-                    value={this.state.lastName}
-                    placeholder='Last Name'
-                    />
-                  <input 
-                    type="email" 
-                    name='email' 
-                    onChange={this.handleChange}
-                    value={this.state.email}
-                    placeholder='E-mail'
-                    />
-                  <button>
-                      Sign Up
-                  </button>
-                </form>
+                <form onSubmit={this.onSubmit}>
+        <input
+          name="username"
+          value={username}
+          onChange={this.onChange}
+          type="text"
+          placeholder="Full Name"
+        />
+        <input
+          name="email"
+          value={email}
+          onChange={this.onChange}
+          type="text"
+          placeholder="Email Address"
+        />
+        <input
+          name="passwordOne"
+          value={passwordOne}
+          onChange={this.onChange}
+          type="password"
+          placeholder="Password"
+        />
+        <input
+          name="passwordTwo"
+          value={passwordTwo}
+          onChange={this.onChange}
+          type="password"
+          placeholder="Confirm Password"
+        />
+        <button type="submit" disabled={isInvalid}>Sign Up</button>
+
+        {error && <p>{error.message}</p>}
+      </form>
+      {/* </FirebaseContext.Consumer> */}
             </SignupContainer>
         )
     }
