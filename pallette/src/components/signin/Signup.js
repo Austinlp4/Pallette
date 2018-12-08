@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-
+import firebase from '../../firebase';
 
 class SignUp extends React.Component{
     constructor(props){
@@ -10,8 +10,6 @@ class SignUp extends React.Component{
                 firstName:'',
                 lastName:'',
                 email: '',
-                password:'',
-                rePassword:''
             }
         };
     }
@@ -25,11 +23,29 @@ class SignUp extends React.Component{
         })
     }
 
+    handleSubmit = event => {
+        event.preventDefault();
+        const itemsRef = firebase.database().ref('users');
+        const user = {
+            bio: '',
+            email: this.state.user.email,
+            facebook: '',
+            firstName: this.state.user.firstName,
+            instagram: '',
+            lastName: this.state.user.lastName
+        }
+
+        itemsRef.push(user);
+        this.setState({
+            user: {firstName:'', lastName:'',email: ''}
+        })
+    }
+
     render(){
         return (
             <SignupContainer>
                 <h1>Sign Up</h1>
-                <form action="submit">
+                <form action="submit" onSubmit={this.handleSubmit}>
                   <input 
                     type="text" 
                     name='firstName' 
@@ -50,20 +66,6 @@ class SignUp extends React.Component{
                     onChange={this.handleChange}
                     value={this.state.email}
                     placeholder='E-mail'
-                    />
-                  <input 
-                    type="password" 
-                    name='password' 
-                    onChange={this.handleChange}
-                    value={this.state.password}
-                    placeholder='New Password'
-                    />
-                  <input 
-                    type="password" 
-                    name='password' 
-                    onChange={this.handleChange}
-                    value={this.state.rePassword}
-                    placeholder='Re-Enter Password'
                     />
                   <button>
                       Sign Up
