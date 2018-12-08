@@ -8,6 +8,8 @@ import SignUp from './components/signin/Signup';
 import SignIn from './components/signin/Signin';
 import MainPage from './components/Home/MainPage';
 
+import * as ROUTES from '../../routes';
+
 class App extends Component {
   constructor() {
     super();
@@ -34,9 +36,9 @@ class App extends Component {
               <h2>This Week's Pallete</h2>
               </Call>
               <Featured /> */}
-              <Route exact path='/' component={MainPage}/>
-              <Route path='/signup' component={SignUp}/>
-              <Route path='/signin' component={SignIn}/>
+              <Route exact path={ROUTES.LANDING} component={MainPage}/>
+              <Route path={ROUTES.SIGN_UP} component={SignUp}/>
+              <Route path={ROUTES.SIGN_IN} component={SignIn}/>
             </div>
           </div>
         </div>
