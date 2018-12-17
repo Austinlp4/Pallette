@@ -1,100 +1,79 @@
 import React from 'react';
+import { withRouter } from 'react-router-dom';
 import styled from 'styled-components';
 import firebase from '../../firebase';
-import { FirebaseContext } from '../Firebase';
-import * as ROUTES from '../routes';
 
-const INITIAL_STATE = {
-    username: '',
-    email: '',
-    passwordOne: '',
-    passwordTwo: '',
-    error: null,
+
+class SignUp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: '',
+      password: '',
+      error: null,
+    };
+  }
+
+  onChange = event => {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
   };
 
-class SignUp extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {...INITIAL_STATE};
-    }
+  onSubmit = event => {
+    event.preventDefault();
+    const { email, password } = this.state;
+    firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password)
+      .then(user => {
+        this.props.history.push('/');
+      })
+      .catch(error => {
+        this.setState({ error: error });
+      });
+  };
 
-    onChange = (event) => {
-        this.setState({
-            [event.target.name]: event.target.value 
-        })
-    }
-
-    onSubmit = event => {
-        const { username, email, passwordOne } = this.state;
-
-        this.props.firebase
-        .doCreateUserWithEmailAndPassword(email, passwordOne)
-        .then(authUser => {
-            this.setState({ ...INITIAL_STATE });
-            this.props.history.push(ROUTES.HOME);
-        })
-        .catch(error => {
-            this.setState({ error });
-        });
-
-        event.preventDefault();
-        }
-
-    render(){
-        const {
-            username,
-            email,
-            passwordOne,
-            passwordTwo,
-            error,
-          } = this.state;
-          
-          const isInvalid =
-          passwordOne !== passwordTwo ||
-          passwordOne === '' ||
-          email === '' ||
-          username === '';
-        return (
-            <SignupContainer>
-                {/* <FirebaseContext.Consumer> */}
-                <h1>Sign Up</h1>
-                <form onSubmit={this.onSubmit}>
-        <input
-          name="username"
-          value={username}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Full Name"
-        />
-        <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
-        <input
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Confirm Password"
-        />
-        <button type="submit" disabled={isInvalid}>Sign Up</button>
-
-        {error && <p>{error.message}</p>}
-      </form>
-      {/* </FirebaseContext.Consumer> */}
-            </SignupContainer>
-        )
-    }
+  render() {
+    const { email, password, error } = this.state;
+    return (
+      <SignupContainer>
+        <div>
+          <div>
+            <h3>Register</h3>
+          </div>
+        </div>
+        {error ? (
+          <div>
+            <div>
+              <p>{error.message}</p>
+            </div>
+          </div>
+        ) : null}
+        <div>
+          <div>
+            <form onSubmit={this.handleSubmit}>
+              <input
+                type="text"
+                name="email"
+                placeholder="Email"
+                value={email}
+                onChange={this.handleInputChange}
+              />
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={password}
+                onChange={this.handleInputChange}
+              />
+              <button children="Register" />
+            </form>
+          </div>
+        </div>
+      </SignupContainer>
+    );
+  }
 }
 
 const SignupContainer = styled.div`
@@ -105,18 +84,18 @@ const SignupContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  form{
-      display: flex;
-      flex-direction: column;
+  form {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    input {
+      height: 35px;
       width: 90%;
-      input{
-          height: 35px;
-          width: 90%;
-          border-radius: 8px;
-          margin: 4% 0;
-          border: .2 solid lightgray;
-      }
+      border-radius: 8px;
+      margin: 4% 0;
+      border: 0.2 solid lightgray;
+    }
   }
 `;
 
-export default SignUp;
+export default withRouter(SignUp);
