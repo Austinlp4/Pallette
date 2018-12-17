@@ -5,7 +5,7 @@ import styled from 'styled-components';
 // import Featured from './components/featured/Featured';
 // import firebase, { auth, provider } from './firebase.js';
 import SignUp from './components/signin/Signup';
-import SignIn from './components/signin/Signin';
+import Login from './components/signin/Signin';
 import MainPage from './components/Home/MainPage';
 
 import * as ROUTES from '../src/components/routes';
@@ -38,7 +38,7 @@ class App extends Component {
               <Featured /> */}
               <Route exact path={ROUTES.LANDING} component={MainPage}/>
               <Route path='/signup' component={SignUp}/>
-              <Route path={ROUTES.SIGN_IN} component={SignIn}/>
+              <Route path={ROUTES.SIGN_IN} component={Login}/>
             </div>
           </div>
         </div>
