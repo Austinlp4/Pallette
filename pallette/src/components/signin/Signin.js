@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import firebase from './firebase';
+import firebase from '../../firebase';
 import styled from 'styled-components';
 
 class Login extends Component {

@@ -35,7 +35,6 @@ class SignUp extends React.Component {
   };
 
   render() {
-    const { email, password, error } = this.state;
     return (
       <SignupContainer>
         <div>
@@ -43,29 +42,29 @@ class SignUp extends React.Component {
             <h3>Register</h3>
           </div>
         </div>
-        {error ? (
+        {this.state.error ? (
           <div>
             <div>
-              <p>{error.message}</p>
+              <p>{this.state.error.message}</p>
             </div>
           </div>
         ) : null}
         <div>
           <div>
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.onSubmit}>
               <input
                 type="text"
                 name="email"
                 placeholder="Email"
-                value={email}
-                onChange={this.handleInputChange}
+                value={this.state.email}
+                onChange={this.onChange}
               />
               <input
                 type="password"
                 name="password"
                 placeholder="Password"
-                value={password}
-                onChange={this.handleInputChange}
+                value={this.state.password}
+                onChange={this.onChange}
               />
               <button children="Register" />
             </form>
