@@ -17,14 +17,12 @@ class Register extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+
   submitHandler = e => {
     const user = firebase.auth().currentUser;
     e.preventDefault();
-    
     if (user) {
-      this.props.signUpNewUser(
-        e, 
-        this.state.type,
+      this.props.newUser(
         user.email, 
         this.state.firstName, 
         this.state.lastName,  
@@ -32,20 +30,27 @@ class Register extends React.Component {
         this.state.city, 
         this.state.state, 
         this.state.zipCode, 
-        // this.state.password,                      
-        // this.state.rePassword
       );
+      this.setState({
+        firstName: '',
+        lastName: '',
+        jobTitle: '',
+        street: '',
+        city: '',
+        state: '',
+        zipCode: '',
+      });
+      this.props.history.push('/');
     } else {
-      console.log('nope');
+      console.log('No user to push');
     }
   }
 
   render() {
-    // console.log('%cstate', 'color: blue', this.state);
     return (
       <div>
         <div>
-          <h2>Job Seeker - Sign Up</h2>
+          <h2>Register</h2>
           
           <form onSubmit={this.submitHandler}>
             <h4>Personal Information</h4>
@@ -95,7 +100,7 @@ class Register extends React.Component {
             </div>
             
             <div>
-              <label
+              <input
                 id="city"
                 name="city"
                 type="text"

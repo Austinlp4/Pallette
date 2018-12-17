@@ -1,7 +1,9 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { Route, withRouter} from 'react-router-dom';
 import styled from 'styled-components';
 import firebase from '../../firebase';
+import Register from './Register';
+
 
 
 class SignUp extends React.Component {
@@ -27,12 +29,36 @@ class SignUp extends React.Component {
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(user => {
-        this.props.history.push('/');
+        this.props.history.push('/register');
       })
       .catch(error => {
         this.setState({ error: error });
       });
   };
+
+  newUser = (
+    e,
+    firstName,
+    lastName,
+    email,
+    street,
+    city,
+    state,
+    zipCode
+  ) => {
+    let info = {
+        e,
+        firstName,
+        lastName,
+        email,
+        street,
+        city,
+        state,
+        zipCode
+    };
+    const ref = firebase.database().ref('users');
+    ref.push(info);
+  }
 
   render() {
     return (
@@ -70,6 +96,12 @@ class SignUp extends React.Component {
             </form>
           </div>
         </div>
+        <Route
+            path="/register"
+            render={props => (
+              <Register {...props} newUser={this.newUser} />
+            )}
+          />
       </SignupContainer>
     );
   }

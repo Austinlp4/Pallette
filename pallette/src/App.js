@@ -7,8 +7,9 @@ import styled from 'styled-components';
 import SignUp from './components/signin/Signup';
 import Login from './components/signin/Signin';
 import MainPage from './components/Home/MainPage';
-
+import Register from './components/signin/Register';
 import * as ROUTES from '../src/components/routes';
+import firebase from './firebase';
 
 class App extends Component {
   constructor() {
@@ -16,6 +17,29 @@ class App extends Component {
     this.state = {
       user: null
     }
+  }
+
+  newUser = (
+    email,
+    firstName,
+    lastName,
+    street,
+    city,
+    state,
+    zipCode
+  ) => {
+    let info = {
+        firstName,
+        lastName,
+        email,
+        street,
+        city,
+        state,
+        zipCode
+    };
+    const ref = firebase.database().ref('users');
+    ref.push(info);
+    this.setState({ user: { firstName: info.firstName, email: info.email} })
   }
 
   render() {
@@ -39,6 +63,12 @@ class App extends Component {
               <Route exact path={ROUTES.LANDING} component={MainPage}/>
               <Route path='/signup' component={SignUp}/>
               <Route path={ROUTES.SIGN_IN} component={Login}/>
+              <Route
+                path="/register"
+                render={props => (
+                  <Register {...props} newUser={this.newUser} />
+                )}
+              />
             </div>
           </div>
         </div>
