@@ -18,7 +18,10 @@ class Profile extends React.Component{
         
         return (
             <div>
-              
+              <div>
+                  <img src="" alt=""/>
+                  <h1>{user.name}</h1>
+              </div>
             </div>
         )
     }
