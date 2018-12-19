@@ -42,14 +42,43 @@ class App extends Component {
     this.setState({ user: { firstName: info.firstName, email: info.email} })
   }
 
+  setUser = (
+    uid,
+    email,
+    firstName,
+    lastName,
+  ) => {
+    let user = {
+      uid,
+      email,
+      firstName,
+      lastName,
+    };
+    this.setState({ user: 
+        { uid: user.uid, 
+          firstName: user.firstName, 
+          email: user.email, 
+          lastName: user.lastName } 
+        });
+  }
+
   render() {
     return (
       <Home className="App">
       <Nav>
        <h1>Pallette</h1>
+       {this.state.user
+       ? null
+       :
+       <div>
        <NavLink to='/signup'>
          Sign Up
        </NavLink>
+       <NavLink to='/signin'>
+         Sign In
+       </NavLink>
+       </div>
+       }
        </Nav>
         <div className="one">
           <div className="two">
@@ -62,7 +91,11 @@ class App extends Component {
               <Featured /> */}
               <Route exact path={ROUTES.LANDING} component={MainPage}/>
               <Route path='/signup' component={SignUp}/>
-              <Route path={ROUTES.SIGN_IN} component={Login}/>
+              <Route path={ROUTES.SIGN_IN} 
+                render={props => (
+                  <Login {...props} setUser={this.setUser}/>
+                )}
+                />
               <Route
                 path="/register"
                 render={props => (

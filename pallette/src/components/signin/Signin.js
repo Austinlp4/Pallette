@@ -19,6 +19,18 @@ firebase
      .auth()
      .signInWithEmailAndPassword(email, password)
      .then((user) => {
+       console.log(user);
+      if (user) {
+        this.props.setUser(
+          user.user.uid,
+          user.user.email, 
+          user.user.firstName, 
+          user.user.lastName,  
+          user.user.street, 
+          user.user.city, 
+          user.user.state, 
+          user.user.zipCode, 
+        );}
        this.props.history.push('/');
      })
      .catch((error) => {
