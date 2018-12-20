@@ -16,21 +16,22 @@ class App extends Component {
     super();
     this.state = {
       userCred: null,
-      user: null
+      user: ''
     }
   }
 
-  componentDidUpdate() {
-    if(this.state.userCred){
-      let userId = this.state.userCred.uid;
-      firebase.database().ref(`users/${userId}`)
-          .once('value')
-          .then(snapshot => {
-            this.setState({
-              user: snapshot.val()
-            });
-          });
-      }
+  componentWillMount() {
+    this.removeAuthListener = firebase.auth().onAuthStateChanged(user=>{
+      if(user){
+        // console.log(user.uid)
+        this.itemsRef = firebase.database().ref(`users/${user.uid}`)
+        this.itemsRef.on('value', data => {
+          this.setState({ 
+            user: data.val(),
+          })
+        })
+      } 
+    })
     }
   
 
