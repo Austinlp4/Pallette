@@ -9,15 +9,30 @@ import Login from './components/signin/Signin';
 import MainPage from './components/Home/MainPage';
 import Register from './components/signin/Register';
 import * as ROUTES from '../src/components/routes';
-import firebase from './firebase';
+import firebase, { auth } from './firebase';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
+      userCred: null,
       user: null
     }
   }
+
+  componentDidUpdate() {
+    if(this.state.userCred){
+      let userId = this.state.userCred.uid;
+      firebase.database().ref(`users/${userId}`)
+          .once('value')
+          .then(snapshot => {
+            this.setState({
+              user: snapshot.val()
+            });
+          });
+      }
+    }
+  
 
   newUser = (
     email,
@@ -45,20 +60,15 @@ class App extends Component {
   setUser = (
     uid,
     email,
-    firstName,
-    lastName,
   ) => {
     let user = {
       uid,
       email,
-      firstName,
-      lastName,
     };
-    this.setState({ user: 
+    this.setState({ userCred: 
         { uid: user.uid, 
-          firstName: user.firstName, 
-          email: user.email, 
-          lastName: user.lastName } 
+          email: user.email,  
+        } 
         });
   }
 

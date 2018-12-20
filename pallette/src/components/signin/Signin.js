@@ -24,12 +24,6 @@ firebase
         this.props.setUser(
           user.user.uid,
           user.user.email, 
-          user.user.firstName, 
-          user.user.lastName,  
-          user.user.street, 
-          user.user.city, 
-          user.user.state, 
-          user.user.zipCode, 
         );}
        this.props.history.push('/');
      })
