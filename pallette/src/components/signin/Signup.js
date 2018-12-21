@@ -36,30 +36,7 @@ class SignUp extends React.Component {
       });
   };
 
-  newUser = (
-    e,
-    firstName,
-    lastName,
-    email,
-    street,
-    city,
-    state,
-    zipCode
-  ) => {
-    let info = {
-        e,
-        firstName,
-        lastName,
-        email,
-        street,
-        city,
-        state,
-        zipCode
-    };
-    const ref = firebase.database().ref('users');
-    ref.push(info);
-  }
-
+  
   render() {
     return (
       <SignupContainer>
@@ -99,7 +76,7 @@ class SignUp extends React.Component {
         <Route
             path="/register"
             render={props => (
-              <Register {...props} newUser={this.newUser} />
+              <Register {...props} newUser={this.props.newUser} />
             )}
           />
       </SignupContainer>

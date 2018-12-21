@@ -23,6 +23,7 @@ class Register extends React.Component {
     e.preventDefault();
     if (user) {
       this.props.newUser(
+        user.uid,
         user.email, 
         this.state.firstName, 
         this.state.lastName,  

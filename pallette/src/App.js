@@ -35,7 +35,9 @@ class App extends Component {
     }
   
 
+
   newUser = (
+    uid,
     email,
     firstName,
     lastName,
@@ -45,6 +47,7 @@ class App extends Component {
     zipCode
   ) => {
     let info = {
+        uid,
         firstName,
         lastName,
         email,
@@ -53,8 +56,8 @@ class App extends Component {
         state,
         zipCode
     };
-    const ref = firebase.database().ref('users');
-    ref.push(info);
+    const ref = firebase.database().ref(`users/${info.uid}`);
+    ref.update(info);
     this.setState({ user: { firstName: info.firstName, email: info.email} })
   }
 
