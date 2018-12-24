@@ -21,7 +21,7 @@ class App extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.removeAuthListener = firebase.auth().onAuthStateChanged(user=>{
       if(user){
         // console.log(user.uid)
