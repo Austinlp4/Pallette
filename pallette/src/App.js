@@ -77,13 +77,29 @@ class App extends Component {
         });
   }
 
+  logout = () => {
+    auth.signOut()
+      .then(() => {
+        this.setState({
+          user: null,
+          userCred: null
+        });
+      });
+  }
+
   render() {
     return (
       <Home className="App">
       <Nav>
        <h1>Pallette</h1>
        {this.state.user
-       ? null
+       ? 
+       <div>
+        <NavLink to='/profile'>
+           Profile
+        </NavLink>
+        <div onClick={this.logout}>Logout</div>
+       </div>
        :
        <div>
        <NavLink to='/signup'>
@@ -92,6 +108,7 @@ class App extends Component {
        <NavLink to='/signin'>
          Sign In
        </NavLink>
+       <div onClick={this.logout}>Logout</div>
        </div>
        }
        </Nav>

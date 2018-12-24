@@ -6,7 +6,7 @@ class Profile extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            
+            user: this.props.user
         };
     }
 
@@ -15,12 +15,12 @@ class Profile extends React.Component{
     }
 
     render(){
-        
+        const user = this.state.user;
         return (
             <div>
               <div>
                   <img src="" alt=""/>
-                  <h1>{user.name}</h1>
+                  <h1>{user.firstName}</h1>
               </div>
             </div>
         )
