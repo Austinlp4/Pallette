@@ -10,6 +10,7 @@ import MainPage from './components/Home/MainPage';
 import Register from './components/signin/Register';
 import * as ROUTES from '../src/components/routes';
 import firebase, { auth } from './firebase';
+import Profile from './components/profile/Profile';
 
 class App extends Component {
   constructor() {
@@ -116,6 +117,12 @@ class App extends Component {
                   <Register {...props} newUser={this.newUser} />
                 )}
               />
+              <Route 
+                  path='/profile'
+                  render={props => (
+                    <Profile {...props} user={this.state.user}/>
+                  )}
+                  />
             </div>
           </div>
         </div>
