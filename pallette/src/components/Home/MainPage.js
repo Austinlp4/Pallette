@@ -21,8 +21,7 @@ class MainPage extends React.Component{
             <div>
               <Pallette/>
               <Call>
-              <h1>^</h1>
-              <h2>This Week's Pallete</h2>
+              <div>This Week's Pallete</div>
               </Call>
               <Featured />
             </div>
@@ -34,9 +33,19 @@ const Call = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  h1, h2{
+  div{
     margin: 0;
     font-size: 1.1rem;
+    color: white;
+    background-color: rgba(45,54,98,1);
+    max-width: 500px;
+    width: 100%;
+    height: 30px;
+    border-bottom-right-radius: 80px;
+    border-bottom-left-radius: 80px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;
 

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 // import Pallette from '../src/components/pallette/Pallette';
 // import Featured from './components/featured/Featured';
 // import firebase, { auth, provider } from './firebase.js';
+import Logo from './images/pallete-logo.png';
 import SignUp from './components/signin/Signup';
 import Login from './components/signin/Signin';
 import MainPage from './components/Home/MainPage';
@@ -11,6 +12,7 @@ import Register from './components/signin/Register';
 import * as ROUTES from '../src/components/routes';
 import firebase, { auth } from './firebase';
 import Profile from './components/profile/Profile';
+
 
 class App extends Component {
   constructor() {
@@ -91,7 +93,7 @@ class App extends Component {
     return (
       <Home className="App">
       <Nav>
-       <h1>Pallette</h1>
+       <img src={Logo} alt="" style={{ width: '275px' }}/>
        {this.state.user
        ? 
        <div>

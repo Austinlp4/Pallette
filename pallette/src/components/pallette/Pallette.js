@@ -25,11 +25,11 @@ class Pallette extends React.Component{
         return (
             <PalletteContainer>
                 <Pallete>
-                    <div style={{ backgroundColor: colorOne}}></div>
+                    <div style={{ backgroundColor: colorOne, borderBottomLeftRadius: '40%'}}></div>
                     <div style={{ backgroundColor: colorTwo}}></div>
                     <div style={{ backgroundColor: colorThree}}></div>
                     <div style={{ backgroundColor: colorFour}}></div>
-                    <div style={{ backgroundColor: colorFive}}></div>
+                    <div style={{ backgroundColor: colorFive, borderBottomRightRadius: '40%'}}></div>
                 </Pallete>
             </PalletteContainer>
         )
@@ -42,17 +42,23 @@ const PalletteContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-bottom: 20px;
   margin-right: 0;
+  border-bottom-right-radius: 20%;
+  border-bottom-left-radius: 20%;
+  border: none;
 `;
 
 const Pallete = styled.div`
   display: flex;
   justify-content: center;
   width: 80%;
+  border-bottom-right-radius: 20%;
+  border-bottom-left-radius: 20%;
+  border: none;
   div{
       width: 18%;
       height: 75px;
+      
   }
 `;
 
