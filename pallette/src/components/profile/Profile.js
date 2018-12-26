@@ -8,17 +8,24 @@ class Profile extends React.Component{
         this.state = {
             image: null,
             url: '',
-            progress: 0
+            progress: 0,
+            bio: '',
+            user: ''
         };
+    }
+
+    componentWillMount() {
+        if(this.props.user){
+            this.setState({user: this.props.user})
+        }
     }
 
     componentDidMount(){
         if(this.props.user){
             storage.ref('images').child(`${this.props.user.uid}/profilepic/${this.props.user.uid}`).getDownloadURL().then(url => {
                 this.setState({url})
-
         })
-    }
+      }
     }
 
     handleChange = event => {
@@ -43,19 +50,33 @@ class Profile extends React.Component{
         },
         () => {
             //complete function
-            storage.ref('images').child(`${this.props.user.uid}/profilepic/${image.name}`).getDownloadURL().then(url => {
+            storage.ref('images').child(`${this.props.user.uid}/profilepic/${this.props.user.uid}}`).getDownloadURL().then(url => {
                 console.log(url);
                 this.setState({url});
-            })
-        });
+            })          
+        })
+    }
+
+    handleInputChange = event => {
+        this.setState({
+            [event.target.name]: event.target.value,
+          });
+    }
+
+    handleSubmit = () => {
+        if(this.state.bio){
+            const bio = this.state.bio;
+            const ref = firebase.database().ref(`users/${this.props.user.uid}`);
+             ref.update({bio});
+        }
     }
 
     render(){
         const user = this.props.user;
-        console.log(this.props.user)
+        console.log(this.props.user.uid)
         return (
               <ProContainer>
-                  {this.state.url.length === 0 ?
+                  {this.props.user ?
                   <Upload className='upload'>
                       <div className='upicon'>
                           <input type='file' onChange={this.handleChange}/>
@@ -70,6 +91,21 @@ class Profile extends React.Component{
                   }
                   <Info>
                     <h1>{user.firstName} {user.lastName}</h1>
+                    {user.bio 
+                    ?
+                    <div>
+                        <p>
+                            {user.bio}
+                        </p>
+                    </div>
+                    :
+                    <div>
+                        <textarea value={this.state.bio} name='bio' onChange={this.handleInputChange}/>
+                        <button onClick={this.handleSubmit}>
+                            Add Bio
+                        </button>
+                    </div>
+                    }
                   </Info>
               </ProContainer>
         )
