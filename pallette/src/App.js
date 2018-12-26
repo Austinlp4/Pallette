@@ -87,13 +87,14 @@ class App extends Component {
           userCred: null
         });
       });
+      this.props.history.push('/');
   }
 
   render() {
     return (
       <Home className="App">
       <Nav>
-       <img src={Logo} alt="" style={{ width: '275px' }}/>
+       <img src={Logo} alt="" style={{ width: '275px' }} onClick={() => {this.props.history.push('/')}}/>
        {this.state.user
        ? 
        <div>

@@ -10,7 +10,8 @@ class Profile extends React.Component{
             url: '',
             progress: 0,
             bio: '',
-            user: ''
+            user: '',
+            photo: ''
         };
     }
 
@@ -50,12 +51,24 @@ class Profile extends React.Component{
         },
         () => {
             //complete function
-            storage.ref('images').child(`${this.props.user.uid}/profilepic/${this.props.user.uid}}`).getDownloadURL().then(url => {
-                console.log(url);
+            storage.ref('images').child(`${this.props.user.uid}/profilepic/${this.props.user.uid}`).getDownloadURL().then(url => {
                 this.setState({url});
             })          
         })
     }
+
+    addPhoto = () => {
+        const {image} = this.state;
+        storage.ref(`images/${this.props.user.uid}/${image.name}`).put(image);
+        this.getURL(image);
+    }
+
+    getURL = (image) => {
+        storage.ref('images').child(`${this.props.user.uid}/${image.name}`).getDownloadURL().then(photo => {
+            this.setState({photo});
+        })     
+    }
+
 
     handleInputChange = event => {
         this.setState({
@@ -71,12 +84,18 @@ class Profile extends React.Component{
         }
     }
 
+
     render(){
         const user = this.props.user;
         console.log(this.props.user.uid)
         return (
               <ProContainer>
-                  {this.props.user ?
+                  <InfoContainer>
+                  {user ?
+                  <div style={{ width: '300px', height: '300px' }}>
+                      <img src={this.state.url} alt="Profile pic" style={{width: '100%', height: 'auto'}}/>
+                  </div>
+                  :
                   <Upload className='upload'>
                       <div className='upicon'>
                           <input type='file' onChange={this.handleChange}/>
@@ -84,10 +103,6 @@ class Profile extends React.Component{
                       </div>
                       <progress value={this.state.progress} max='100'/>
                   </Upload>
-                  :
-                  <div style={{ width: '300px', height: '300px' }}>
-                      <img src={this.state.url} alt="Profile pic" style={{width: '100%', height: 'auto'}}/>
-                  </div>
                   }
                   <Info>
                     <h1>{user.firstName} {user.lastName}</h1>
@@ -107,6 +122,13 @@ class Profile extends React.Component{
                     </div>
                     }
                   </Info>
+                  </InfoContainer>
+                  <div>
+                      <Card>
+                      <input type='file' onChange={this.handleChange}/>
+                      <button onClick={this.addPhoto}>Add</button>
+                      </Card>
+                  </div>
               </ProContainer>
         )
     }
@@ -126,6 +148,7 @@ const ProContainer = styled.div`
   display: flex;
   width: 100%;
   padding: 3%;
+  flex-direction: column;
   .upload{
       justify-self: flex-start;
   }
@@ -134,6 +157,20 @@ const ProContainer = styled.div`
 const Info = styled.div`
   width: 100%;
   padding: 5%;
+`;
+
+const InfoContainer = styled.div`
+  display: flex;
+`;
+
+const Card = styled.div`
+  width: 300px;
+  height: 300px;
+  border: 1px solid lightgrey;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default Profile;
