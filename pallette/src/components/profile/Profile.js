@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import firebase, {storage} from '../../firebase';
 import ProfileWorks from './ProfileWorks';
+import { connect } from 'react-redux';
 
 class Profile extends React.Component{
     constructor(props){
@@ -286,4 +287,10 @@ const Card = styled.div`
     }
 `;
 
-export default Profile;
+const mapStateToProps = (state) => {
+    return {
+
+    }
+}
+
+export default connect(mapStateToProps)(Profile);
