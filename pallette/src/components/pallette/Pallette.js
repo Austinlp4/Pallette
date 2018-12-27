@@ -10,18 +10,26 @@ class Pallette extends React.Component{
         };
     }
 
-    componentDidMount() {
-        this.setState({
-            pallete: colors[93]
-        });
+    // componentDidMount() {
+    //     this.setState({
+    //         pallete: colors[4]
+    //     });
+    // }
+
+
+    colors = () => {
+        let count = 16;
+        const pallete = colors[count]
+        return pallete;
     }
 
     render(){
-        let colorOne = this.state.pallete[0];
-        let colorTwo = this.state.pallete[1];
-        let colorThree = this.state.pallete[2];
-        let colorFour = this.state.pallete[3];
-        let colorFive = this.state.pallete[4];
+        const pallete = this.colors();
+        let colorOne = pallete[0];
+        let colorTwo = pallete[1];
+        let colorThree = pallete[2];
+        let colorFour = pallete[3];
+        let colorFive = pallete[4];
         return (
             <PalletteContainer>
                 <Pallete>

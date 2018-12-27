@@ -6,7 +6,8 @@ import { Upload,
          ProContainer,
          Info,
          InfoContainer,
-         Card } from './ProfileStyles.js'
+         Card } from './ProfileStyles.js';
+import { addPhoto } from '../../store/actions/projectActions';
 
 class Profile extends React.Component{
     constructor(props){
@@ -85,6 +86,7 @@ class Profile extends React.Component{
         const {image} = this.state;
         storage.ref(`images/${this.props.user.uid}/${image.name}`).put(image);
         this.getURL(image);
+        this.props.addPhoto(image);
     }
 
     getURL = (image) => {
@@ -169,10 +171,10 @@ class Profile extends React.Component{
 
 
 
-const mapStateToProps = (state) => {
+const mapDispatchToProps = (dispatch) => {
     return {
-
+        addPhoto: (photo) => dispatch(addPhoto(photo))
     }
 }
 
-export default connect(mapStateToProps)(Profile);
+export default connect(null, mapDispatchToProps)(Profile);
