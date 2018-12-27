@@ -27,7 +27,11 @@ class ProfileWorks extends React.Component{
                     <Container>
                         {Object.values(this.state.works).map((post, i) => (
                             <Card key={i}>
-                                <img src={post.art} alt=""/>
+                                <img src={post.photo.art} alt=""/>
+                                <div className='banner'>
+                                    <h1>{post.photo.title}</h1>
+                                    <h4>{post.photo.artist}</h4>
+                                </div>
                             </Card>
                         ))}
                     </Container>
@@ -42,8 +46,8 @@ class ProfileWorks extends React.Component{
 }
 
 const Card = styled.div`
-  width: 350px;
-  height: 350px;
+  width: 325px;
+  height: 325px;
   overflow: hidden;
   background: no-repeat center;
   background-size: cover;
@@ -52,6 +56,7 @@ const Card = styled.div`
   align-items: center;
   margin: 3% 3%;
   border-radius: 6px;
+  position: relative;
   img{
       position: relative;
       width: 500px;
@@ -59,10 +64,39 @@ const Card = styled.div`
       background: no-repeat center;
       background-size: cover;
   }
+  .banner{
+      box-sizing: border-box;
+      position: absolute;
+      z-index: 3;
+      background-color: white;
+      height: 60px;
+      width: 100%;
+      bottom: 0;
+      border: 1px solid lightgrey;
+      border-top: none;
+      border-bottom-right-radius: 6px;
+      border-bottom-left-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 3%;
+      h1{
+          font-size: 1.2rem;
+          color: rgb(45,54,98);
+          margin: 0;
+      }
+      h4{
+          font-size: .9rem;
+          color: rgb(45,54,98);
+          margin: 0;
+      }
+  }
 `;
 
 const Container = styled.div`
   display: flex;
+  flex-wrap: wrap;
 `;
 
 export default ProfileWorks;

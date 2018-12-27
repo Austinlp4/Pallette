@@ -12,30 +12,40 @@ class Profile extends React.Component{
             progress: 0,
             bio: '',
             user: '',
-            photo: null
+            photo: null,
+            title: '',
+            loaded: false
         };
     }
 
-    componentWillMount() {
-        if(this.props.user){
-            this.setState({user: this.props.user})
-        }
-    }
+//   async componentWillMount() {
 
-    componentDidMount(){
-        if(this.props.user){
-            storage.ref('images').child(`${this.props.user.uid}/profilepic/${this.props.user.uid}`).getDownloadURL().then(url => {
-                this.setState({url})
+//         await  this.setState({user: this.props.user})
+        
+//     }
+
+  componentDidMount(){  
+        storage.ref(`images/${this.props.user.uid}/profilepic/${this.props.user.uid}`).getDownloadURL().then(url => {
+             this.setState({url, loaded: true, user: this.props.user})
         })
-      }
+      
     }
 
-    componentDidUpdate(){
+   componentDidUpdate(){
         if(this.state.photo){
             let art = this.state.photo
-            const ref = firebase.database().ref(`photos/${this.props.user.uid}`);
-             ref.push({art});
+            const photo = {
+                art, 
+                likes: 0,
+                title: this.state.title,
+                date: Date.now(),
+                points: 0,
+                artist: `${this.props.user.firstName} ${this.props.user.firstName}`
+            }
+          const ref = firebase.database().ref(`photos/${this.props.user.uid}`);
+             ref.push({photo});
         }
+
     }
 
     handleChange = event => {
@@ -74,7 +84,7 @@ class Profile extends React.Component{
 
     getURL = (image) => {
         storage.ref('images').child(`${this.props.user.uid}/${image.name}`).getDownloadURL().then(photo => {
-            this.setState({photo});
+            this.setState({photo, image: null});
         })     
     }
 
@@ -93,12 +103,20 @@ class Profile extends React.Component{
         }
     }
 
+    handleTitle = event => {
+        this.setState({ 
+            [event.target.name]: event.target.value
+         });
+    }
+
+
 
     render(){
         const user = this.state.user;
+
         return (
-              <ProContainer>
-                  <InfoContainer>
+            <ProContainer>
+            <InfoContainer>
                   {user ?
                   <div style={{ width: '400px', height: '400px' }}>
                       <img src={this.state.url} alt="Profile pic" style={{width: '100%', height: 'auto'}}/>
@@ -107,18 +125,18 @@ class Profile extends React.Component{
                   <Upload className='upload'>
                       <div className='upicon'>
                           <input type='file' name='file' id='file' onChange={this.handleChange} className='fileup'/>
-                          <label for="file">Choose a file</label>
+                          <label htmlFor="file">Choose a file</label>
                           <button onClick={this.handleUpload}>Upload</button>
                       </div>
                   </Upload>
                   }
                   <Info>
-                    <h1>{user.firstName} {user.lastName}</h1>
-                    {user.bio 
+                    <h1>{this.props.user.firstName} {this.props.user.lastName}</h1>
+                    {this.props.user.bio 
                     ?
                     <div>
                         <p>
-                            {user.bio}
+                            {this.props.user.bio }
                         </p>
                     </div>
                     :
@@ -134,12 +152,12 @@ class Profile extends React.Component{
                   <div>
                       <Card>
                       <input type='file' name='file' id='filetwo' onChange={this.handleChange} className={this.state.image ? 'fileup go' : 'fileup'}/>
-                      <label for="filetwo" >{this.state.image ? 'Press Add =>' : 'Add Artwork' }</label>
+                      <label htmlFor="filetwo" >{this.state.image ? <input type="text" value={this.state.title} name='title' onChange={this.handleTitle}/> : 'Add Artwork' }</label>
                       <button onClick={this.addPhoto}>Add</button>
                       </Card>
                       <ProfileWorks {...this.props} user={this.props.user}/>
                   </div>
-              </ProContainer>
+                  </ProContainer>
         )
     }
 }
