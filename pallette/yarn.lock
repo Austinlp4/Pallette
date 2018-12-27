@@ -3987,7 +3987,7 @@ hoek@4.x.x:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/hoek/-/hoek-4.2.1.tgz#9634502aa12c445dd5a7c5734b572bb8738aacbb"
 
-hoist-non-react-statics@^2.5.0:
+hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
 
@@ -4173,6 +4173,10 @@ ignore-walk@^3.0.1:
 ignore@^4.0.6:
   version "4.0.6"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-4.0.6.tgz#750e3db5862087b4737ebac8207ffd1ef27b25fc"
+
+immer@1.5.0:
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/immer/-/immer-1.5.0.tgz#1ed9b1b653643fe9276bbc36377613523ea32a39"
 
 import-cwd@^2.0.0:
   version "2.1.0"
@@ -5289,7 +5293,7 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-"lodash@>=3.5 <5", lodash@^4.13.1, lodash@^4.17.10, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0:
+"lodash@>=3.5 <5", lodash@^4.13.1, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
 
@@ -7150,6 +7154,14 @@ react-move@^2.7.0:
     d3-interpolate "^1.2.0"
     d3-timer "^1.0.4"
 
+react-redux-firebase@^2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/react-redux-firebase/-/react-redux-firebase-2.2.5.tgz#d409ec326d6da271d931e0c76803a06f95e3ff64"
+  dependencies:
+    hoist-non-react-statics "^2.3.1"
+    lodash "^4.17.11"
+    prop-types "^15.6.2"
+
 react-redux@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-6.0.0.tgz#09e86eeed5febb98e9442458ad2970c8f1a173ef"
@@ -7327,6 +7339,18 @@ reduce-css-calc@^2.0.0:
   dependencies:
     css-unit-converter "^1.1.1"
     postcss-value-parser "^3.3.0"
+
+reduce-reducers@0.4.3:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/reduce-reducers/-/reduce-reducers-0.4.3.tgz#8e052618801cd8fc2714b4915adaa8937eb6d66c"
+
+redux-firestore@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/redux-firestore/-/redux-firestore-0.6.1.tgz#12a01d430a1ff9e4cccc4f2df25bf3600cbab3f6"
+  dependencies:
+    immer "1.5.0"
+    lodash "^4.17.11"
+    reduce-reducers "0.4.3"
 
 redux-thunk@^2.3.0:
   version "2.3.0"

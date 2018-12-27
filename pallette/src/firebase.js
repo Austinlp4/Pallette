@@ -1,4 +1,6 @@
 import firebase from 'firebase';
+import 'firebase/firestore';
+
 
 const config = {
     apiKey: process.env.REACT_APP_API_KEY,
@@ -9,6 +11,7 @@ const config = {
     messagingSenderId: process.env.REACT_APP_MESSAGING_SENDER_ID,
   };
   firebase.initializeApp(config);
+  firebase.firestore().settings({ timestampsInSnapshots: true })
 
   export const auth = firebase.auth();
 
