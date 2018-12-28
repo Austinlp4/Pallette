@@ -1,6 +1,7 @@
 import React from 'react';
 import firebase, { storage } from '../../firebase';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
 
 class ProfileWorks extends React.Component{
     constructor(props){
@@ -11,7 +12,7 @@ class ProfileWorks extends React.Component{
     }
 
     componentDidMount(){
-       let itemsRef = firebase.database().ref(`photos/${this.props.user.uid}`);
+       let itemsRef = firebase.database().ref(`photos/${this.props.auth.uid}`);
         itemsRef.on('value', data => {
             console.log('test', this.props)
             this.setState({ 
@@ -27,10 +28,10 @@ class ProfileWorks extends React.Component{
                     <Container>
                         {Object.values(this.state.works).map((post, i) => (
                             <Card key={i}>
-                                <img src={post.photo.art} alt=""/>
+                                <img src={post.post.url} alt=""/>
                                 <div className='banner'>
-                                    <h1>{post.photo.title}</h1>
-                                    <h4>{post.photo.artist}</h4>
+                                    <h1>{post.post.title}</h1>
+                                    <h4>{post.post.artist}</h4>
                                 </div>
                             </Card>
                         ))}
@@ -99,4 +100,13 @@ const Container = styled.div`
   flex-wrap: wrap;
 `;
 
-export default ProfileWorks;
+const mapStateToProps = (state) => {
+    console.log(state)
+    return {
+        auth: state.firebase.auth,
+        profile: state.firebase.profile
+    }
+}
+
+export default connect(mapStateToProps)(ProfileWorks);
+

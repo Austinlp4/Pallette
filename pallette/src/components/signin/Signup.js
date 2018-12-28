@@ -3,6 +3,9 @@ import { Route, withRouter} from 'react-router-dom';
 import styled from 'styled-components';
 import firebase from '../../firebase';
 import Register from './Register';
+import { signUp } from '../../store/actions/authActions.js';
+import { connect } from 'react-redux';
+
 
 
 
@@ -12,7 +15,8 @@ class SignUp extends React.Component {
     this.state = {
       email: '',
       password: '',
-      error: null,
+      firstName: '',
+      lastName: ''
     };
   }
 
@@ -24,16 +28,18 @@ class SignUp extends React.Component {
 
   onSubmit = event => {
     event.preventDefault();
-    const { email, password } = this.state;
-    firebase
-      .auth()
-      .createUserWithEmailAndPassword(email, password)
-      .then(user => {
-        this.props.history.push('/register');
-      })
-      .catch(error => {
-        this.setState({ error: error });
-      });
+    this.props.signUp(this.state)
+    this.props.history.push('/');
+    // const { email, password } = this.state;
+    // firebase
+    //   .auth()
+    //   .createUserWithEmailAndPassword(email, password)
+    //   .then(user => {
+    //     this.props.history.push('/register');
+    //   })
+    //   .catch(error => {
+    //     this.setState({ error: error });
+    //   });
   };
 
   
@@ -45,13 +51,6 @@ class SignUp extends React.Component {
             <h3>Register</h3>
           </div>
         </div>
-        {this.state.error ? (
-          <div>
-            <div>
-              <p>{this.state.error.message}</p>
-            </div>
-          </div>
-        ) : null}
         <div>
           <div>
             <form onSubmit={this.onSubmit}>
@@ -69,7 +68,24 @@ class SignUp extends React.Component {
                 value={this.state.password}
                 onChange={this.onChange}
               />
+              <input
+                type="text"
+                name="firstName"
+                placeholder="First Name"
+                value={this.state.firstName}
+                onChange={this.onChange}
+              />
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Last Name"
+                value={this.state.lastName}
+                onChange={this.onChange}
+              />
               <button children="Register" />
+              <div>
+                {this.props.authError ? <p>{this.props.authError}</p> : null}
+              </div>
             </form>
           </div>
         </div>
@@ -106,4 +122,17 @@ const SignupContainer = styled.div`
   }
 `;
 
-export default withRouter(SignUp);
+const mapStateToProps = (state) => {
+  return {
+    auth: state.firebase.auth,
+    authError: state.auth.authError
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    signUp: (newUser) => dispatch(signUp(newUser))
+  }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SignUp));

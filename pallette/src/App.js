@@ -12,6 +12,8 @@ import Register from './components/signin/Register';
 import * as ROUTES from '../src/components/routes';
 import firebase, { auth } from './firebase';
 import Profile from './components/profile/Profile';
+import { connect } from 'react-redux';
+import NavBar from './components/Nav/Nav.js';
 
 
 class App extends Component {
@@ -64,71 +66,34 @@ class App extends Component {
     this.setState({ user: { firstName: info.firstName, email: info.email} })
   }
 
-  setUser = (
-    uid,
-    email,
-  ) => {
-    let user = {
-      uid,
-      email,
-    };
-    this.setState({ userCred: 
-        { uid: user.uid, 
-          email: user.email,  
-        } 
-        });
-  }
+  // setUser = (
+  //   uid,
+  //   email,
+  // ) => {
+  //   let user = {
+  //     uid,
+  //     email,
+  //   };
+  //   this.setState({ userCred: 
+  //       { uid: user.uid, 
+  //         email: user.email,  
+  //       } 
+  //       });
+  // }
 
-  logout = () => {
-    auth.signOut()
-      .then(() => {
-        this.setState({
-          user: null,
-          userCred: null
-        });
-      });
-      this.props.history.push('/');
-  }
 
   render() {
     return (
       <Home className="App">
-      <Nav>
-       <img src={Logo} alt="" style={{ width: '275px' }} onClick={() => {this.props.history.push('/')}}/>
-       {this.state.user
-       ? 
-       <div>
-        <NavLink to='/profile'>
-           Profile
-        </NavLink>
-        <div onClick={this.logout}>Logout</div>
-       </div>
-       :
-       <div>
-       <NavLink to='/signup'>
-         Sign Up
-       </NavLink>
-       <NavLink to='/signin'>
-         Sign In
-       </NavLink>
-       <div onClick={this.logout}>Logout</div>
-       </div>
-       }
-       </Nav>
+        <NavBar {...this.props}/>
         <div className="one">
           <div className="two">
             <div className="three">
-              {/* <Pallette />
-              <Call>
-              <h1>^</h1>
-              <h2>This Week's Pallete</h2>
-              </Call>
-              <Featured /> */}
               <Route exact path={ROUTES.LANDING} component={MainPage}/>
               <Route path='/signup' component={SignUp}/>
               <Route path={ROUTES.SIGN_IN} 
                 render={props => (
-                  <Login {...props} setUser={this.setUser}/>
+                  <Login {...props} />
                 )}
                 />
               <Route
@@ -177,17 +142,11 @@ const Home = styled.div`
   }
 `;
 
-const Nav = styled.div`
-  display: flex;
-  width: 90%;
-  justify-content: space-between;
-  align-items: center;
-  a{
-    text-decoration: none;
-    color: black;
-    font-size: 1.1rem;
-    font-weight: bold;
-  }
-`;
 
-export default withRouter(App);
+const mapStateToProps = (state) => {
+  return {
+
+  }
+}
+
+export default withRouter(connect()(App));

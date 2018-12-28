@@ -7,7 +7,7 @@ import { Upload,
          Info,
          InfoContainer,
          Card } from './ProfileStyles.js';
-import { addPhoto } from '../../store/actions/projectActions';
+import { addPhoto, uploadAvatar } from '../../store/actions/projectActions';
 
 class Profile extends React.Component{
     constructor(props){
@@ -24,30 +24,22 @@ class Profile extends React.Component{
         };
     }
 
+//    componentDidUpdate(){
+//         if(this.state.image){
+//             let art = {...this.state.image}
+//             const photo = {
+//                 art, 
+//                 likes: 0,
+//                 title: this.state.title,
+//                 date: Date.now(),
+//                 points: 0,
+//                 artist: `${this.props.profile.firstName} ${this.props.profile.firstName}`
+//             }
+//           const ref = firebase.database().ref(`photos/${this.props.auth.uid}`);
+//              ref.push({photo});
+//         }
 
-  componentDidMount(){  
-        storage.ref(`images/${this.props.user.uid}/profilepic/${this.props.user.uid}`).getDownloadURL().then(url => {
-             this.setState({url, loaded: true, user: this.props.user})
-        })
-      
-    }
-
-   componentDidUpdate(){
-        if(this.state.photo){
-            let art = this.state.photo
-            const photo = {
-                art, 
-                likes: 0,
-                title: this.state.title,
-                date: Date.now(),
-                points: 0,
-                artist: `${this.props.user.firstName} ${this.props.user.firstName}`
-            }
-          const ref = firebase.database().ref(`photos/${this.props.user.uid}`);
-             ref.push({photo});
-        }
-
-    }
+//     }
 
     handleChange = event => {
         if(event.target.files[0]){
@@ -56,40 +48,57 @@ class Profile extends React.Component{
         }
     }
 
+    handlePhotoChange = event => {
+        if(event.target.files[0]){
+            const photo = event.target.files[0];
+            this.setState(() => ({photo}))
+        }
+    }
+
+
     handleUpload = () => {
         const {image} = this.state;
-        const uploadTask = storage.ref(`images/${this.props.user.uid}/profilepic/${this.props.user.uid}`).put(image);
-        uploadTask.on('state_changed', 
-        (snapshot)=> {
-            //progress function
-            const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-            this.setState({progress})
-        },
-        (error) => {
-            //error function
-            console.log(error)
-        },
-        () => {
-            //complete function
-            storage.ref('images').child(`${this.props.user.uid}/profilepic/${this.props.user.uid}`).getDownloadURL().then(url => {
-                this.setState({url});
-            })          
-        })
+        const uid = this.props.auth.uid;
+        this.props.uploadAvatar(image, uid)
+        // const uploadTask = storage.ref(`images/${this.props.user.uid}/profilepic/${this.props.user.uid}`).put(image);
+        // uploadTask.on('state_changed', 
+        // (snapshot)=> {
+        //     //progress function
+        //     const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        //     this.setState({progress})
+        // },
+        // (error) => {
+        //     //error function
+        //     console.log(error)
+        // },
+        // () => {
+        //     //complete function
+        //     storage.ref('images').child(`${this.props.user.uid}/profilepic/${this.props.user.uid}`).getDownloadURL().then(url => {
+        //         this.setState({url});
+        //     })          
+        // })
     }
 
-    addPhoto = () => {
-        let {image} = this.state;
-        const uid = this.props.user.uid;
+    addPhoto = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        let {photo, title} = this.state;
+        const uid = this.props.auth.uid;
+        const artist = `${this.props.profile.firstName} ${this.props.profile.firstName}`
         // storage.ref(`images/${this.props.user.uid}/${image.name}`).put(image);
-        this.getURL(image);
-        this.props.addPhoto(image, uid);
+        // this.getURL(image);
+        if(this.state.photo){
+        this.props.addPhoto(photo, uid, title, artist);
+        this.setState({photo: null})
+        }
+            
     }
 
-    getURL = (image) => {
-        storage.ref('images').child(`${this.props.user.uid}/${image.name}`).getDownloadURL().then(photo => {
-            this.setState({photo, image: null});
-        })     
-    }
+    // getURL = (image) => {
+    //     storage.ref('images').child(`${this.props.user.uid}/${image.name}`).getDownloadURL().then(photo => {
+    //         this.setState({photo, image: null});
+    //     })     
+    // }
 
 
     handleInputChange = event => {
@@ -115,14 +124,13 @@ class Profile extends React.Component{
 
 
     render(){
-        const user = this.state.user;
-
+        console.log(this.props.profile.url)
         return (
             <ProContainer>
             <InfoContainer>
-                  {user ?
+                  {this.props.auth.uid ?
                   <div style={{ width: '400px', height: '400px' }}>
-                      <img src={this.state.url} alt="Profile pic" style={{width: '100%', height: 'auto'}}/>
+                      <img src={this.props.profile.url} alt="Profile pic" style={{width: '100%', height: 'auto'}}/>
                   </div>
                   :
                   <Upload className='upload'>
@@ -134,7 +142,7 @@ class Profile extends React.Component{
                   </Upload>
                   }
                   <Info>
-                    <h1>{this.props.user.firstName} {this.props.user.lastName}</h1>
+                    <h1>{this.props.profile.firstName} {this.props.profile.lastName}</h1>
                     {this.props.user.bio 
                     ?
                     <div>
@@ -154,11 +162,11 @@ class Profile extends React.Component{
                   </InfoContainer>
                   <div>
                       <Card>
-                      <input type='file' name='file' id='filetwo' onChange={this.handleChange} className={this.state.image ? 'fileup go' : 'fileup'}/>
-                      <label htmlFor="filetwo" >{this.state.image ? <input type="text" value={this.state.title} name='title' onChange={this.handleTitle}/> : 'Add Artwork' }</label>
+                      <input type='file' name='file' id='filetwo' onChange={this.handlePhotoChange} className={this.state.photo ? 'fileup go' : 'fileup'}/>
+                      <label htmlFor="filetwo" >{this.state.photo ? <input type="text" value={this.state.title} name='title' onChange={this.handleTitle}/> : 'Add Artwork' }</label>
                       <button onClick={this.addPhoto}>Add</button>
                       </Card>
-                      <ProfileWorks {...this.props} user={this.props.user}/>
+                      <ProfileWorks {...this.props}/>
                   </div>
                   </ProContainer>
         )
@@ -169,8 +177,17 @@ class Profile extends React.Component{
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addPhoto: (photo) => dispatch(addPhoto(photo))
+        addPhoto: (photo, uid, title, artist) => dispatch(addPhoto(photo, uid, title, artist)),
+        uploadAvatar: (image, uid) => dispatch(uploadAvatar(image, uid))
     }
 }
 
-export default connect(null, mapDispatchToProps)(Profile);
+const mapStateToProps = (state) => {
+    console.log(state)
+    return {
+        auth: state.firebase.auth,
+        profile: state.firebase.profile
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);
