@@ -24,11 +24,6 @@ class Profile extends React.Component{
         };
     }
 
-//   async componentWillMount() {
-
-//         await  this.setState({user: this.props.user})
-        
-//     }
 
   componentDidMount(){  
         storage.ref(`images/${this.props.user.uid}/profilepic/${this.props.user.uid}`).getDownloadURL().then(url => {
@@ -83,10 +78,11 @@ class Profile extends React.Component{
     }
 
     addPhoto = () => {
-        const {image} = this.state;
-        storage.ref(`images/${this.props.user.uid}/${image.name}`).put(image);
+        let {image} = this.state;
+        const uid = this.props.user.uid;
+        // storage.ref(`images/${this.props.user.uid}/${image.name}`).put(image);
         this.getURL(image);
-        this.props.addPhoto(image);
+        this.props.addPhoto(image, uid);
     }
 
     getURL = (image) => {
