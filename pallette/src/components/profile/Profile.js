@@ -25,22 +25,6 @@ class Profile extends React.Component{
         };
     }
 
-//    componentDidUpdate(){
-//         if(this.state.image){
-//             let art = {...this.state.image}
-//             const photo = {
-//                 art, 
-//                 likes: 0,
-//                 title: this.state.title,
-//                 date: Date.now(),
-//                 points: 0,
-//                 artist: `${this.props.profile.firstName} ${this.props.profile.firstName}`
-//             }
-//           const ref = firebase.database().ref(`photos/${this.props.auth.uid}`);
-//              ref.push({photo});
-//         }
-
-//     }
 
     handleChange = event => {
         if(event.target.files[0]){
@@ -61,23 +45,7 @@ class Profile extends React.Component{
         const {image} = this.state;
         const uid = this.props.auth.uid;
         this.props.uploadAvatar(image, uid)
-        // const uploadTask = storage.ref(`images/${this.props.user.uid}/profilepic/${this.props.user.uid}`).put(image);
-        // uploadTask.on('state_changed', 
-        // (snapshot)=> {
-        //     //progress function
-        //     const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-        //     this.setState({progress})
-        // },
-        // (error) => {
-        //     //error function
-        //     console.log(error)
-        // },
-        // () => {
-        //     //complete function
-        //     storage.ref('images').child(`${this.props.user.uid}/profilepic/${this.props.user.uid}`).getDownloadURL().then(url => {
-        //         this.setState({url});
-        //     })          
-        // })
+        
     }
 
     addPhoto = (e) => {
@@ -86,20 +54,12 @@ class Profile extends React.Component{
         let {photo, title} = this.state;
         const uid = this.props.auth.uid;
         const artist = `${this.props.profile.firstName} ${this.props.profile.firstName}`
-        // storage.ref(`images/${this.props.user.uid}/${image.name}`).put(image);
-        // this.getURL(image);
         if(this.state.photo){
         this.props.addPhoto(photo, uid, title, artist);
         this.setState({photo: null, title: ''})
         }
             
     }
-
-    // getURL = (image) => {
-    //     storage.ref('images').child(`${this.props.user.uid}/${image.name}`).getDownloadURL().then(photo => {
-    //         this.setState({photo, image: null});
-    //     })     
-    // }
 
 
     handleInputChange = event => {

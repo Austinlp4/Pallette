@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^0.18.0",
+    "firebase-tools": "^6.2.2",
     "nice-color-palettes": "^2.0.0",
     "nuka-carousel": "^4.4.3",
     "react": "^16.6.0",
