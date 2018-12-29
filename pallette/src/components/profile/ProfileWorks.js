@@ -2,6 +2,7 @@ import React from 'react';
 import firebase, { storage } from '../../firebase';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import { NavLink } from "react-router-dom";
 
 class ProfileWorks extends React.Component{
     constructor(props){
@@ -14,11 +15,22 @@ class ProfileWorks extends React.Component{
     componentDidMount(){
        let itemsRef = firebase.database().ref(`photos/${this.props.auth.uid}`);
         itemsRef.on('value', data => {
-            console.log('test', this.props)
+            let works = [];
+            data.forEach((child) => {
+                console.log(child.val())
+                works.push({
+                    key: child.key,
+                    ...child.val()
+                })
+            })
             this.setState({ 
-              works: data.val()
+              works: works
             })
         })
+    }
+
+    pageFlip = (id) => {
+        console.log(id)
     }
     
     render(){
@@ -26,13 +38,15 @@ class ProfileWorks extends React.Component{
             <div>
                 {this.state.works ? (
                     <Container>
-                        {Object.values(this.state.works).map((post, i) => (
-                            <Card key={post.uid}>
+                        {Object.values(this.state.works).map((post) => (
+                            <Card id={post.key} post={post}>
+                            <NavLink to={`${this.props.match.path}/${post.key}`}>
                                 <img src={post.post.url} alt=""/>
                                 <div className='banner'>
                                     <h1>{post.post.title}</h1>
                                     <h4>{post.post.artist}</h4>
                                 </div>
+                            </NavLink>
                             </Card>
                         ))}
                     </Container>
@@ -91,6 +105,9 @@ const Card = styled.div`
           font-size: .9rem;
           color: rgb(45,54,98);
           margin: 0;
+      }
+      a{
+          display: none;
       }
   }
 `;

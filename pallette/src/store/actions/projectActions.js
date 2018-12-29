@@ -1,3 +1,5 @@
+import { generateKeyPair } from "crypto";
+
 export const addPhoto = (photo, uid, title, artist) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
         // make async call to database
@@ -17,7 +19,7 @@ export const addPhoto = (photo, uid, title, artist) => {
                     likes: 0,
                     pPoints: 0,
                     views: 0,
-                    created: new Date()
+                    created: new Date(),
                 }
                 firebase.database().ref(`photos/${uid}`).push({post})
             })

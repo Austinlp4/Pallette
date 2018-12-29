@@ -14,6 +14,7 @@ import firebase, { auth } from './firebase';
 import Profile from './components/profile/Profile';
 import { connect } from 'react-redux';
 import NavBar from './components/Nav/Nav.js';
+import SingleCard from './components/profile/SingleCard';
 
 
 class App extends Component {
@@ -103,11 +104,17 @@ class App extends Component {
                 )}
               />
               <Route 
-                  path='/profile'
+                  exact path='/profile'
                   render={props => (
                     <Profile {...props} user={this.state.user}/>
                   )}
                   />
+              <Route 
+                  path='/profile/:uid'
+                  render={props => (
+                    <SingleCard {...props}/>
+                  )}
+              />
             </div>
           </div>
         </div>
