@@ -55,3 +55,16 @@ export const uploadAvatar = (image, uid) => {
         })
     }
 }
+
+export const addView = (key, uid) => {
+    return (dispatch, getState, { getFirebase }) => {
+        const firebase = getFirebase();
+        let views = 0;
+        let rootRef = firebase.database().ref(`photos/${uid}/${key}`).child('post');
+        rootRef.on('value', data => {
+            views = data.val().views + 1;
+        })
+        console.log('views', views)
+        rootRef.update({views});
+    }
+}

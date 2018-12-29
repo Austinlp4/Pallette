@@ -2,62 +2,79 @@ import React from 'react';
 import firebase, { storage } from '../../firebase';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { NavLink } from "react-router-dom";
+import { NavLink } from 'react-router-dom';
+import View from '../../images/view.png';
+import { addView } from '../../store/actions/projectActions';
 
-class ProfileWorks extends React.Component{
-    constructor(props){
-        super(props);
-        this.state = {
-            works: []
-        }
-    }
+class ProfileWorks extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      works: [],
+    };
+  }
 
-    componentDidMount(){
-       let itemsRef = firebase.database().ref(`photos/${this.props.auth.uid}`);
-        itemsRef.on('value', data => {
-            let works = [];
-            data.forEach((child) => {
-                console.log(child.val())
-                works.push({
-                    key: child.key,
-                    ...child.val()
-                })
-            })
-            this.setState({ 
-              works: works
-            })
-        })
-    }
+  componentDidMount() {
+    let itemsRef = firebase.database().ref(`photos/${this.props.auth.uid}`);
+    itemsRef.on('value', data => {
+      let works = [];
+      data.forEach(child => {
+        console.log(child.val());
+        works.push({
+          key: child.key,
+          ...child.val(),
+        });
+      });
+      this.setState({
+        works: works,
+      });
+    });
+  }
 
-    pageFlip = (id) => {
-        console.log(id)
-    }
+  pageFlip = key => {
+    const uid = this.props.auth.uid;
+    this.props.addView(key, uid)
+    this.props.history.push(`${this.props.match.path}/${key}`);
     
-    render(){
-        return (
-            <div>
-                {this.state.works ? (
-                    <Container>
-                        {Object.values(this.state.works).map((post) => (
-                            <Card id={post.key} post={post}>
-                            <NavLink to={`${this.props.match.path}/${post.key}`}>
-                                <img src={post.post.url} alt=""/>
-                                <div className='banner'>
-                                    <h1>{post.post.title}</h1>
-                                    <h4>{post.post.artist}</h4>
-                                </div>
-                            </NavLink>
-                            </Card>
-                        ))}
-                    </Container>
-                    ) : (
-                    <div>
-                        <h1>No Postings</h1>
-                    </div>
-                    )}
-            </div>
-        )
-    }
+  };
+
+  render() {
+    return (
+      <div>
+        {this.state.works ? (
+          <Container>
+            {Object.values(this.state.works).map(post => (
+              <Card
+                id={post.key}
+                key={post.key}
+                post={post}
+                onClick={() => this.pageFlip(post.key)}
+              >
+                {/* <NavLink to={`${this.props.match.path}/${post.key}`}> */}
+                <img src={post.post.url} alt="" />
+                <div className="banner">
+                  <div className="title">
+                    <h1>{post.post.title}</h1>
+                    <h4>{post.post.artist}</h4>
+                  </div>
+                  <div className='view-container'>
+                    <img className="view" src={View} alt="" />
+                    <h4>{post.post.views}</h4>
+                  </div>
+                </div>
+
+                {/* </NavLink> */}
+              </Card>
+            ))}
+          </Container>
+        ) : (
+          <div>
+            <h1>No Postings</h1>
+          </div>
+        )}
+      </div>
+    );
+  }
 }
 
 const Card = styled.div`
@@ -72,43 +89,62 @@ const Card = styled.div`
   margin: 3% 3%;
   border-radius: 6px;
   position: relative;
-  img{
-      position: relative;
-      width: 500px;
-      height: auto;
-      background: no-repeat center;
-      background-size: cover;
+  img {
+    position: relative;
+    width: 500px;
+    height: auto;
+    background: no-repeat center;
+    background-size: cover;
   }
-  .banner{
-      box-sizing: border-box;
-      position: absolute;
-      z-index: 3;
-      background-color: white;
-      height: 60px;
-      width: 100%;
-      bottom: 0;
-      border: 1px solid lightgrey;
-      border-top: none;
-      border-bottom-right-radius: 6px;
-      border-bottom-left-radius: 6px;
+  .banner {
+    box-sizing: border-box;
+    position: absolute;
+    z-index: 3;
+    background-color: white;
+    height: 60px;
+    width: 100%;
+    bottom: 0;
+    border: 1px solid lightgrey;
+    border-top: none;
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3%;
+    left: 0;
+    h1 {
+      font-size: 1.2rem;
+      color: rgb(45, 54, 98);
+      margin: 0;
+    }
+    h4 {
+      font-size: 0.9rem;
+      color: rgb(45, 54, 98);
+      margin: 0;
+    }
+    .view-container{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        h4{
+            align-self: center;
+        }
+      }
+    .view {
+      width: 30px;
+      height: 20px;
+    }
+    .title {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
-      padding: 3%;
-      h1{
-          font-size: 1.2rem;
-          color: rgb(45,54,98);
-          margin: 0;
-      }
-      h4{
-          font-size: .9rem;
-          color: rgb(45,54,98);
-          margin: 0;
-      }
-      a{
-          display: none;
-      }
+      align-items: start;
+      width: 100px;
+    }
+    
   }
 `;
 
@@ -117,13 +153,19 @@ const Container = styled.div`
   flex-wrap: wrap;
 `;
 
-const mapStateToProps = (state) => {
-    console.log(state)
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    auth: state.firebase.auth,
+    profile: state.firebase.profile,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
     return {
-        auth: state.firebase.auth,
-        profile: state.firebase.profile
+        addView: (key, uid) => dispatch(addView(key, uid)),
+        
     }
 }
 
-export default connect(mapStateToProps)(ProfileWorks);
-
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileWorks);
