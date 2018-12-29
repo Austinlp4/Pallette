@@ -9,7 +9,7 @@ const initState = {
 const projectReducer = (state = initState, action) => {
     switch(action.type) {
         case 'ADD_PHOTO':
-            console.log(`added photo`, action.post)
+            console.log(`added photo`, action.photo)
             return state;
         case 'ADD_PHOTO_ERROR':
             console.log('create project error', action.err);

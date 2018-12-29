@@ -3,22 +3,27 @@ export const addPhoto = (photo, uid, title, artist) => {
         // make async call to database
         const firebase = getFirebase();
         const storage = firebase.storage();
-        let uploadTask = storage.ref(`images/${uid}/${photo.name}`).put(photo);
-        uploadTask.on('state_changed', 
-        () => {
+        storage.ref(`images/${uid}/${photo.name}`).put(photo)
+        // uploadTask.on('state_changed', 
+        .then((response) => {
             //complete function
+            console.log(response)
             storage.ref('images').child(`${uid}/${photo.name}`).getDownloadURL()
             .then((url) => {
                 const post = {
                     url,
                     title,
-                    artist
+                    artist,
+                    likes: 0,
+                    pPoints: 0,
+                    views: 0,
+                    created: new Date()
                 }
                 firebase.database().ref(`photos/${uid}`).push({post})
             })
-            // .then((post) => {
-            //     dispatch({ type: 'ADD_PHOTO', post })
-            // })
+            .then(() => {
+                dispatch({ type: 'ADD_PHOTO', photo })
+            })
             .catch((err) => {
                 dispatch({ type: 'ADD_PHOTO_ERROR', err })
             })          

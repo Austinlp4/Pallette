@@ -9,6 +9,7 @@ import { Upload,
          Card } from './ProfileStyles.js';
 import { addPhoto, uploadAvatar } from '../../store/actions/projectActions';
 
+
 class Profile extends React.Component{
     constructor(props){
         super(props);
@@ -89,7 +90,7 @@ class Profile extends React.Component{
         // this.getURL(image);
         if(this.state.photo){
         this.props.addPhoto(photo, uid, title, artist);
-        this.setState({photo: null})
+        this.setState({photo: null, title: ''})
         }
             
     }
@@ -163,7 +164,7 @@ class Profile extends React.Component{
                   <div>
                       <Card>
                       <input type='file' name='file' id='filetwo' onChange={this.handlePhotoChange} className={this.state.photo ? 'fileup go' : 'fileup'}/>
-                      <label htmlFor="filetwo" >{this.state.photo ? <input type="text" value={this.state.title} name='title' onChange={this.handleTitle}/> : 'Add Artwork' }</label>
+                      <label htmlFor="filetwo" >{this.state.photo ? <input className='pic-title' type="text" value={this.state.title} name='title' onChange={this.handleTitle} placeholder='Add Title..'/> : 'Add Artwork' }</label>
                       <button onClick={this.addPhoto}>Add</button>
                       </Card>
                       <ProfileWorks {...this.props}/>

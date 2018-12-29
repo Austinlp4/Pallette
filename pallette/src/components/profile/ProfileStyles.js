@@ -122,4 +122,10 @@ export const Card = styled.div`
             color: white;
         }
     }
+    .pic-title{
+        width: 200px;
+        height: 35px;
+        border: 1px solid lightgrey;
+        border-radius: 6px;
+    }
 `;

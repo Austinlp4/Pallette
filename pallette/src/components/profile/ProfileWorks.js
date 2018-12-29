@@ -27,7 +27,7 @@ class ProfileWorks extends React.Component{
                 {this.state.works ? (
                     <Container>
                         {Object.values(this.state.works).map((post, i) => (
-                            <Card key={i}>
+                            <Card key={post.uid}>
                                 <img src={post.post.url} alt=""/>
                                 <div className='banner'>
                                     <h1>{post.post.title}</h1>
