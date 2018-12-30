@@ -9,6 +9,7 @@ import { Upload,
          Card } from './ProfileStyles.js';
 import { addPhoto, uploadAvatar } from '../../store/actions/projectActions';
 import moment from 'moment';
+import analyze from 'rgbaster';
 
 
 class Profile extends React.Component{
@@ -54,7 +55,7 @@ class Profile extends React.Component{
         e.stopPropagation();
         let {photo, title} = this.state;
         const uid = this.props.auth.uid;
-        const artist = `${this.props.profile.firstName} ${this.props.profile.firstName}`
+        const artist = `${this.props.profile.firstName} ${this.props.profile.lastName}`
         const created = moment().calendar();
         const palette = this.props.palette.palette
         if(this.state.photo){
@@ -94,9 +95,9 @@ class Profile extends React.Component{
         return (
             <ProContainer>
             <InfoContainer>
-                  {this.props.auth.uid ?
-                  <div style={{ width: '400px', height: '400px' }}>
-                      <img src={this.props.profile.url} alt="Profile pic" style={{width: '100%', height: 'auto'}}/>
+                  {this.props.profile.url ?
+                  <div style={{ width: '500px', height: '400px',  borderRadius: '6px' ,boxShadow: '0 9px 0px 0px white, inset 0 -9px 0px 0px white, inset 10px 0 15px -4px rgba(31, 73, 125, 0.2),inset -10px 0 15px -4px rgba(31, 73, 125, 0.2)', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
+                      <img src={this.props.profile.url} alt="Profile pic" style={{width: '90%', height: 'auto', borderRadius: '6px'}}/>
                   </div>
                   :
                   <Upload className='upload'>

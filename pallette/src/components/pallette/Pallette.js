@@ -68,13 +68,13 @@ const Pallete = styled.div`
   border-bottom-right-radius: 20%;
   border-bottom-left-radius: 20%;
   .first{
-    border-left: 5px solid rgba(45,54,98,1);
+    border-left: 5px solid white;
   }
   .last{
-    border-right: 5px solid rgba(45,54,98,1);
+    border-right: 5px solid white;
   }
   div{
-      border-bottom: 5px solid rgba(45,54,98,1);
+      border-bottom: 5px solid white;
   }
   div{
       width: 18%;

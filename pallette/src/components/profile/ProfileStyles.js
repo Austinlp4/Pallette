@@ -60,6 +60,11 @@ export const ProContainer = styled.div`
 export const Info = styled.div`
   width: 100%;
   padding: 5%;
+  h1{
+      color: rgb(45,54,98);
+      font-weight: 400;
+      font-size: 3rem;
+  }
 `;
 
 export const InfoContainer = styled.div`
@@ -73,10 +78,7 @@ export const Card = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 9px 0px 0px white, 
-    inset 0 -9px 0px 0px white, 
-    inset 10px 0 15px -4px rgba(31, 73, 125, 0.2),
-    inset -10px 0 15px -4px rgba(31, 73, 125, 0.2);
+  
   .fileup{
     width: 0.1px;
 	height: 0.1px;

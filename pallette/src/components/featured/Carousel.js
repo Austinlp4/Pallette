@@ -4,7 +4,7 @@ import Slide from './Slide'
 import LeftArrow from './LeftArrow'
 import RightArrow from './RightArrow'
 import firebase from '../../firebase';
-
+import analyze from 'rgbaster';
 
 
 class Slider extends React.Component {
@@ -17,21 +17,30 @@ class Slider extends React.Component {
     }
   }
 
+  getParent = (snapshot) => {
+    // You can get the reference (A Firebase object) from a snapshot
+    // using .ref().
+    var ref = snapshot.ref();
+    // Now simply find the parent and return the name.
+    return ref.parent().name();
+  }
+
   componentDidMount() {
     let itemsRef = firebase.database().ref(`photos`);
     itemsRef.on('value', data => {
       let works = [];
+      console.log(data.val())
       data.forEach((child) => {
         works.push(
           Object.values(child.val())
         );
       });
-      let newWorks = Object.values(works[0]);
-      console.log('works', newWorks)
+      let newWorks = Object.values(works);
+      console.log('newWorks', works)
       let photos = [];
       newWorks.map(child => 
         photos.push(
-          child.post.url
+          child.url
         )
       )
       this.setState({

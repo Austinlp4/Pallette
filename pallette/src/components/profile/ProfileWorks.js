@@ -51,15 +51,15 @@ class ProfileWorks extends React.Component {
                 onClick={() => this.pageFlip(post.key)}
               >
                 {/* <NavLink to={`${this.props.match.path}/${post.key}`}> */}
-                <img src={post.post.url} alt="" />
+                <img src={post.url} alt="" />
                 <div className="banner">
                   <div className="title">
-                    <h1>{post.post.title}</h1>
-                    <h4>{post.post.artist}</h4>
+                    <h1>{post.title}</h1>
+                    <h4>{post.artist}</h4>
                   </div>
                   <div className='view-container'>
                     <img className="view" src={View} alt="" />
-                    <h4>{post.post.views}</h4>
+                    <h4>{post.views}</h4>
                   </div>
                 </div>
 

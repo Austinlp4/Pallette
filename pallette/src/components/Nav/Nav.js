@@ -13,7 +13,7 @@ const NavBar = (props) => {
             {props.auth.uid
             ? 
             <Links>
-                <h3>{`Welcome, ${props.profile.firstName}`}</h3>
+                <h3>{`Welcome, ${props.profile.firstName}!`}</h3>
                 <NavLink to='/profile'>
                 Profile
                 </NavLink>
@@ -52,6 +52,11 @@ const Links = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  h3{
+    color: rgb(45,54,98);
+    font-weight: 400;
+    font-size: 1.4rem;
+}
 `;
 
 const mapDispatchToProps = (dispatch) => {

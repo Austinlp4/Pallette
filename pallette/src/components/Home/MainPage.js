@@ -18,7 +18,7 @@ class MainPage extends React.Component{
     render(){
         
         return (
-            <div style={{ width: '100%' }}>
+            <div style={{ width: '100%', height: '900px', backgroundColor: 'rgba(45,54,98,1)'}}>
               <Pallette/>
               <Call>
               <div>This Week's Pallete</div>
@@ -36,8 +36,9 @@ const Call = styled.div`
   div{
     margin: 0;
     font-size: 1.1rem;
-    color: white;
-    background-color: rgba(45,54,98,1);
+    font-weight: 600;
+    color: rgba(45,54,98,1);
+    background-color: white;
     max-width: 500px;
     width: 100%;
     height: 30px;

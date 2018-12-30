@@ -1,4 +1,3 @@
-import { generateKeyPair } from "crypto";
 
 export const addPhoto = (photo, uid, title, artist, created, palette) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {
@@ -12,17 +11,24 @@ export const addPhoto = (photo, uid, title, artist, created, palette) => {
             console.log(response)
             storage.ref('images').child(`${uid}/${photo.name}`).getDownloadURL()
             .then((url) => {
-                const post = {
-                    url,
+                // const post = {
+                //     url,
+                //     title,
+                //     artist,
+                //     likes: 0,
+                //     pPoints: 0,
+                //     views: 0,
+                //     created,
+                //     palette
+                // }
+                firebase.database().ref(`photos/${uid}`).push({url,
                     title,
                     artist,
                     likes: 0,
                     pPoints: 0,
                     views: 0,
                     created,
-                    palette
-                }
-                firebase.database().ref(`photos/${uid}`).push({post})
+                    palette})
             })
             .then(() => {
                 dispatch({ type: 'ADD_PHOTO', photo })
