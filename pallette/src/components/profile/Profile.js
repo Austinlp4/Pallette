@@ -8,6 +8,7 @@ import { Upload,
          InfoContainer,
          Card } from './ProfileStyles.js';
 import { addPhoto, uploadAvatar } from '../../store/actions/projectActions';
+import moment from 'moment';
 
 
 class Profile extends React.Component{
@@ -54,8 +55,10 @@ class Profile extends React.Component{
         let {photo, title} = this.state;
         const uid = this.props.auth.uid;
         const artist = `${this.props.profile.firstName} ${this.props.profile.firstName}`
+        const created = moment().calendar();
+        const palette = this.props.palette.palette
         if(this.state.photo){
-        this.props.addPhoto(photo, uid, title, artist);
+        this.props.addPhoto(photo, uid, title, artist, created, palette);
         this.setState({photo: null, title: ''})
         }
             
@@ -87,7 +90,7 @@ class Profile extends React.Component{
 
 
     render(){
-        console.log(this.props.profile.url)
+        console.log('palette',this.props.palette)
         return (
             <ProContainer>
             <InfoContainer>
@@ -140,7 +143,7 @@ class Profile extends React.Component{
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addPhoto: (photo, uid, title, artist) => dispatch(addPhoto(photo, uid, title, artist)),
+        addPhoto: (photo, uid, title, artist, created, palette) => dispatch(addPhoto(photo, uid, title, artist, created, palette)),
         uploadAvatar: (image, uid) => dispatch(uploadAvatar(image, uid))
     }
 }
@@ -149,7 +152,8 @@ const mapStateToProps = (state) => {
     console.log(state)
     return {
         auth: state.firebase.auth,
-        profile: state.firebase.profile
+        profile: state.firebase.profile,
+        palette: state.palette
     }
 }
 

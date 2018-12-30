@@ -15,7 +15,8 @@ import Profile from './components/profile/Profile';
 import { connect } from 'react-redux';
 import NavBar from './components/Nav/Nav.js';
 import SingleCard from './components/profile/SingleCard';
-
+import { addPalette } from './store/actions/paletteActions';
+import colors from 'nice-color-palettes';
 
 class App extends Component {
   constructor() {
@@ -37,8 +38,17 @@ class App extends Component {
           })
         })
       } 
-    })
+    });
+    this.colors();
     }
+
+
+    colors = () => {
+      let count = 16;
+      const pallete = colors[count]
+      this.props.addPalette(pallete)
+      return pallete;
+  }
   
 
 
@@ -156,4 +166,10 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default withRouter(connect()(App));
+const mapDispatchToProps = (dispatch) => {
+  return {
+      addPalette: (palette) => dispatch(addPalette(palette)) 
+  }
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(App));

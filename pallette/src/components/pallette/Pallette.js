@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import colors from 'nice-color-palettes';
+import { addPalette } from '../../store/actions/paletteActions';
+import { connect } from 'react-redux';
 
 class Pallette extends React.Component{
     constructor(props){
@@ -17,19 +19,22 @@ class Pallette extends React.Component{
     // }
 
 
-    colors = () => {
-        let count = 16;
-        const pallete = colors[count]
-        return pallete;
-    }
+    // colors = () => {
+    //     let count = 16;
+    //     const pallete = colors[count]
+    //     this.props.addPalette(pallete)
+    //     return pallete;
+    // }
 
     render(){
-        const pallete = this.colors();
-        let colorOne = pallete[0];
-        let colorTwo = pallete[1];
-        let colorThree = pallete[2];
-        let colorFour = pallete[3];
-        let colorFive = pallete[4];
+        // const pallete = this.colors();
+        
+        console.log('palette', this.props.palette.palette)
+        let colorOne = this.props.palette.palette[0];
+        let colorTwo = this.props.palette.palette[1];
+        let colorThree = this.props.palette.palette[2];
+        let colorFour = this.props.palette.palette[3];
+        let colorFive = this.props.palette.palette[4];
         return (
             <PalletteContainer>
                 <Pallete>
@@ -79,4 +84,19 @@ const Pallete = styled.div`
   }
 `;
 
-export default Pallette;
+const mapDispatchToProps = (dispatch) => {
+    return {
+        addPalette: (palette) => dispatch(addPalette(palette)) 
+    }
+}
+
+const mapStateToProps = (state) => {
+    console.log(state)
+    return {
+        auth: state.firebase.auth,
+        profile: state.firebase.profile,
+        palette: state.palette
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Pallette);
