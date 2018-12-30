@@ -1,4 +1,4 @@
-import colors from 'nice-color-palettes';
+
 
 export const addPalette = (palette) => {
     return (dispatch, getState, { getFirebase, getFirestore }) => {

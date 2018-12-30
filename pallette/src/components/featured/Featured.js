@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Carousel from './Carousel';
+import Slider from './Carousel';
 
 
 class Featured extends React.Component{
@@ -19,7 +19,7 @@ class Featured extends React.Component{
         
         return (
             <div>
-              <Carousel />
+              <Slider />
             </div>
         )
     }
