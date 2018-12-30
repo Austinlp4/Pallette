@@ -18,7 +18,7 @@ class MainPage extends React.Component{
     render(){
         
         return (
-            <div>
+            <div style={{ width: '100%' }}>
               <Pallette/>
               <Call>
               <div>This Week's Pallete</div>
