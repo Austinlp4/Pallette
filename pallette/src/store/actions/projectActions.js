@@ -11,17 +11,10 @@ export const addPhoto = (photo, uid, title, artist, created, palette) => {
             console.log(response)
             storage.ref('images').child(`${uid}/${photo.name}`).getDownloadURL()
             .then((url) => {
-                // const post = {
-                //     url,
-                //     title,
-                //     artist,
-                //     likes: 0,
-                //     pPoints: 0,
-                //     views: 0,
-                //     created,
-                //     palette
-                // }
+                let key = firebase.database().ref(`photos/${uid}`).push().key;
                 firebase.database().ref(`photos/${uid}`).push({
+                    uid,
+                    id: key,
                     url,
                     title,
                     artist,
@@ -30,6 +23,10 @@ export const addPhoto = (photo, uid, title, artist, created, palette) => {
                     views: 0,
                     created,
                     palette
+                }).then((res) => {
+                firebase.database().ref(`photos/${uid}`).child(`${res.key}`).update({
+                    id: res.key
+                })
                 })
             })
             .then(() => {
@@ -69,7 +66,7 @@ export const addView = (key, uid) => {
     return (dispatch, getState, { getFirebase }) => {
         const firebase = getFirebase();
         let views = 0;
-        let rootRef = firebase.database().ref(`photos/${uid}/${key}`).child('post');
+        let rootRef = firebase.database().ref(`photos/${uid}/${key}`);
         rootRef.on('value', data => {
             views = data.val().views + 1;
         })

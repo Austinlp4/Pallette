@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import { Route, withRouter, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
-// import Pallette from '../src/components/pallette/Pallette';
-// import Featured from './components/featured/Featured';
-// import firebase, { auth, provider } from './firebase.js';
 import Logo from './images/pallete-logo.png';
 import SignUp from './components/signin/Signup';
 import Login from './components/signin/Signin';
@@ -17,6 +14,7 @@ import NavBar from './components/Nav/Nav.js';
 import SingleCard from './components/profile/SingleCard';
 import { addPalette } from './store/actions/paletteActions';
 import colors from 'nice-color-palettes';
+import SingleImage from './components/featured/SingleImage.js';
 
 class App extends Component {
   constructor() {
@@ -77,21 +75,6 @@ class App extends Component {
     this.setState({ user: { firstName: info.firstName, email: info.email} })
   }
 
-  // setUser = (
-  //   uid,
-  //   email,
-  // ) => {
-  //   let user = {
-  //     uid,
-  //     email,
-  //   };
-  //   this.setState({ userCred: 
-  //       { uid: user.uid, 
-  //         email: user.email,  
-  //       } 
-  //       });
-  // }
-
 
   render() {
     return (
@@ -100,7 +83,10 @@ class App extends Component {
         <div className="one">
           <div className="two">
             <div className="three">
-              <Route exact path={ROUTES.LANDING} component={MainPage}/>
+              <Route exact path={ROUTES.LANDING} 
+              render={props => (
+                <MainPage {...props} />
+              )}/>
               <Route path='/signup' component={SignUp}/>
               <Route path={ROUTES.SIGN_IN} 
                 render={props => (
@@ -126,9 +112,9 @@ class App extends Component {
                   )}
               />
               <Route 
-                  path='/:uid'
+                  path='/:uid/:key'
                   render={props => (
-                    <SingleCard {...props}/>
+                    <SingleImage {...props}/>
                   )}
               />
             </div>
@@ -165,12 +151,6 @@ const Home = styled.div`
   }
 `;
 
-
-const mapStateToProps = (state) => {
-  return {
-
-  }
-}
 
 const mapDispatchToProps = (dispatch) => {
   return {

@@ -19,7 +19,7 @@ class Featured extends React.Component{
         
         return (
             <div>
-              <Slider />
+              <Slider {...this.props}/>
             </div>
         )
     }

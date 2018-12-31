@@ -5,7 +5,7 @@ import AliceCarousel from 'react-alice-carousel';
 import "react-alice-carousel/lib/alice-carousel.css";
 import View from '../../images/view.png';
 import { connect } from 'react-redux';
-import { addView } from '../../store/actions/projectActions';
+import { addView } from '../../store/actions/projectActions.js';
 
 
 class Slider extends React.Component {
@@ -29,8 +29,8 @@ class Slider extends React.Component {
     let itemsRef = firebase.database().ref(`photos`);
     itemsRef.on('value', data => {
       let works = [];
-      console.log('data', Object.values(data.val()))
       data = Object.values(data.val());
+      console.log('data', data)
       data.forEach((child) => {
         works.push(
           Object.values(child)
@@ -67,10 +67,10 @@ class Slider extends React.Component {
       this.state.photos.map((item, i) => (
         <div key={`key-${i}`} className="yours-custom-class">
         <Card
-        id={item.key}
-        key={item.key}
+        id={item.id}
+        key={item.id}
         post={item}
-        onClick={() => this.pageFlip(item.key)}
+        onClick={() => this.pageFlip(item.id, item.uid)}
       >
         {/* <NavLink to={`${this.props.match.path}/${post.key}`}> */}
         <img src={item.url} alt="" />
@@ -91,10 +91,10 @@ class Slider extends React.Component {
     )
   };
 
-  pageFlip = key => {
-    const uid = this.props.auth.uid;
+  pageFlip = (key, uid) => {
+    console.log('key, uid', key, uid)
     this.props.addView(key, uid)
-    this.props.history.push(`/${key}`);
+    this.props.history.push(`/${uid}/${key}`);
     
   };
 
@@ -207,9 +207,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-      addView: (key, uid) => dispatch(addView(key, uid)),
-      
+    addView: (key, uid) => dispatch(addView(key, uid))
   }
 }
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(Slider);

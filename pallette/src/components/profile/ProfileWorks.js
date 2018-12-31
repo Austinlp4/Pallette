@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import View from '../../images/view.png';
-import { addView } from '../../store/actions/projectActions';
+
 
 class ProfileWorks extends React.Component {
   constructor(props) {
@@ -32,8 +32,6 @@ class ProfileWorks extends React.Component {
   }
 
   pageFlip = key => {
-    const uid = this.props.auth.uid;
-    this.props.addView(key, uid)
     this.props.history.push(`${this.props.match.path}/${key}`);
     
   };
@@ -161,11 +159,11 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
-    return {
-        addView: (key, uid) => dispatch(addView(key, uid)),
+// const mapDispatchToProps = (dispatch) => {
+//     return {
+//         addView: (key, uid) => dispatch(addView(key, uid)),
         
-    }
-}
+//     }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileWorks);
+export default connect(mapStateToProps)(ProfileWorks);

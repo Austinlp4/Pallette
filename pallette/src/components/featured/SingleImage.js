@@ -12,7 +12,7 @@ class SingleCard extends React.Component{
     }
 
    async componentDidMount(){
-        let itemsRef = firebase.database().ref(`photos/${this.props.auth.uid}/${this.props.match.params.uid}`);
+        let itemsRef = firebase.database().ref(`photos/${this.props.match.params.uid}/${this.props.match.params.key}`);
       await itemsRef.on('value', data => {
            console.log('data.val', data.val())
             this.setState({ 
@@ -71,4 +71,3 @@ const mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps)(SingleCard);
-
