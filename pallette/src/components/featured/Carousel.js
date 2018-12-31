@@ -19,8 +19,8 @@ class Slider extends React.Component {
   }
 
   responsive = {
-    0: { items: 1 },
-    600: { items: 2 },
+    500: { items: 1 },
+    900: { items: 3 },
     1024: { items: 4 },
   };
 

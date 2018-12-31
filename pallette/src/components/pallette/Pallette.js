@@ -59,6 +59,7 @@ const PalletteContainer = styled.div`
   border-bottom-right-radius: 20%;
   border-bottom-left-radius: 20%;
   border: none;
+  padding-right: 2%;
 `;
 
 const Pallete = styled.div`

@@ -31,7 +31,10 @@ class MainPage extends React.Component{
 }
 
 const Container =styled.div`
-   width: 100%;
+   display: flex;
+   flex-direction: column;
+   padding-left: 2%;
+   width: 90%;
    height: 900px;
    background-color: rgba(45,54,98,1);
    h1{

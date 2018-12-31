@@ -10,6 +10,10 @@ import { Upload,
 import { addPhoto, uploadAvatar } from '../../store/actions/projectActions';
 import moment from 'moment';
 import analyze from 'rgbaster';
+import styled from 'styled-components';
+import Facebook from '../../images/facebook.png';
+import Instagram from '../../images/instagram.png';
+import Twitter from '../../images/twitter.png';
 
 
 class Profile extends React.Component{
@@ -91,13 +95,13 @@ class Profile extends React.Component{
 
 
     render(){
-        console.log('palette',this.props.palette)
+        console.log('palette',this.props.profile)
         return (
             <ProContainer>
             <InfoContainer>
                   {this.props.profile.url ?
-                  <div style={{ width: '500px', height: '400px',  borderRadius: '6px' ,boxShadow: '0 9px 0px 0px white, inset 0 -9px 0px 0px white, inset 10px 0 15px -4px rgba(31, 73, 125, 0.2),inset -10px 0 15px -4px rgba(31, 73, 125, 0.2)', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>
-                      <img src={this.props.profile.url} alt="Profile pic" style={{width: '90%', height: 'auto', borderRadius: '6px'}}/>
+                  <div style={{ margin: '3%', width: '500px', height: '400px', border: '1px solid lightgrey'}}>
+                      <img src={this.props.profile.url} alt="Profile pic" style={{width: '450px', height: 'auto', borderRadius: '6px'}}/>
                   </div>
                   :
                   <Upload className='upload'>
@@ -125,7 +129,16 @@ class Profile extends React.Component{
                         </button>
                     </div>
                     }
+                    
                   </Info>
+                  <Stats>
+
+                  </Stats>
+                  <Social>
+                        <div className='facebook'><img src={Facebook} alt="" style={{ width: '75px' }}/></div>
+                        <div className='instagram'><img src={Instagram} alt="" style={{ width: '75px' }}/></div>
+                        <div className='twitter'><img src={Twitter} alt="" style={{ width: '75px' }}/></div>
+                    </Social>
                   </InfoContainer>
                   <div>
                       <Card>
@@ -139,6 +152,40 @@ class Profile extends React.Component{
         )
     }
 }
+
+const Stats = styled.div`
+    width: 100%;
+    max-width: 200px;
+    
+`;
+
+const Social = styled.div`
+  height: 250px;
+  width: 100px;
+  .facebook{
+      background-color: rgb(41, 82, 150);
+      width: 100%;
+      height: 75px;
+      box-shadow: inset -10px 0 15px -4px rgba(31, 73, 125, 0.5)
+  }
+  .instagram{
+    background-color: rgb(254, 216, 116);
+    width: 100%;
+    height: 75px;
+    box-shadow: inset -10px 0 15px -4px rgba(31, 73, 125, 0.3)
+  }
+  .twitter{
+      background-color: rgb(250, 250, 250);
+      width: 100%;
+      height: 75px;
+      box-shadow: inset -10px 0 15px -4px rgba(31, 73, 125, 0.3)
+  }
+  .facebook, .instagram, .twitter{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+`;
 
 
 

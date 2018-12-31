@@ -8,6 +8,7 @@ export const Upload = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 3%;
   .fileup{
     width: 0.1px;
 	height: 0.1px;
@@ -50,7 +51,6 @@ export const Upload = styled.div`
 export const ProContainer = styled.div`
   display: flex;
   width: 100%;
-  padding: 3%;
   flex-direction: column;
   .upload{
       justify-self: flex-start;

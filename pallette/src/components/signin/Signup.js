@@ -16,7 +16,11 @@ class SignUp extends React.Component {
       email: '',
       password: '',
       firstName: '',
-      lastName: ''
+      lastName: '',
+      followers: 0,
+      facebook: '',
+      instagram: '',
+      twitter: ''
     };
   }
 

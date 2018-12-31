@@ -35,7 +35,11 @@ export const signUp = (newUser) => {
             console.log(response)
             return firebase.database().ref(`users/${response.user.uid}`).set({
                 firstName: newUser.firstName,
-                lastName: newUser.lastName,             
+                lastName: newUser.lastName,
+                followers: newUser.followers,
+                facebook: newUser.facebook,
+                instagram: newUser.instagram,
+                twitter: newUser.twitter           
             })
         }).then(() => {
             dispatch({ type: 'SIGNUP_SUCCESS' })
