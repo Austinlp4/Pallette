@@ -18,21 +18,34 @@ class MainPage extends React.Component{
     render(){
         
         return (
-            <div style={{ width: '100%', height: '900px', backgroundColor: 'rgba(45,54,98,1)'}}>
+            <Container>
               <Pallette/>
               <Call>
               <div>This Week's Pallete</div>
               </Call>
+              <h1>Recently Added</h1>
               <Featured />
-            </div>
+            </Container>
         )
     }
 }
+
+const Container =styled.div`
+   width: 100%;
+   height: 900px;
+   background-color: rgba(45,54,98,1);
+   h1{
+       text-align: center;
+       color: white;
+       font-weight: 300;
+   }
+`;
 
 const Call = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-bottom: 50px;
   div{
     margin: 0;
     font-size: 1.1rem;

@@ -21,14 +21,16 @@ export const addPhoto = (photo, uid, title, artist, created, palette) => {
                 //     created,
                 //     palette
                 // }
-                firebase.database().ref(`photos/${uid}`).push({url,
+                firebase.database().ref(`photos/${uid}`).push({
+                    url,
                     title,
                     artist,
                     likes: 0,
                     pPoints: 0,
                     views: 0,
                     created,
-                    palette})
+                    palette
+                })
             })
             .then(() => {
                 dispatch({ type: 'ADD_PHOTO', photo })

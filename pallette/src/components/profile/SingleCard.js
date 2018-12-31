@@ -14,11 +14,10 @@ class SingleCard extends React.Component{
     async componentDidMount(){
         let itemsRef = firebase.database().ref(`photos/${this.props.auth.uid}`);
        await itemsRef.child(`${this.props.match.params.uid}`).on('value', data => {
+           console.log('data.val', data.val())
             this.setState({ 
               post: {
-                  url: data.val().post.url,
-                  artist: data.val().post.artist,
-                  title: data.val().post.title
+                  ...data.val()
             
             }
             })

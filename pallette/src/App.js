@@ -125,6 +125,12 @@ class App extends Component {
                     <SingleCard {...props}/>
                   )}
               />
+              <Route 
+                  path='/:uid'
+                  render={props => (
+                    <SingleCard {...props}/>
+                  )}
+              />
             </div>
           </div>
         </div>
