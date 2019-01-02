@@ -78,13 +78,13 @@ export const addView = (key, uid) => {
 export const addLike = (key, uid) => {
     return (dispatch, getState, { getFirebase }) => {
         const firebase = getFirebase();
-        let views = 0;
+        let likes = 0;
         let rootRef = firebase.database().ref(`photos/${uid}/${key}`);
         rootRef.on('value', data => {
-            views = data.val().views + 1;
+            likes = data.val().likes + 1;
         })
-        console.log('views', views)
-        rootRef.update({views});
+        console.log('views', likes)
+        rootRef.update({likes});
     }
 }
 
