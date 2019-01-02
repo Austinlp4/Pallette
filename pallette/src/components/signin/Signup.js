@@ -5,7 +5,7 @@ import firebase from '../../firebase';
 import Register from './Register';
 import { signUp } from '../../store/actions/authActions.js';
 import { connect } from 'react-redux';
-
+import { NavLink } from 'react-router-dom';
 
 
 
@@ -53,6 +53,9 @@ class SignUp extends React.Component {
         <div>
           <div>
             <h3>Register</h3>
+            <NavLink to='/signin' className='reroute'>
+              Already a user? Sign in here!
+           </NavLink>
           </div>
         </div>
         <div>
@@ -86,7 +89,7 @@ class SignUp extends React.Component {
                 value={this.state.lastName}
                 onChange={this.onChange}
               />
-              <button children="Register" />
+              <Button children="Register" />
               <div>
                 {this.props.authError ? <p>{this.props.authError}</p> : null}
               </div>
@@ -105,24 +108,62 @@ class SignUp extends React.Component {
 }
 
 const SignupContainer = styled.div`
-  height: 600px;
-  width: 600px;
-  border: 1px solid lightgray;
-  margin: 75px auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  form {
+    height: 500px;
+    width: 400px;
+    border: 1px solid rgb(255, 0, 198);
     display: flex;
     flex-direction: column;
-    width: 90%;
-    input {
-      height: 35px;
-      width: 90%;
-      border-radius: 8px;
-      margin: 4% 0;
-      border: 0.2 solid lightgray;
+    justify-content: center;
+    align-items: center;
+    margin: 10% 0;
+    border-radius: 8px;
+    background-color: rgb(45,54,98);
+    .reroute{
+      color: white;
+      &:hover{
+        color: rgb(255, 0, 198);
+      }
     }
+    h3{
+      text-align: center;
+      font-family: 'Lobster', cursive;
+      font-size: 3rem;
+      color: rgb(255, 0, 198);
+    }
+    form{
+      display: flex;
+      flex-direction: column;
+      input{
+        padding-left: 3%;
+        margin: 5% 0;
+        height: 40px;
+        width: 250px;
+        border: none;
+        border-radius: 6px;
+        &:focus{
+          outline: none;
+          border: 1px solid rgb(255, 0, 198) !important;
+
+        }
+      }
+      input:-webkit-autofill,
+        input:-webkit-autofill:hover, 
+        input:-webkit-autofill:focus, 
+        input:-webkit-autofill:active  {
+            -webkit-box-shadow: 0 0 0 30px white inset;
+        }
+    }
+`;
+
+const Button = styled.button`
+  height: 40px;
+  width: 250px;
+  border: none;
+  border-radius: 6px;
+  background-color: rgb(255, 0, 198);
+  color:  rgb(45,54,98);
+  &:hover{
+    background-color: rgb(255,126,70);
   }
 `;
 
