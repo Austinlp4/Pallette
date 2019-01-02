@@ -4,6 +4,7 @@ import firebase, { auth } from '../../firebase';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { signIn } from '../../store/actions/authActions';
+import { Redirect } from 'react-router-dom';
 
 class Login extends Component {
  state = {
@@ -14,8 +15,8 @@ class Login extends Component {
 handleInputChange = (event) => {
    this.setState({ [event.target.name]: event.target.value });
  };
+
 handleSubmit = (event) => {
-   event.preventDefault();
    const { email, password } = this.state;
    const creds = {email,password};
     this.props.signIn(creds)
@@ -25,6 +26,7 @@ handleSubmit = (event) => {
  render() {
    const { authError } = this.props;
    const { email, password, error } = this.state;
+   if(this.props.auth.uid) return <Redirect to='/' />
    return (
      <SigninContainer>
        <div>
@@ -83,7 +85,8 @@ const SigninContainer = styled.div`
 
 const mapStateToProps = (state) => {
   return {
-    authError: state.auth.authError
+    authError: state.auth.authError,
+    auth: state.firebase.auth
   }
 }
 

@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import Pallette from '../pallette/Pallette';
 import Featured from '../featured/Featured';
 import All from '../featured/All';
+import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom';
 
 class MainPage extends React.Component{
     constructor(props){
@@ -17,8 +19,9 @@ class MainPage extends React.Component{
     }
 
     render(){
-        
+        if(!this.props.auth.uid) return <Redirect to='/signin'/>
         return (
+
             <Container>
               <Pallette/>
               <Call>
@@ -66,5 +69,14 @@ const Call = styled.div`
   }
 `;
 
+const mapStateToProps = (state) => {
+    console.log(state)
+    return {
+        auth: state.firebase.auth,
+        profile: state.firebase.profile,
+        palette: state.palette
+    }
+}
 
-export default MainPage;
+
+export default connect(mapStateToProps)(MainPage);

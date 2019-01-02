@@ -14,6 +14,8 @@ import styled from 'styled-components';
 import Facebook from '../../images/facebook.png';
 import Instagram from '../../images/instagram.png';
 import Twitter from '../../images/twitter.png';
+import ColorThief from '../../ColorThief';
+import { Redirect } from 'react-router-dom';
 
 
 class Profile extends React.Component{
@@ -29,6 +31,7 @@ class Profile extends React.Component{
             title: '',
             loaded: false
         };
+        this.colorThief = new ColorThief();
     }
 
 
@@ -42,6 +45,7 @@ class Profile extends React.Component{
     handlePhotoChange = event => {
         if(event.target.files[0]){
             const photo = event.target.files[0];
+            console.log('photo', photo)
             this.setState(() => ({photo}))
         }
     }
@@ -94,6 +98,7 @@ class Profile extends React.Component{
 
     render(){
         console.log('palette',this.props.profile)
+        if(!this.props.auth.uid) return <Redirect to='/signin'/>
         return (
             <ProContainer>
             <InfoContainer>
@@ -140,7 +145,7 @@ class Profile extends React.Component{
                   </InfoContainer>
                   <div>
                       <Card>
-                      <input type='file' name='file' id='filetwo' onChange={this.handlePhotoChange} className={this.state.photo ? 'fileup go' : 'fileup'}/>
+                      <input type='file' name='file' accept='image/*' id='filetwo' onChange={this.handlePhotoChange} className={this.state.photo ? 'fileup go' : 'fileup'}/>
                       <label htmlFor="filetwo" >{this.state.photo ? <input className='pic-title' type="text" value={this.state.title} name='title' onChange={this.handleTitle} placeholder='Add Title..'/> : 'Add Artwork' }</label>
                       <button onClick={this.addPhoto}>Add</button>
                       </Card>

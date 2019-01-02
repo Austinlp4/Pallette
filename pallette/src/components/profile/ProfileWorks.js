@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import View from '../../images/view.png';
 import Like from '../../images/heart.png';
+import ColorThief from '../../ColorThief';
 
 
 class ProfileWorks extends React.Component {
@@ -13,6 +14,7 @@ class ProfileWorks extends React.Component {
     this.state = {
       works: [],
     };
+    this.colorThief = new ColorThief();
   }
 
   componentDidMount() {
@@ -20,12 +22,12 @@ class ProfileWorks extends React.Component {
     itemsRef.on('value', data => {
       let works = [];
       data.forEach(child => {
-        console.log(child.val());
         works.push({
           key: child.key,
           ...child.val(),
         });
       });
+      console.log('works', works)
       this.setState({
         works: works,
       });
