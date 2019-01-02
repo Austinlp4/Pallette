@@ -35,7 +35,6 @@ const Container =styled.div`
    flex-direction: column;
    padding-left: 2%;
    width: 90%;
-   height: 900px;
    background-color: rgba(45,54,98,1);
    h1{
        text-align: center;
