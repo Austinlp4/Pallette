@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Slider from './Carousel';
 import MostViewed from './MostViewed';
+import All from './All';
 
 
 class Featured extends React.Component{
@@ -23,6 +24,8 @@ class Featured extends React.Component{
               <Slider {...this.props}/>
               <Call>Most Viewed</Call>
               <MostViewed {...this.props}/>
+              <Call>All</Call>
+              <All {...this.props}/>
             </div>
         )
     }

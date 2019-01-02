@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Pallette from '../pallette/Pallette';
 import Featured from '../featured/Featured';
+import All from '../featured/All';
 
 class MainPage extends React.Component{
     constructor(props){

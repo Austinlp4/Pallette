@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import { addView } from '../../store/actions/projectActions.js';
 
 
-class MostViewed extends React.Component {
+class All extends React.Component {
   constructor(props) {
     super(props);
 
@@ -30,12 +30,14 @@ class MostViewed extends React.Component {
     itemsRef.on('value', data => {
       let works = [];
       data = Object.values(data.val());
+      console.log('data', data)
       data.forEach((child) => {
         works.push(
           Object.values(child)
         );
       });
       let newWorks = Object.values(works);
+      console.log('newWorks', works)
       let photos = [];
       newWorks.map((child, i) => 
         child.map((obj, i) => 
@@ -44,11 +46,20 @@ class MostViewed extends React.Component {
           )
         )
       )
-      photos.sort((a,b) => a.views - b.views).reverse();
+      this.shuffleArray(photos);
       this.setState({
         photos: photos,
       });
     });
+  }
+
+  shuffleArray = (array) => {
+      for(let i=array.length - 1; i > 0; i--) {
+        let j = Math.floor(Math.random() * (i + 1));
+        let temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+      }
   }
 
   onSlideChange(e) {
@@ -64,7 +75,6 @@ class MostViewed extends React.Component {
   galleryItems() {
     return (
       this.state.photos.map((item, i) => (
-        <div key={`key-${i}`} className="yours-custom-class">
         <Card
         id={item.id}
         key={item.id}
@@ -85,7 +95,7 @@ class MostViewed extends React.Component {
         </div>
 
         {/* </NavLink> */}
-      </Card></div>
+      </Card>
       ))
     )
   };
@@ -101,29 +111,42 @@ class MostViewed extends React.Component {
   render () {
     // const anObj = this.state.photos[0];
     // console.log(anObj)
-
-      const items = this.galleryItems();
    
       return (
-        <AliceCarousel
-          items={items}
-          duration={400}
-          autoPlay={false}
-          startIndex = {1}
-          fadeOutAnimation={true}
-          mouseDragEnabled={true}
-          playButtonEnabled={false}
-          autoPlayInterval={2000}
-          autoPlayDirection="rtl"
-          responsive={this.responsive}
-          disableAutoPlayOnAction={true}
-          onSlideChange={this.onSlideChange}
-          onSlideChanged={this.onSlideChanged}
-        />
+        <Container>
+            {this.state.photos.map((item, i) => (
+        <Card
+        id={item.id}
+        key={item.id}
+        post={item}
+        onClick={() => this.pageFlip(item.id, item.uid)}
+      >
+        {/* <NavLink to={`${this.props.match.path}/${post.key}`}> */}
+        <img src={item.url} alt="" />
+        <div className="banner">
+          <div className="title">
+            <h1>{item.title}</h1>
+            <h4>{item.artist}</h4>
+          </div>
+          <div className='view-container'>
+            <img className="view" src={View} alt="" />
+            <h4>{item.views}</h4>
+          </div>
+        </div>
+
+        {/* </NavLink> */}
+      </Card>
+      ))}
+        </Container>
       );
   
     }
   }
+
+  const Container = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+  `;
 
   const Card = styled.div`
   width: 275px;
@@ -212,4 +235,4 @@ const mapDispatchToProps = (dispatch) => {
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(MostViewed);
+export default connect(mapStateToProps, mapDispatchToProps)(All);
