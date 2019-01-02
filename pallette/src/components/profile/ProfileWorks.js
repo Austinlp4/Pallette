@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import View from '../../images/view.png';
+import Like from '../../images/heart.png';
 
 
 class ProfileWorks extends React.Component {
@@ -54,6 +55,10 @@ class ProfileWorks extends React.Component {
                   <div className="title">
                     <h1>{post.title}</h1>
                     <h4>{post.artist}</h4>
+                  </div>
+                  <div className='like-container'>
+                    <img className="like" src={Like} alt="" />
+                    <h4>{post.likes}</h4>
                   </div>
                   <div className='view-container'>
                     <img className="view" src={View} alt="" />
@@ -135,6 +140,21 @@ const Card = styled.div`
       width: 30px;
       height: 20px;
     }
+    .like-container{
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      h4{
+          align-self: center;
+      }
+    }
+  .like {
+    width: 25px;
+    height: 20px;
+    margin-right: 4%;
+  }
     .title {
       display: flex;
       flex-direction: column;
