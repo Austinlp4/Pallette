@@ -7,7 +7,7 @@ import { Upload,
          Info,
          InfoContainer,
          Card } from './ProfileStyles.js';
-import { addPhoto, uploadAvatar } from '../../store/actions/projectActions';
+import { addPhoto, uploadAvatar, addBio } from '../../store/actions/projectActions';
 import moment from 'moment';
 import analyze from 'rgbaster';
 import styled from 'styled-components';
@@ -77,11 +77,9 @@ class Profile extends React.Component{
     }
 
     handleSubmit = () => {
-        if(this.state.bio){
             const bio = this.state.bio;
-            const ref = firebase.database().ref(`users/${this.props.user.uid}`);
-             ref.update({bio});
-        }
+            const uid = this.props.auth.uid;
+            this.props.addBio(bio, uid)
     }
 
     handleTitle = event => {
@@ -100,7 +98,7 @@ class Profile extends React.Component{
             <ProContainer>
             <InfoContainer>
                   {this.props.profile.url ?
-                  <div style={{ margin: '3%', width: '500px', height: '400px', border: '1px solid lightgrey'}}>
+                  <div style={{ margin: '3%', width: '500px', height: '400px', border: '1px solid pink', borderRadius: '6px'}}>
                       <img src={this.props.profile.url} alt="Profile pic" style={{width: '450px', height: 'auto', borderRadius: '6px'}}/>
                   </div>
                   :
@@ -114,11 +112,11 @@ class Profile extends React.Component{
                   }
                   <Info>
                     <h1>{this.props.profile.firstName} {this.props.profile.lastName}</h1>
-                    {this.props.user.bio 
+                    {this.props.profile.bio 
                     ?
                     <div>
                         <p>
-                            {this.props.user.bio }
+                            {this.props.profile.bio }
                         </p>
                     </div>
                     :
@@ -192,7 +190,8 @@ const Social = styled.div`
 const mapDispatchToProps = (dispatch) => {
     return {
         addPhoto: (photo, uid, title, artist, created, palette) => dispatch(addPhoto(photo, uid, title, artist, created, palette)),
-        uploadAvatar: (image, uid) => dispatch(uploadAvatar(image, uid))
+        uploadAvatar: (image, uid) => dispatch(uploadAvatar(image, uid)),
+        addBio: (bio, uid) => dispatch(addBio(bio, uid))
     }
 }
 

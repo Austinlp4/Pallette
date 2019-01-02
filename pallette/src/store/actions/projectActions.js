@@ -74,3 +74,17 @@ export const addView = (key, uid) => {
         rootRef.update({views});
     }
 }
+
+export const addBio = (bio, uid) => {
+    return (dispatch, getState, {getFirebase}) => {
+        const firebase = getFirebase();
+        const ref = firebase.database().ref(`users/${uid}`);
+             ref.update({bio})
+             .then(() => {
+                 dispatch({ type: 'ADD_BIO', bio })
+             })
+             .catch((err) => {
+                dispatch({ type: 'ADD_BIO_ERROR', err })
+            }) 
+    }
+}

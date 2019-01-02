@@ -53,7 +53,7 @@ const Nav = styled.div`
 
 const Links = styled.div`
   display: flex;
-  max-width: 400px;
+  max-width: 350px;
   justify-content: space-between;
   align-items: center;
   width: 100%;

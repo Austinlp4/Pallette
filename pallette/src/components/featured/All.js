@@ -213,7 +213,7 @@ class All extends React.Component {
       flex-direction: column;
       justify-content: center;
       align-items: start;
-      width: 100px;
+      width: 150px;
     }
     
   }
