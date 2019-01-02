@@ -21,21 +21,6 @@ handleSubmit = (event) => {
     this.props.signIn(creds)
     this.props.history.push('/')
 
-// firebase
-//      .auth()
-//      .signInWithEmailAndPassword(email, password)
-//      .then((user) => {
-//        console.log(user);
-//       if (user) {
-//         this.props.setUser(
-//           user.user.uid,
-//           user.user.email, 
-//         );}
-//        this.props.history.push('/');
-//      })
-//      .catch((error) => {
-//        this.setState({ error: error });
-//      });
  };
  render() {
    const { authError } = this.props;
@@ -81,6 +66,19 @@ const SigninContainer = styled.div`
   height: 400px;
   width: 400px;
   border: 1px solid lightgray;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10% 0;
+  border-radius: 6px;
+  form{
+    display: flex;
+    flex-direction: column;
+    input{
+      margin: 10% 0;
+    }
+  }
 `;
 
 const mapStateToProps = (state) => {

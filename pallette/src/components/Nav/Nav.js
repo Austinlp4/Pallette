@@ -20,7 +20,7 @@ const NavBar = (props) => {
                 <div onClick={props.signOut}>Logout</div>
             </Links>
             :
-            <div>
+            <div className='auth'>
             <NavLink to='/signup'>
                 Sign Up
             </NavLink>
@@ -43,6 +43,11 @@ const Nav = styled.div`
     color: black;
     font-size: 1.1rem;
     font-weight: bold;
+  }
+  .auth{
+      display: flex;
+      width: 135px;
+      justify-content: space-between;
   }
 `;
 
