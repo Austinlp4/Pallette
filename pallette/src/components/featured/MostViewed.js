@@ -45,9 +45,10 @@ class MostViewed extends React.Component {
           )
         )
       )
-      photos.sort((a,b) => a.views - b.views).reverse();
+      let newPhotos = photos.sort((a, b) => a.views - b.views).reverse();
+      console.log(newPhotos)
       this.setState({
-        photos: photos,
+        photos: newPhotos,
       });
     });
   }
@@ -114,7 +115,7 @@ class MostViewed extends React.Component {
           items={items}
           duration={400}
           autoPlay={false}
-          startIndex = {1}
+          startIndex = {0}
           fadeOutAnimation={true}
           mouseDragEnabled={true}
           playButtonEnabled={false}

@@ -22,7 +22,8 @@ export const addPhoto = (photo, uid, title, artist, created, palette) => {
                     pPoints: 0,
                     views: 0,
                     created,
-                    palette
+                    palette,
+                    likedBy: {}
                 }).then((res) => {
                 firebase.database().ref(`photos/${uid}`).child(`${res.key}`).update({
                     id: res.key
@@ -75,16 +76,20 @@ export const addView = (key, uid) => {
     }
 }
 
-export const addLike = (key, uid) => {
+export const addLike = (key, uid, auth) => {
     return (dispatch, getState, { getFirebase }) => {
         const firebase = getFirebase();
         let likes = 0;
         let rootRef = firebase.database().ref(`photos/${uid}/${key}`);
         rootRef.on('value', data => {
-            likes = data.val().likes + 1;
+            if(data.val().likedBy && Object.values(data.val().likedBy).indexOf(auth) > -1){
+                likes = data.val().likes;
+            } else {
+            likes = data.val().likes + 1
+            }
         })
         console.log('views', likes)
-        rootRef.update({likes});
+        rootRef.update({likes: likes, likedBy: {auth}});
     }
 }
 

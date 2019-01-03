@@ -47,8 +47,9 @@ class Slider extends React.Component {
           )
         )
       )
+      let newPhotos = photos.sort((a, b) => a.likes - b.likes).reverse();
       this.setState({
-        photos: photos,
+        photos: newPhotos,
       });
     });
   }
@@ -64,7 +65,8 @@ class Slider extends React.Component {
   };
 
   handleLike = (key, uid) => {
-    this.props.addLike(key, uid);
+    const auth = this.props.auth.uid;
+    this.props.addLike(key, uid, auth);
   }
 
   galleryItems() {
@@ -118,7 +120,7 @@ class Slider extends React.Component {
           items={items}
           duration={400}
           autoPlay={false}
-          startIndex = {1}
+          startIndex = {0}
           fadeOutAnimation={true}
           mouseDragEnabled={true}
           playButtonEnabled={false}
@@ -231,7 +233,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
   return {
     addView: (key, uid) => dispatch(addView(key, uid)),
-    addLike: (key, uid) => dispatch(addLike(key, uid))
+    addLike: (key, uid, auth) => dispatch(addLike(key, uid, auth))
   }
 }
 

@@ -3,7 +3,7 @@ import { Route, withRouter} from 'react-router-dom';
 import styled from 'styled-components';
 import firebase from '../../firebase';
 import Register from './Register';
-import { signUp } from '../../store/actions/authActions.js';
+import { signUp, signUpWithGoogle } from '../../store/actions/authActions.js';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
@@ -45,6 +45,12 @@ class SignUp extends React.Component {
     //     this.setState({ error: error });
     //   });
   };
+
+  googleSign = event => {
+    event.preventDefault();
+    this.props.signUpWithGoogle();
+
+  }
 
   
   render() {
@@ -94,6 +100,7 @@ class SignUp extends React.Component {
                 {this.props.authError ? <p>{this.props.authError}</p> : null}
               </div>
             </form>
+            <button onClick={this.googleSign}>Google</button>
           </div>
         </div>
         <Route
@@ -176,7 +183,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    signUp: (newUser) => dispatch(signUp(newUser))
+    signUp: (newUser) => dispatch(signUp(newUser)),
+    signUpWithGoogle: (newUser) => dispatch(signUpWithGoogle(newUser))
   }
 }
 
