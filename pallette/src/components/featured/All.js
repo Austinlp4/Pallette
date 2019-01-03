@@ -6,7 +6,7 @@ import "react-alice-carousel/lib/alice-carousel.css";
 import View from '../../images/view.png';
 import Like from '../../images/heart.png';
 import { connect } from 'react-redux';
-import { addView } from '../../store/actions/projectActions.js';
+import { addView, addLike } from '../../store/actions/projectActions.js';
 
 
 class All extends React.Component {
@@ -108,6 +108,11 @@ class All extends React.Component {
     
   };
 
+  handleLike = (key, uid) => {
+    const auth = this.props.auth.uid;
+    this.props.addLike(key, uid, auth);
+  }
+
 
   render () {
     // const anObj = this.state.photos[0];
@@ -120,16 +125,15 @@ class All extends React.Component {
         id={item.id}
         key={item.id}
         post={item}
-        onClick={() => this.pageFlip(item.id, item.uid)}
       >
         {/* <NavLink to={`${this.props.match.path}/${post.key}`}> */}
-        <img src={item.url} alt="" />
+        <img src={item.url} alt="" onClick={() => this.pageFlip(item.id, item.uid)}/>
         <div className="banner">
           <div className="title">
             <h1>{item.title}</h1>
             <h4>{item.artist}</h4>
           </div>
-          <div className='like-container'>
+          <div className='like-container' onClick={() => this.handleLike(item.id, item.uid)}>
             <img className="like" src={Like} alt="" />
             <h4>{item.likes}</h4>
           </div>
@@ -249,7 +253,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addView: (key, uid) => dispatch(addView(key, uid))
+    addView: (key, uid) => dispatch(addView(key, uid)),
+    addLike: (key, uid, auth) => dispatch(addLike(key, uid, auth))
   }
 }
 
