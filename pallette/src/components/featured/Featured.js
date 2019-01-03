@@ -38,6 +38,7 @@ const Call = styled.h1`
     text-align: center;
     color: white;
     font-weight: 300;
+    font-family: 'Lobster', cursive;
 `;
 
 const Bar = styled.div`
@@ -46,7 +47,7 @@ const Bar = styled.div`
     linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
     linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
     linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
-    height: 7px;
+    height: 4px;
     width: 70%;
 `;
 

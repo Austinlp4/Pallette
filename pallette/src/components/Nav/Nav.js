@@ -9,7 +9,7 @@ import { signOut } from '../../store/actions/authActions';
 const NavBar = (props) => {
     return(
         <Nav>
-            <img src={Logo} alt="" style={{ width: '275px' }} onClick={() => {props.history.push('/')}}/>
+            <img src={Logo} alt="" style={{ width: '250px' }} onClick={() => {props.history.push('/')}}/>
             {props.auth.uid
             ? 
             <Links>

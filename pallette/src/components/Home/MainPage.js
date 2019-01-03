@@ -44,6 +44,7 @@ const Container =styled.div`
        text-align: center;
        color: white;
        font-weight: 300;
+       font-family: 'Lobster', cursive;
    }
 `;
 
