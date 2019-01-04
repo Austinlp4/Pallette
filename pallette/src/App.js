@@ -88,7 +88,11 @@ class App extends Component {
               render={props => (
                 <MainPage {...props} />
               )}/>
-              <Route path='/cta' component={Cta} />
+              <Route path='/cta' 
+                  render={props => (
+                    <Cta {...props}/>
+                  )}
+              />
               <Route path='/signup' component={SignUp}/>
               <Route path={ROUTES.SIGN_IN} 
                 render={props => (

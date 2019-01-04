@@ -98,7 +98,7 @@ class Profile extends React.Component{
 
     render(){
         console.log('palette',this.props.profile)
-        if(!this.props.auth.uid) return <Redirect to='/signin'/>
+        if(!this.props.auth.uid) return <Redirect to='/cta'/>
         return (
             <ProContainer>
             <InfoContainer>

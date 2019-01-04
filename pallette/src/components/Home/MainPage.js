@@ -19,7 +19,7 @@ class MainPage extends React.Component{
     }
 
     render(){
-        if(!this.props.auth.uid) return <Redirect to='/signin'/>
+        if(!this.props.auth.uid) return <Redirect to='/cta'/>
         return (
 
             <Container>

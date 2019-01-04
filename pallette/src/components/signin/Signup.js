@@ -100,7 +100,7 @@ class SignUp extends React.Component {
                 {this.props.authError ? <p>{this.props.authError}</p> : null}
               </div>
             </form>
-            <button onClick={this.googleSign}>Google</button>
+            {/* <button onClick={this.googleSign}>Google</button> */}
           </div>
         </div>
         <Route
