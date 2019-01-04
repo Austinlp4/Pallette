@@ -19,12 +19,7 @@ class Slider extends React.Component {
     }
   }
 
-  responsive = {
-    500: { items: 1 },
-    900: { items: 3 },
-    1024: { items: 4 },
-  };
-
+  
   
   componentDidMount() {
     let itemsRef = firebase.database().ref(`photos`);
@@ -114,27 +109,80 @@ class Slider extends React.Component {
     // console.log(anObj)
 
       const items = this.galleryItems();
+     const responsive = {
+        500: { items: 1 },
+        900: { items: 2 },
+        1025: { items: 2 },
+        1300: { items: 2 },
+        1400: { items: 3 },
+        1700: { items: 3 },
+        1800: { items: 4 }
+      };
    
       return (
+        <Wrapper>
         <AliceCarousel
           items={items}
           duration={400}
           autoPlay={false}
+          dotsDisabled={true}
           startIndex = {0}
           fadeOutAnimation={true}
           mouseDragEnabled={true}
           playButtonEnabled={false}
           autoPlayInterval={2000}
           autoPlayDirection="rtl"
-          responsive={this.responsive}
+          responsive={responsive}
           disableAutoPlayOnAction={true}
           onSlideChange={this.onSlideChange}
           onSlideChanged={this.onSlideChanged}
         />
+        </Wrapper>
       );
   
     }
   }
+
+  const Wrapper = styled.div`
+  .alice-carousel__prev-btn,
+  .alice-carousel__next-btn {
+    display: inline-block;
+    width: 50%;
+    padding: 15px 10px;
+    box-sizing: border-box;
+  
+    [data-area] {
+      &::after {
+        content: attr(data-area);
+        position: relative;
+      }
+    }
+
+    .alice-carousel__prev-btn-wrapper {
+      text-align: center;
+    }
+
+    .alice-carousel__next-btn-wrapper {
+      text-align: center;
+    }
+
+
+    .alice-carousel__prev-btn-item,
+   .alice-carousel__next-btn-item {
+  display: inline-block;
+  color: white;
+  cursor: pointer;
+  font-family: 'Lobster', cursive;
+  font-size: 2rem;
+  &:hover {
+    color: pink;
+  }
+  &.__inactive {
+    opacity: .4;
+  }
+}
+  }
+  `;
 
   const Card = styled.div`
   width: 275px;

@@ -25,7 +25,7 @@ class MainPage extends React.Component{
             <Container>
               <Pallette/>
               <Call>
-              <div>This Week's Pallete</div>
+              <div>This Week's Palette</div>
               </Call>
               <h1>Recently Added</h1>
               <Featured {...this.props}/>

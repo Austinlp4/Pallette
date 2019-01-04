@@ -78,7 +78,7 @@ class App extends Component {
 
   render() {
     return (
-      <Home className="App">
+      <Home className="App" style={{ minWidth: '1000px' }}>
         <NavBar {...this.props}/>
         <div className="one">
           <div className="two">

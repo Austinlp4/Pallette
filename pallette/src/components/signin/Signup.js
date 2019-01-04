@@ -67,6 +67,20 @@ class SignUp extends React.Component {
         <div>
           <div>
             <form onSubmit={this.onSubmit}>
+            <input
+                type="text"
+                name="firstName"
+                placeholder="First Name"
+                value={this.state.firstName}
+                onChange={this.onChange}
+              />
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Last Name"
+                value={this.state.lastName}
+                onChange={this.onChange}
+              />
               <input
                 type="text"
                 name="email"
@@ -79,20 +93,6 @@ class SignUp extends React.Component {
                 name="password"
                 placeholder="Password"
                 value={this.state.password}
-                onChange={this.onChange}
-              />
-              <input
-                type="text"
-                name="firstName"
-                placeholder="First Name"
-                value={this.state.firstName}
-                onChange={this.onChange}
-              />
-              <input
-                type="text"
-                name="lastName"
-                placeholder="Last Name"
-                value={this.state.lastName}
                 onChange={this.onChange}
               />
               <Button children="Register" />
