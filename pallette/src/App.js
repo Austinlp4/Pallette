@@ -15,6 +15,7 @@ import SingleCard from './components/profile/SingleCard';
 import { addPalette } from './store/actions/paletteActions';
 import colors from 'nice-color-palettes';
 import SingleImage from './components/featured/SingleImage.js';
+import Cta from './components/Home/Cta';
 
 class App extends Component {
   constructor() {
@@ -87,6 +88,7 @@ class App extends Component {
               render={props => (
                 <MainPage {...props} />
               )}/>
+              <Route path='/cta' component={Cta} />
               <Route path='/signup' component={SignUp}/>
               <Route path={ROUTES.SIGN_IN} 
                 render={props => (
@@ -117,6 +119,8 @@ class App extends Component {
                     <SingleImage {...props}/>
                   )}
               />
+              
+              
             </div>
           </div>
         </div>
@@ -148,6 +152,7 @@ const Home = styled.div`
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    background-color: rgb(250,250,250);
   }
 `;
 

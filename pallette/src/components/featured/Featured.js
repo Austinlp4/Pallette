@@ -49,6 +49,7 @@ const Bar = styled.div`
     linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%);
     height: 4px;
     width: 70%;
+    border-radius: 6px;
 `;
 
 export default Featured;

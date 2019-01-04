@@ -27,7 +27,7 @@ class MainPage extends React.Component{
               <Call>
               <div>This Week's Palette</div>
               </Call>
-              <h1>Recently Added</h1>
+              <h1>Most Popular</h1>
               <Featured {...this.props}/>
             </Container>
         )

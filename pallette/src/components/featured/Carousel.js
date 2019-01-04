@@ -174,6 +174,7 @@ class Slider extends React.Component {
   cursor: pointer;
   font-family: 'Lobster', cursive;
   font-size: 2rem;
+  font-weight: 100;
   &:hover {
     color: pink;
   }
