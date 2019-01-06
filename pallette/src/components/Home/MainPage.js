@@ -21,13 +21,9 @@ class MainPage extends React.Component{
     render(){
         if(!this.props.auth.uid) return <Redirect to='/cta'/>
         return (
-
             <Container>
               <Pallette/>
-              <Call>
-              <div>This Week's Palette</div>
-              </Call>
-              <h1>Most Popular</h1>
+              {/* <h1>Most Popular</h1> */}
               <Featured {...this.props}/>
             </Container>
         )
@@ -39,7 +35,6 @@ const Container =styled.div`
    flex-direction: column;
    padding-left: 2%;
    width: 90%;
-   background-color: rgba(45,54,98,1);
    h1{
        text-align: center;
        color: white;
@@ -48,27 +43,27 @@ const Container =styled.div`
    }
 `;
 
-const Call = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 50px;
-  div{
-    margin: 0;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: rgba(45,54,98,1);
-    background-color: white;
-    max-width: 500px;
-    width: 100%;
-    height: 30px;
-    border-bottom-right-radius: 80px;
-    border-bottom-left-radius: 80px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-`;
+// const Call = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   margin-bottom: 50px;
+//   div{
+//     margin: 0;
+//     font-size: 1.1rem;
+//     font-weight: 600;
+//     color: rgba(45,54,98,1);
+//     background-color: white;
+//     max-width: 500px;
+//     width: 100%;
+//     height: 30px;
+//     border-bottom-right-radius: 80px;
+//     border-bottom-left-radius: 80px;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//   }
+// `;
 
 const mapStateToProps = (state) => {
     console.log(state)

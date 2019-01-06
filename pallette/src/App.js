@@ -81,9 +81,9 @@ class App extends Component {
     return (
       <Home className="App" style={{ minWidth: '1000px' }}>
         <NavBar {...this.props}/>
-        <div className="one">
+        {/* <div className="one">
           <div className="two">
-            <div className="three">
+            <div className="three"> */}
               <Route exact path={ROUTES.LANDING} 
               render={props => (
                 <MainPage {...props} />
@@ -125,9 +125,9 @@ class App extends Component {
               />
               
               
-            </div>
+            {/* </div>
           </div>
-        </div>
+        </div> */}
       </Home>
     );
   }
@@ -140,6 +140,8 @@ const Home = styled.div`
   align-items: center;
   padding-top: 5px;
   z-index: 4;
+  background: linear-gradient(rgb(196,252,250), rgb(78,107,140));
+  padding-top: 0;
   .one, .two, .three{
     box-shadow: 0 9px 0px 0px white, 
     inset 0 -9px 0px 0px white, 

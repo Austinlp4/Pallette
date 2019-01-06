@@ -21,12 +21,12 @@ class Featured extends React.Component{
         
         return (
             <div>
-              <Slider {...this.props}/>
+              {/* <Slider {...this.props}/>
               <Bar></Bar>
               <Call>Most Viewed</Call>
               <MostViewed {...this.props}/>
-              <Bar></Bar>
-              <Call>All</Call>
+              <Bar></Bar> */}
+              {/* <Call>All</Call> */}
               <All {...this.props}/>
             </div>
         )

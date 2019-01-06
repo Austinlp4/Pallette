@@ -35,14 +35,18 @@ const NavBar = (props) => {
 
 const Nav = styled.div`
   display: flex;
-  width: 90%;
+  width: 100%;
   justify-content: space-between;
   align-items: center;
+  background-color: rgb(28, 49, 68);
+  padding: 0 3%;
+  color: rgb(255,218,99);
   a{
     text-decoration: none;
     color: black;
     font-size: 1.1rem;
     font-weight: bold;
+    color: rgb(255,218,99);
   }
   .auth{
       display: flex;
@@ -57,8 +61,8 @@ const Links = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  color: rgb(255,218,99);
   h3{
-    color: rgb(45,54,98);
     font-weight: 400;
     font-size: 1.4rem;
 }
