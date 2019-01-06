@@ -155,11 +155,14 @@ class All extends React.Component {
   const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
+    width: 80%;
+    margin: 100px auto;
+    padding-left: 8%;
   `;
 
   const Card = styled.div`
-  width: 275px;
-  height: 275px;
+  width: 325px;
+  height: 325px;
   overflow: hidden;
   background: no-repeat center;
   background-size: cover;
@@ -180,11 +183,11 @@ class All extends React.Component {
     box-sizing: border-box;
     position: absolute;
     z-index: 3;
-    background-color: white;
+    background-color: rgb(28, 49, 68);
     height: 60px;
     width: 100%;
     bottom: 0;
-    border: 1px solid lightgrey;
+    border: 1px solid rgb(28, 49, 68);
     border-top: none;
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
@@ -195,12 +198,12 @@ class All extends React.Component {
     left: 0;
     h1 {
       font-size: 1.2rem;
-      color: rgb(45, 54, 98);
+      color: rgb(255,218,99);
       margin: 0;
     }
     h4 {
       font-size: 0.9rem;
-      color: rgb(45, 54, 98);
+      color: rgb(255,218,99);
       margin: 0;
     }
     .view-container{
