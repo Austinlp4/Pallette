@@ -5,6 +5,8 @@ import Featured from '../featured/Featured';
 import All from '../featured/All';
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom';
+import { Route, withRouter, NavLink } from 'react-router-dom';
+import All from '../featured/All';
 
 class MainPage extends React.Component{
     constructor(props){
@@ -25,6 +27,12 @@ class MainPage extends React.Component{
               <Pallette/>
               {/* <h1>Most Popular</h1> */}
               <Featured {...this.props}/>
+              <Route 
+                  path='/all'
+                  render={props => (
+                    <All {...props}/>
+                  )}
+              />
             </Container>
         )
     }
@@ -75,4 +83,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps)(MainPage);
+export default withRouter(connect(mapStateToProps)(MainPage));

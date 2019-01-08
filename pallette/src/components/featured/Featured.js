@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Slider from './Carousel';
 import MostViewed from './MostViewed';
 import All from './All';
-
+import { Route, withRouter, NavLink } from 'react-router-dom';
 
 class Featured extends React.Component{
     constructor(props){
@@ -21,12 +21,7 @@ class Featured extends React.Component{
         
         return (
             <div>
-              {/* <Slider {...this.props}/>
-              <Bar></Bar>
-              <Call>Most Viewed</Call>
-              <MostViewed {...this.props}/>
-              <Bar></Bar> */}
-              {/* <Call>All</Call> */}
+              
               <All {...this.props}/>
             </div>
         )
