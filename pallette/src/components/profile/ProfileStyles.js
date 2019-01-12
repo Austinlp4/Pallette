@@ -50,7 +50,7 @@ export const Upload = styled.div`
 
 export const ProContainer = styled.div`
   display: flex;
-  width: 100%;
+  width: 80%;
   flex-direction: column;
   .upload{
       justify-self: flex-start;
@@ -67,9 +67,7 @@ export const Info = styled.div`
   }
 `;
 
-export const InfoContainer = styled.div`
-  display: flex;
-`;
+
 
 export const Card = styled.div`
   margin-top: 30px;

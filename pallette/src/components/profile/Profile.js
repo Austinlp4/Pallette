@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { Upload,
          ProContainer,
          Info,
-         InfoContainer,
          Card } from './ProfileStyles.js';
 import { addPhoto, uploadAvatar, addBio } from '../../store/actions/projectActions';
 import moment from 'moment';
@@ -103,8 +102,8 @@ class Profile extends React.Component{
             <ProContainer>
             <InfoContainer>
                   {this.props.profile.url ?
-                  <div style={{ margin: '3%', width: '500px', height: '400px', border: '1px solid pink', borderRadius: '6px'}}>
-                      <img src={this.props.profile.url} alt="Profile pic" style={{width: '450px', height: 'auto', borderRadius: '6px'}}/>
+                  <div style={{ margin: '3%', width: '500px', height: '400px', borderRadius: '50%'}} className='pro-cont'>
+                      <img src={this.props.profile.url} alt="Profile pic" style={{width: '450px', height: 'auto', borderRadius: '50%'}}/>
                   </div>
                   :
                   <Upload className='upload'>
@@ -154,12 +153,20 @@ class Profile extends React.Component{
                   </ProContainer>
         )
     }
+  
 }
+
+
 
 const Stats = styled.div`
     width: 100%;
     max-width: 200px;
     
+`;
+
+const InfoContainer = styled.div`
+  display: flex;
+  
 `;
 
 const Social = styled.div`
