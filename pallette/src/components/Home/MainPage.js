@@ -81,7 +81,7 @@ class MainPage extends React.Component{
               <div>
                         { (this.state.choice === 'All')
                          ?
-                        <All {...this.Allprops} />
+                        <All {...this.props} />
                         :
                         (this.state.choice === 'Most Popular')
                         ?
@@ -103,11 +103,12 @@ class MainPage extends React.Component{
 const Header = styled.div`
   display: flex;
 
-  
+  padding-right: 0;
   
 `;
 
 const Select = styled.div`
+    position: fixed;
     width: 200px;
     background-color: rgba(28,49,68,0.85);
     color: rgb(255, 218, 99);
@@ -133,6 +134,7 @@ const Container =styled.div`
    display: flex;
    flex-direction: column;
    width: 100%;
+   margin-top: 60px;
    h1{
        text-align: center;
        color: white;

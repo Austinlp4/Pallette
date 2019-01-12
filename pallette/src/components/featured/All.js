@@ -95,6 +95,7 @@ class All extends React.Component {
   pageFlip = (key, uid) => {
     console.log('key, uid', key, uid)
     this.props.addView(key, uid)
+    console.log(this.props)
     this.props.history.push(`/${uid}/${key}`);
     
   };

@@ -136,11 +136,11 @@ class Profile extends React.Component{
                   <Stats>
 
                   </Stats>
-                  <Social>
+                  {/* <Social>
                         <div className='facebook'><img src={Facebook} alt="" style={{ width: '75px' }}/></div>
                         <div className='instagram'><img src={Instagram} alt="" style={{ width: '75px' }}/></div>
                         <div className='twitter'><img src={Twitter} alt="" style={{ width: '75px' }}/></div>
-                    </Social>
+                    </Social> */}
                   </InfoContainer>
                   <div>
                       <Card>

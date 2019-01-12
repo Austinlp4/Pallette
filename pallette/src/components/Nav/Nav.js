@@ -10,15 +10,23 @@ import Logout from '../../images/logout.png';
 const NavBar = (props) => {
     return(
         <Nav>
-            <img src={Logo} alt="" style={{ width: '200px' }} onClick={() => {props.history.push('/')}}/>
+            <div className='logo'>
+                <img src={Logo} alt="" style={{ width: '200px' }} onClick={() => {props.history.push('/')}} />
+            </div>
             {props.auth.uid
             ? 
             <Links>
                 <h3>{`Welcome, ${props.profile.firstName}!`}</h3>
                 <NavLink to='/profile'>
+                {
+                props.profile.url 
+                ? 
+                <img src={props.profile.url} alt="" style={{ width: '40px', height: '40px', borderRadius: '50%' }} title='Go To Profile'/>
+                :
                 <img src={Avatar} alt="" style={{ width: '40px', height: '40px' }}/>
+                }
                 </NavLink>
-                <div onClick={props.signOut}><img src={Logout} alt="" style={{ width: '40px', height: '30px', cursor: 'pointer' }}/></div>
+                <div onClick={props.signOut}><img src={Logout} alt="" style={{ width: '40px', height: '30px', cursor: 'pointer' }} title='Logout'/></div>
             </Links>
             :
             <div className='auth'>
@@ -35,6 +43,8 @@ const NavBar = (props) => {
 }
 
 const Nav = styled.div`
+  top: 0;
+  position: fixed;
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -54,6 +64,7 @@ const Nav = styled.div`
       width: 135px;
       justify-content: space-between;
   }
+  z-index: 3;
 `;
 
 const Links = styled.div`
@@ -66,7 +77,7 @@ const Links = styled.div`
   padding: 0 1.8%;
   h3{
     font-weight: 400;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
 }
 `;
 

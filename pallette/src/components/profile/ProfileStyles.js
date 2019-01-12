@@ -52,6 +52,7 @@ export const ProContainer = styled.div`
   display: flex;
   width: 80%;
   flex-direction: column;
+  margin-top: 60px;
   .upload{
       justify-self: flex-start;
   }

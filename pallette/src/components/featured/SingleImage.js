@@ -28,12 +28,14 @@ class SingleCard extends React.Component{
         const post = this.state.post;
 
         return (
-            <Container>
-                <Image src={post.url} alt="" />
+            <Container onClick={() => {this.props.history.push('/')}}>
+                <Modal>
+                    <div className='image-cont'><Image src={post.url} alt="" /> </div>
                 <Info>
                     <h2>{post.title}</h2>
                     <h5>By: {post.artist}</h5>
                 </Info>
+                </Modal>
             </Container>
         )
         
@@ -41,15 +43,36 @@ class SingleCard extends React.Component{
 }
 
 const Image = styled.img`
-  max-width: 600px;
   width: 100%;
-  height: 100%;
+  height: auto;
+  max-width: 800px;
+`;
+
+const Modal = styled.div`
+    height: 700px;
+    display: flex;
+    overflow: hidden;
+    .image-cont{
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.9)
+    }
+    border-radius: 6px;
 `;
 
 const Container = styled.div`
-  width: 100%;
-  display: flex;
-  padding: 3%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 10;
 `;
 
 const Info = styled.div`
@@ -58,6 +81,9 @@ const Info = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+  max-width: 400px;
+  background-color: rgb(28, 49, 68);
+  color: rgb(255,218,99);
   h2{
       font-size: 2rem;
   }
