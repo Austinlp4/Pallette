@@ -116,30 +116,38 @@ class MostViewed extends React.Component {
     // const anObj = this.state.photos[0];
     // console.log(anObj)
 
-      const items = this.galleryItems();
-   
-      return (
-        <Wrapper>
-        <AliceCarousel
-          items={items}
-          duration={400}
-          autoPlay={false}
-          dotsDisabled={true}
-          startIndex = {0}
-          fadeOutAnimation={true}
-          mouseDragEnabled={true}
-          playButtonEnabled={false}
-          autoPlayInterval={2000}
-          autoPlayDirection="rtl"
-          responsive={this.responsive}
-          disableAutoPlayOnAction={true}
-          onSlideChange={this.onSlideChange}
-          onSlideChanged={this.onSlideChanged}
-        />
-        </Wrapper>
-      );
-  
-    }
+    return (
+      <Container>
+          {this.state.photos.map((item, i) => (
+      <Card
+      id={item.id}
+      key={item.id}
+      post={item}
+    >
+      {/* <NavLink to={`${this.props.match.path}/${post.key}`}> */}
+      <img src={item.url} alt="" onClick={() => this.pageFlip(item.id, item.uid)}/>
+      <div className="banner">
+        <div className="title">
+          <h1>{item.title}</h1>
+          <h4>{item.artist}</h4>
+        </div>
+        <div className='like-container' onClick={() => this.handleLike(item.id, item.uid)}>
+          <img className="like" src={Like} alt="" />
+          <h4>{item.likes}</h4>
+        </div>
+        <div className='view-container'>
+          <img className="view" src={View} alt="" />
+          <h4>{item.views}</h4>
+        </div>
+      </div>
+
+      {/* </NavLink> */}
+    </Card>
+    ))}
+      </Container>
+    );
+
+  }
   }
 
   const Wrapper = styled.div`
@@ -183,9 +191,18 @@ class MostViewed extends React.Component {
   }
   `;
 
+  const Container = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    max-width: 1100px;
+    margin: 100px auto;
+    justify-content: center;
+  `;
+
   const Card = styled.div`
-  width: 275px;
-  height: 275px;
+  width: 325px;
+  height: 325px;
   overflow: hidden;
   background: no-repeat center;
   background-size: cover;
@@ -206,11 +223,11 @@ class MostViewed extends React.Component {
     box-sizing: border-box;
     position: absolute;
     z-index: 3;
-    background-color: white;
+    background-color: rgb(28, 49, 68);
     height: 60px;
     width: 100%;
     bottom: 0;
-    border: 1px solid lightgrey;
+    border: 1px solid rgb(28, 49, 68);
     border-top: none;
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
@@ -221,12 +238,12 @@ class MostViewed extends React.Component {
     left: 0;
     h1 {
       font-size: 1.2rem;
-      color: rgb(45, 54, 98);
+      color: rgb(255,218,99);
       margin: 0;
     }
     h4 {
       font-size: 0.9rem;
-      color: rgb(45, 54, 98);
+      color: rgb(255,218,99);
       margin: 0;
     }
     .view-container{

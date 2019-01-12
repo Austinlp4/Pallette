@@ -4,6 +4,7 @@ import Pallette from '../pallette/Pallette';
 import Featured from '../featured/Featured';
 import All from '../featured/All';
 import MostLiked from '../featured/MostLiked';
+import MostViewed from '../featured/MostViewed';
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { Route, withRouter, NavLink } from 'react-router-dom';
@@ -27,7 +28,23 @@ class MainPage extends React.Component{
         
     }
 
+    showMenu = event => {
+        event.preventDefault();
+        this.setState({ showMenu: true }, () => {
+            document.addEventListener('click', this.closeMenu);
+          });
+      
+    }
 
+    closeMenu = event => {
+        if (!this.dropdownMenu.contains(event.target)) {
+      
+            this.setState({ showMenu: false }, () => {
+              document.removeEventListener('click', this.closeMenu);
+            });  
+            
+          }
+    }
 
     render(){
         if(!this.props.auth.uid) return <Redirect to='/cta'/>
@@ -35,17 +52,21 @@ class MainPage extends React.Component{
             <Container>
                 <Header>
                     <Select >
-                        <div className='choice'>
+                        <div className='choice' onClick={this.showMenu}>
                             {this.state.choice}
                             <img src={Arrow} alt=""/>
                         </div>
                         {
                             this.state.showMenu
                                 ? (
-                                <div className="menu">
-                                    <button> Menu item 1 </button>
-                                    <button> Menu item 2 </button>
-                                    <button> Menu item 3 </button>
+                                <div className="menu"
+                                     ref={(element) => {
+                                        this.dropdownMenu = element;
+                                     }}
+                                >
+                                    <div onClick={() => {this.setState({ choice: 'All' })}}> All </div>
+                                    <div onClick={() => {this.setState({ choice: 'Most Popular'})}}> Most Popular </div>
+                                    <div onClick={() => {this.setState({ choice: 'Most Viewed'})}}> Most Viewed</div>
                                 </div>
                                 )
                                 : (
@@ -57,7 +78,22 @@ class MainPage extends React.Component{
                 </Header>
               
               {/* <h1>Most Popular</h1> */}
-              
+              <div>
+                        { (this.state.choice === 'All')
+                         ?
+                        <All {...this.Allprops} />
+                        :
+                        (this.state.choice === 'Most Popular')
+                        ?
+                        <MostLiked {...this.props} />
+                        :
+                        (this.state.choice === 'Most Viewed')
+                        ?
+                        <MostViewed {...this.props}/>
+                        :
+                        <All {...this.props}/>
+                        }
+                    </div>
               
             </Container>
         )
@@ -80,11 +116,16 @@ const Select = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 5% 5%;
+        padding: 5% 5% 0 5%;
         img{
             width: 15px;
             height: 15px;
+            justify-self: flex-end;
         }
+    }
+    .menu{
+        background-color: rgb(28,49,68);
+        text-align: center;
     }
 `;
 

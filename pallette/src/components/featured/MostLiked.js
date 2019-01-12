@@ -144,11 +144,11 @@ class MostLiked extends React.Component {
   const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
-  width: 80%;
+  width: 100%;
+  max-width: 1100px;
   margin: 100px auto;
-  padding-left: 8%;
+  justify-content: center;
 `;
-
 
   const Wrapper = styled.div`
   .alice-carousel__prev-btn,
@@ -193,8 +193,8 @@ class MostLiked extends React.Component {
   `;
 
   const Card = styled.div`
-  width: 275px;
-  height: 275px;
+  width: 325px;
+  height: 325px;
   overflow: hidden;
   background: no-repeat center;
   background-size: cover;
@@ -215,11 +215,11 @@ class MostLiked extends React.Component {
     box-sizing: border-box;
     position: absolute;
     z-index: 3;
-    background-color: white;
+    background-color: rgb(28, 49, 68);
     height: 60px;
     width: 100%;
     bottom: 0;
-    border: 1px solid lightgrey;
+    border: 1px solid rgb(28, 49, 68);
     border-top: none;
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
@@ -230,12 +230,12 @@ class MostLiked extends React.Component {
     left: 0;
     h1 {
       font-size: 1.2rem;
-      color: rgb(45, 54, 98);
+      color: rgb(255,218,99);
       margin: 0;
     }
     h4 {
       font-size: 0.9rem;
-      color: rgb(45, 54, 98);
+      color: rgb(255,218,99);
       margin: 0;
     }
     .view-container{
@@ -253,20 +253,20 @@ class MostLiked extends React.Component {
       height: 20px;
     }
     .like-container{
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      width: 50px;
-      h4{
-          align-self: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        h4{
+            align-self: center;
+        }
       }
+    .like {
+      width: 25px;
+      height: 20px;
+      margin-right: 4%;
     }
-  .like {
-    width: 25px;
-    height: 20px;
-    margin-right: 4%;
-  }
     .title {
       display: flex;
       flex-direction: column;

@@ -4,7 +4,8 @@ import { NavLink } from 'react-router-dom';
 import Logo from '../../images/pallete-logo.png';
 import styled from 'styled-components';
 import { signOut } from '../../store/actions/authActions';
-
+import Avatar from '../../images/avatar-profile.png';
+import Logout from '../../images/logout.png';
 
 const NavBar = (props) => {
     return(
@@ -15,9 +16,9 @@ const NavBar = (props) => {
             <Links>
                 <h3>{`Welcome, ${props.profile.firstName}!`}</h3>
                 <NavLink to='/profile'>
-                Profile
+                <img src={Avatar} alt="" style={{ width: '40px', height: '40px' }}/>
                 </NavLink>
-                <div onClick={props.signOut}>Logout</div>
+                <div onClick={props.signOut}><img src={Logout} alt="" style={{ width: '40px', height: '30px', cursor: 'pointer' }}/></div>
             </Links>
             :
             <div className='auth'>
@@ -39,7 +40,7 @@ const Nav = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: rgb(28, 49, 68);
-  padding: 0 3%;
+  padding: 0 2%;
   color: rgb(255,218,99);
   a{
     text-decoration: none;
@@ -62,6 +63,7 @@ const Links = styled.div`
   align-items: center;
   width: 100%;
   color: rgb(255,218,99);
+  padding: 0 1.8%;
   h3{
     font-weight: 400;
     font-size: 1.4rem;
