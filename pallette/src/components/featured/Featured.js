@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Slider from './Carousel';
+import MostLiked from './MostLiked';
 import MostViewed from './MostViewed';
 import All from './All';
 import { Route, withRouter, NavLink } from 'react-router-dom';

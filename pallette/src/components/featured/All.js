@@ -63,15 +63,6 @@ class All extends React.Component {
       }
   }
 
-  onSlideChange(e) {
-    console.log('Item`s position during a change: ', e.item);
-    console.log('Slide`s position during a change: ', e.slide);
-  };
-
-  onSlideChanged(e) {
-    console.log('Item`s position after changes: ', e.item);
-    console.log('Slide`s position after changes: ', e.slide);
-  };
 
   galleryItems() {
     return (
@@ -155,9 +146,10 @@ class All extends React.Component {
   const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
-    width: 80%;
+    width: 100%;
+    max-width: 1100px;
     margin: 100px auto;
-    padding-left: 8%;
+    justify-content: center;
   `;
 
   const Card = styled.div`

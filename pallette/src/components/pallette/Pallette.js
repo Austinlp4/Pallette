@@ -57,7 +57,7 @@ const PalletteContainer = styled.div`
   justify-content: center;
   margin: 0 auto;
   border: none;
-  padding-right: 2%;
+  padding-right: 12%;
 `;
 
 const Pallete = styled.div`

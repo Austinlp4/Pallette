@@ -3,16 +3,19 @@ import styled from 'styled-components';
 import Pallette from '../pallette/Pallette';
 import Featured from '../featured/Featured';
 import All from '../featured/All';
+import MostLiked from '../featured/MostLiked';
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { Route, withRouter, NavLink } from 'react-router-dom';
-import All from '../featured/All';
+import Arrow from '../../images/down-arrow.png';
+
 
 class MainPage extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            
+            choice: 'All',
+            showMenu: false
         };
     }
 
@@ -20,29 +23,75 @@ class MainPage extends React.Component{
         
     }
 
+    select = (e) => {
+        
+    }
+
+
+
     render(){
         if(!this.props.auth.uid) return <Redirect to='/cta'/>
         return (
             <Container>
-              <Pallette/>
+                <Header>
+                    <Select >
+                        <div className='choice'>
+                            {this.state.choice}
+                            <img src={Arrow} alt=""/>
+                        </div>
+                        {
+                            this.state.showMenu
+                                ? (
+                                <div className="menu">
+                                    <button> Menu item 1 </button>
+                                    <button> Menu item 2 </button>
+                                    <button> Menu item 3 </button>
+                                </div>
+                                )
+                                : (
+                                null
+                                )
+                        }
+                    </Select>
+                    <Pallette />
+                </Header>
+              
               {/* <h1>Most Popular</h1> */}
-              <Featured {...this.props}/>
-              <Route 
-                  path='/all'
-                  render={props => (
-                    <All {...props}/>
-                  )}
-              />
+              
+              
             </Container>
         )
     }
 }
 
+const Header = styled.div`
+  display: flex;
+
+  
+  
+`;
+
+const Select = styled.div`
+    width: 200px;
+    background-color: rgba(28,49,68,0.85);
+    color: rgb(255, 218, 99);
+    height: 35px;
+    .choice{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5% 5%;
+        img{
+            width: 15px;
+            height: 15px;
+        }
+    }
+`;
+
 const Container =styled.div`
    display: flex;
    flex-direction: column;
-   padding-left: 2%;
-   width: 90%;
+   width: 100%;
    h1{
        text-align: center;
        color: white;

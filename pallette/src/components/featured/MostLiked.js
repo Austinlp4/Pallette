@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import firebase from '../../firebase';
-import AliceCarousel from 'react-alice-carousel';
 import "react-alice-carousel/lib/alice-carousel.css";
 import View from '../../images/view.png';
 import Like from '../../images/heart.png';
@@ -9,7 +8,7 @@ import { connect } from 'react-redux';
 import { addView, addLike } from '../../store/actions/projectActions.js';
 
 
-class Slider extends React.Component {
+class MostLiked extends React.Component {
   constructor(props) {
     super(props);
 
@@ -64,37 +63,37 @@ class Slider extends React.Component {
     this.props.addLike(key, uid, auth);
   }
 
-  galleryItems() {
-    return (
-      this.state.photos.map((item, i) => (
-        <div key={`key-${i}`} className="yours-custom-class">
-        <Card
-        id={item.id}
-        key={item.id}
-        post={item}
-      >
-        {/* <NavLink to={`${this.props.match.path}/${post.key}`}> */}
-        <img src={item.url} alt="" onClick={() => this.pageFlip(item.id, item.uid)}/>
-        <div className="banner">
-          <div className="title">
-            <h1>{item.title}</h1>
-            <h4>{item.artist}</h4>
-          </div>
-          <div className='like-container' onClick={() => this.handleLike(item.id, item.uid)}>
-            <img className="like" src={Like} alt="" />
-            <h4>{item.likes}</h4>
-          </div>
-          <div className='view-container'>
-            <img className="view" src={View} alt="" />
-            <h4>{item.views}</h4>
-          </div>
-        </div>
+  // galleryItems() {
+  //   return (
+  //     this.state.photos.map((item, i) => (
+  //       <div key={`key-${i}`} className="yours-custom-class">
+  //       <Card
+  //       id={item.id}
+  //       key={item.id}
+  //       post={item}
+  //     >
+  //       {/* <NavLink to={`${this.props.match.path}/${post.key}`}> */}
+  //       <img src={item.url} alt="" onClick={() => this.pageFlip(item.id, item.uid)}/>
+  //       <div className="banner">
+  //         <div className="title">
+  //           <h1>{item.title}</h1>
+  //           <h4>{item.artist}</h4>
+  //         </div>
+  //         <div className='like-container' onClick={() => this.handleLike(item.id, item.uid)}>
+  //           <img className="like" src={Like} alt="" />
+  //           <h4>{item.likes}</h4>
+  //         </div>
+  //         <div className='view-container'>
+  //           <img className="view" src={View} alt="" />
+  //           <h4>{item.views}</h4>
+  //         </div>
+  //       </div>
 
-        {/* </NavLink> */}
-      </Card></div>
-      ))
-    )
-  };
+  //       {/* </NavLink> */}
+  //     </Card></div>
+  //     ))
+  //   )
+  // };
 
   pageFlip = (key, uid) => {
     console.log('key, uid', key, uid)
@@ -108,40 +107,48 @@ class Slider extends React.Component {
     // const anObj = this.state.photos[0];
     // console.log(anObj)
 
-      const items = this.galleryItems();
-     const responsive = {
-        500: { items: 1 },
-        900: { items: 2 },
-        1025: { items: 2 },
-        1300: { items: 2 },
-        1400: { items: 3 },
-        1700: { items: 3 },
-        1800: { items: 4 }
-      };
-   
-      return (
-        <Wrapper>
-        <AliceCarousel
-          items={items}
-          duration={400}
-          autoPlay={false}
-          dotsDisabled={true}
-          startIndex = {0}
-          fadeOutAnimation={true}
-          mouseDragEnabled={true}
-          playButtonEnabled={false}
-          autoPlayInterval={2000}
-          autoPlayDirection="rtl"
-          responsive={responsive}
-          disableAutoPlayOnAction={true}
-          onSlideChange={this.onSlideChange}
-          onSlideChanged={this.onSlideChanged}
-        />
-        </Wrapper>
-      );
-  
-    }
+    return (
+      <Container>
+          {this.state.photos.map((item, i) => (
+      <Card
+      id={item.id}
+      key={item.id}
+      post={item}
+    >
+      {/* <NavLink to={`${this.props.match.path}/${post.key}`}> */}
+      <img src={item.url} alt="" onClick={() => this.pageFlip(item.id, item.uid)}/>
+      <div className="banner">
+        <div className="title">
+          <h1>{item.title}</h1>
+          <h4>{item.artist}</h4>
+        </div>
+        <div className='like-container' onClick={() => this.handleLike(item.id, item.uid)}>
+          <img className="like" src={Like} alt="" />
+          <h4>{item.likes}</h4>
+        </div>
+        <div className='view-container'>
+          <img className="view" src={View} alt="" />
+          <h4>{item.views}</h4>
+        </div>
+      </div>
+
+      {/* </NavLink> */}
+    </Card>
+    ))}
+      </Container>
+    );
+
   }
+  }
+
+  const Container = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+  margin: 100px auto;
+  padding-left: 8%;
+`;
+
 
   const Wrapper = styled.div`
   .alice-carousel__prev-btn,
@@ -288,4 +295,4 @@ const mapDispatchToProps = (dispatch) => {
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(Slider);
+export default connect(mapStateToProps, mapDispatchToProps)(MostLiked);
