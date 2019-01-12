@@ -1,1 +1,1 @@
-![alt text](https://raw.githubusercontent.com/Austinlp4/Pallette/blob/master/pallette/src/images/pallete-logo.png)
+![alt text](https://www.pallet-app.com/static/media/pallete-logo.0365ef85.png)
