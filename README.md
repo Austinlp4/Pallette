@@ -4,6 +4,6 @@
   <br><br>
 </p>
 
-<h4 align="center">Founded by: Austin Pendergrast</h4>
+<h4 align="center">Founded by: Austin Pendergrast🎨</h4>
 
 
