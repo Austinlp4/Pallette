@@ -101,9 +101,10 @@ class Profile extends React.Component{
         return (
             <ProContainer>
             <InfoContainer>
+                <Header>
                   {this.props.profile.url ?
-                  <div style={{ margin: '3%', width: '500px', height: '400px', borderRadius: '50%'}} className='pro-cont'>
-                      <img src={this.props.profile.url} alt="Profile pic" style={{width: '450px', height: 'auto', borderRadius: '50%'}}/>
+                  <div style={{ margin: '3%', width: '300px', height: '300px', borderRadius: '50%'}} className='pro-cont'>
+                      <img src={this.props.profile.url} alt="Profile pic" style={{width: '300px', height: 'auto', borderRadius: '50%'}}/>
                   </div>
                   :
                   <Upload className='upload'>
@@ -114,7 +115,35 @@ class Profile extends React.Component{
                       </div>
                   </Upload>
                   }
-                  <Info>
+                  <Settings>
+                      Settings
+                  </Settings>
+                  </Header>
+                  <Information>
+                      <General>
+                    <h1>
+                        {this.props.profile.firstName} {this.props.profile.lastName}
+                    </h1>
+                    {this.props.profile.bio 
+                    ?
+                    <div className='bio'>
+                        <p>
+                            {this.props.profile.bio }
+                        </p>
+                    </div>
+                    :
+                    <div className='bio'>
+                        <p>You have no bio yet. Please go to settings to edit your information.</p>
+                    </div>
+                    }
+                    </General>
+                    <Social>
+                        <img src={Facebook} alt="" className='facebook'/>
+                        <img src={Instagram} alt="" className='instagram'/>
+                        <img src={Twitter} alt="" className='twitter'/>
+                    </Social>
+                  </Information>
+                  {/* <Info>
                     <h1>{this.props.profile.firstName} {this.props.profile.lastName}</h1>
                     {this.props.profile.bio 
                     ?
@@ -132,7 +161,7 @@ class Profile extends React.Component{
                     </div>
                     }
                     
-                  </Info>
+                  </Info> */}
                   <Stats>
 
                   </Stats>
@@ -156,7 +185,102 @@ class Profile extends React.Component{
   
 }
 
+const Settings = styled.button`
+    border: none;
+    border-radius: 6px;
+    box-shadow: 0 4px 2px -2px rgba(28, 49, 68, 0.6);
+    background-color: rgb(255,102,79);
+    color: rgba(255, 218, 99, 0.9);
+    height: 40px;
+    width: 100px;
+    justify-self: end;
+    margin: 2% 2% 0 0;
+    font-weight: 500;
+    font-size: 1.1rem;
+    &:hover{
+        cursor: pointer;
+        background-color: rgb(255,134,118);
+    }
+`;
 
+const Social = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 140px;
+    height: 50px;
+    .facebook{
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        &:hover{
+            background-color: rgba(255,255,255, 0.5);
+            border-radius: 6px;
+        }
+    }
+    .instagram{
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+        &:hover{
+            background-color: rgba(255,255,255, 0.5);
+            border-radius: 6px;
+        }
+    }
+    .twitter{
+        width: 35px;
+        height: 35px;
+        cursor: pointer;
+        &:hover{
+            background-color: rgba(255,255,255, 0.5);
+            border-radius: 6px;
+        }
+    }
+`;
+
+const General = styled.div`
+    display: flex;
+    flex-direction: column;
+    h1{
+        color: rgb(255,218,99);
+        font-size: 2rem;
+        font-weight: 300;
+    }
+    .bio{
+        display: flex;
+        flex-wrap: wrap;
+        overflow: hidden;
+        height: 250px;
+        width: 300px;
+        p{
+            color: rgb(255,218,99);
+        }
+    }
+`;
+
+const Information = styled.div`
+    display: flex;
+    padding: 2%;
+    background-color: rgb(28, 49, 68);
+    height: 300px;
+    justify-content: space-between;
+    
+`;
+
+const Header = styled.div`
+    background-color: rgb(78, 107, 140);
+    display: flex;
+    position: relative;
+    justify-content: flex-end;
+    img{
+        position: absolute;
+        bottom: -40%;
+        margin: 0 auto;
+        left: 35%;
+        width: 300px;
+        height: 300px;
+    }
+`;
 
 const Stats = styled.div`
     width: 100%;
@@ -166,36 +290,11 @@ const Stats = styled.div`
 
 const InfoContainer = styled.div`
   display: flex;
-  
+  flex-direction: column;
+  width: 100%;
+  max-width: 1000px;
 `;
 
-const Social = styled.div`
-  height: 250px;
-  width: 100px;
-  .facebook{
-      background-color: rgb(41, 82, 150);
-      width: 100%;
-      height: 75px;
-      box-shadow: inset -10px 0 15px -4px rgba(31, 73, 125, 0.5)
-  }
-  .instagram{
-    background-color: rgb(254, 216, 116);
-    width: 100%;
-    height: 75px;
-    box-shadow: inset -10px 0 15px -4px rgba(31, 73, 125, 0.3)
-  }
-  .twitter{
-      background-color: rgb(250, 250, 250);
-      width: 100%;
-      height: 75px;
-      box-shadow: inset -10px 0 15px -4px rgba(31, 73, 125, 0.3)
-  }
-  .facebook, .instagram, .twitter{
-      display: flex;
-      justify-content: center;
-      align-items: center;
-  }
-`;
 
 
 

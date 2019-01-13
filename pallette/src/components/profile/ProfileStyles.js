@@ -2,13 +2,16 @@ import styled from 'styled-components';
 
 export const Upload = styled.div`
   border: 1px solid lightgrey;
-  border-radius: 8px;
-  height: 400px;
-  width: 400px;
+  border-radius: 50%;
+  height: 300px;
+  width: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 3%;
+  position: absolute;
+        bottom: 40%;
+        margin: 0 auto;
+        left: 35%;
   .fileup{
     width: 0.1px;
 	height: 0.1px;
@@ -52,6 +55,7 @@ export const ProContainer = styled.div`
   display: flex;
   width: 80%;
   flex-direction: column;
+  align-items: center;
   margin-top: 60px;
   .upload{
       justify-self: flex-start;
