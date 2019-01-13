@@ -28,7 +28,8 @@ class Profile extends React.Component{
             user: '',
             photo: null,
             title: '',
-            loaded: false
+            loaded: false,
+            showModal: false,
         };
         this.colorThief = new ColorThief();
     }
@@ -91,7 +92,15 @@ class Profile extends React.Component{
          });
     }
 
-    
+    showModal = event => {
+        this.setState({ showModal: !this.state.showModal })
+    }
+
+    closeModal = event => {
+        if (!this.modal.contains(event.target)) {
+            this.setState({ showModal: !this.state.showModal })
+        }
+    }
 
 
 
@@ -115,7 +124,7 @@ class Profile extends React.Component{
                       </div>
                   </Upload>
                   }
-                  <Settings>
+                  <Settings onClick={this.showModal}>
                       Settings
                   </Settings>
                   </Header>
@@ -143,33 +152,18 @@ class Profile extends React.Component{
                         <img src={Twitter} alt="" className='twitter'/>
                     </Social>
                   </Information>
-                  {/* <Info>
-                    <h1>{this.props.profile.firstName} {this.props.profile.lastName}</h1>
-                    {this.props.profile.bio 
+                  {this.state.showModal
                     ?
-                    <div>
-                        <p>
-                            {this.props.profile.bio }
-                        </p>
-                    </div>
+                    <ModalContainer onClick={this.closeModal} ref={(element) => {
+                        this.modal = element;
+                     }}>
+                        <Modal>
+                            <input type="text" value={this.state.firstName}/>
+                        </Modal>
+                    </ModalContainer>
                     :
-                    <div>
-                        <textarea value={this.state.bio} name='bio' onChange={this.handleInputChange}/>
-                        <button onClick={this.handleSubmit}>
-                            Add Bio
-                        </button>
-                    </div>
-                    }
-                    
-                  </Info> */}
-                  <Stats>
-
-                  </Stats>
-                  {/* <Social>
-                        <div className='facebook'><img src={Facebook} alt="" style={{ width: '75px' }}/></div>
-                        <div className='instagram'><img src={Instagram} alt="" style={{ width: '75px' }}/></div>
-                        <div className='twitter'><img src={Twitter} alt="" style={{ width: '75px' }}/></div>
-                    </Social> */}
+                    null
+                  }
                   </InfoContainer>
                   <div>
                       <Card>
@@ -184,6 +178,42 @@ class Profile extends React.Component{
     }
   
 }
+
+const Modal = styled.div`
+    height: 700px;
+    width: 700px;
+    display: flex;
+    overflow: hidden;
+    border-radius: 6px;
+    background-color: rgb(78, 107, 140);
+`;
+
+const ModalContainer = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 10;
+`;
+
+// const Info = styled.div`
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+//   width: 100%;
+//   max-width: 400px;
+//   background-color: rgb(28, 49, 68);
+//   color: rgb(255,218,99);
+//   h2{
+//       font-size: 2rem;
+//   }
+// `;
 
 const Settings = styled.button`
     border: none;
