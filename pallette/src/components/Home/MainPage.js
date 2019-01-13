@@ -113,6 +113,7 @@ const Select = styled.div`
     background-color: rgba(28,49,68,0.85);
     color: rgb(255, 218, 99);
     height: 35px;
+    cursor: pointer;
     .choice{
         display: flex;
         justify-content: space-between;

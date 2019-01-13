@@ -125,6 +125,7 @@ class All extends React.Component {
             <h1>{item.title}</h1>
             <h4>{item.artist}</h4>
           </div>
+          <Imgcont>
           <div className='like-container' onClick={() => this.handleLike(item.id, item.uid)}>
             <img className="like" src={Like} alt="" />
             <h4>{item.likes}</h4>
@@ -133,6 +134,7 @@ class All extends React.Component {
             <img className="view" src={View} alt="" />
             <h4>{item.views}</h4>
           </div>
+          </Imgcont>
         </div>
 
         {/* </NavLink> */}
@@ -143,6 +145,12 @@ class All extends React.Component {
   
     }
   }
+
+  const Imgcont = styled.div`
+    display: flex;
+    width: 110px;
+    justify-content: space-between;
+  `;
 
   const Container = styled.div`
     display: flex;
@@ -171,6 +179,7 @@ class All extends React.Component {
     height: auto;
     background: no-repeat center;
     background-size: cover;
+    cursor: pointer;
   }
   .banner {
     box-sizing: border-box;
@@ -205,6 +214,9 @@ class All extends React.Component {
         justify-content: center;
         align-items: center;
         width: 50px;
+        height: 40px;
+        border-radius: 6px;
+        background-color: rgb(21, 37, 51);
         h4{
             align-self: center;
         }
@@ -212,6 +224,7 @@ class All extends React.Component {
     .view {
       width: 30px;
       height: 20px;
+      cursor: pointer;
     }
     .like-container{
         display: flex;
@@ -219,6 +232,9 @@ class All extends React.Component {
         justify-content: center;
         align-items: center;
         width: 50px;
+        height: 40px;
+        border-radius: 6px;
+        background-color: rgb(21, 37, 51);
         h4{
             align-self: center;
         }
@@ -227,6 +243,7 @@ class All extends React.Component {
       width: 25px;
       height: 20px;
       margin-right: 4%;
+      cursor: pointer;
     }
     .title {
       display: flex;

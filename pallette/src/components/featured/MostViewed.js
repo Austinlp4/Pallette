@@ -131,6 +131,7 @@ class MostViewed extends React.Component {
           <h1>{item.title}</h1>
           <h4>{item.artist}</h4>
         </div>
+        <Imgcont>
         <div className='like-container' onClick={() => this.handleLike(item.id, item.uid)}>
           <img className="like" src={Like} alt="" />
           <h4>{item.likes}</h4>
@@ -139,6 +140,7 @@ class MostViewed extends React.Component {
           <img className="view" src={View} alt="" />
           <h4>{item.views}</h4>
         </div>
+        </Imgcont>
       </div>
 
       {/* </NavLink> */}
@@ -149,6 +151,12 @@ class MostViewed extends React.Component {
 
   }
   }
+
+  const Imgcont = styled.div`
+    display: flex;
+    width: 110px;
+    justify-content: space-between;
+  `;
 
   const Wrapper = styled.div`
   .alice-carousel__prev-btn,
@@ -252,6 +260,9 @@ class MostViewed extends React.Component {
         justify-content: center;
         align-items: center;
         width: 50px;
+        height: 40px;
+        border-radius: 6px;
+        background-color: rgb(21, 37, 51);
         h4{
             align-self: center;
         }
@@ -266,6 +277,9 @@ class MostViewed extends React.Component {
         justify-content: center;
         align-items: center;
         width: 50px;
+        height: 40px;
+        border-radius: 6px;
+        background-color: rgb(21, 37, 51);
         h4{
             align-self: center;
         }
