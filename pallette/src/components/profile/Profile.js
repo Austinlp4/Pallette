@@ -32,7 +32,9 @@ class Profile extends React.Component{
             showModal: false,
             hovered: false,
             upload: false,
-            showModalTwo: false
+            showModalTwo: false,
+            firstName: this.props.profile.firstName,
+            lastName: this.props.profile.lastName
         };
         this.colorThief = new ColorThief();
     }
@@ -191,8 +193,16 @@ class Profile extends React.Component{
                     <ModalContainer data-type='modal-container' onClick={this.closeModal} ref={(element) => {
                         this.modal = element;
                      }}>
-                        <Modal>
-                            <input type="text" value={this.state.firstName}/>
+                        <Modal className='settings-modal'>
+                            <h3>Edit Settings</h3>
+                            <form action="">
+                                <h3>FirstName: </h3>
+                                <SettingsInput type="text" name='firstName' body={this.state.firstName} onChange={this.handleChange}/>
+                                <h3>LastName: </h3>
+                                <SettingsInput type="text" name ='lastName' body={this.state.lastName} onChange={this.handleChange}/>
+                                <h3>Bio: </h3>
+                                <textarea type="text" name ='bio' body={this.state.bio} onChange={this.handleChange}/>
+                            </form>
                         </Modal>
                     </ModalContainer>
                     :
@@ -230,6 +240,12 @@ class Profile extends React.Component{
     }
   
 }
+
+const SettingsInput = styled.input`
+    height: 40px; 
+    width: 300px;
+
+`;
 
 const ProfilePicCont = styled.div`
    
@@ -271,9 +287,9 @@ const Modal = styled.div`
     height: 700px;
     width: 700px;
     display: flex;
-    overflow: hidden;
     border-radius: 6px;
     background-color: rgb(78, 107, 140);
+    flex-direction: column;
 `;
 
 const ModalContainer = styled.div`
