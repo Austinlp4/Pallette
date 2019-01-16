@@ -30,6 +30,9 @@ class Profile extends React.Component{
             title: '',
             loaded: false,
             showModal: false,
+            hovered: false,
+            upload: false,
+            showModalTwo: false
         };
         this.colorThief = new ColorThief();
     }
@@ -55,6 +58,9 @@ class Profile extends React.Component{
         const {image} = this.state;
         const uid = this.props.auth.uid;
         this.props.uploadAvatar(image, uid)
+        if(this.state.showModalTwo){
+            this.setState({ showModalTwo: !this.state.showModalTwo })
+        }
         
     }
 
@@ -97,23 +103,48 @@ class Profile extends React.Component{
     }
 
     closeModal = event => {
-        if (!this.modal.contains(event.target)) {
-            this.setState({ showModal: !this.state.showModal })
-        }
+        if (event.target.dataset.type === 'modal-container' || event.target.dataset.type === 'modal-container-two') {
+            if(event.target.dataset.type === 'modal-container'){
+                this.setState({  showModal: !this.state.showModal})
+            } else {
+                this.setState({  showModalTwo: !this.state.showModalTwo})
+            }
+            
+          }
     }
 
+    enter = () => {
+        this.setState({ hovered: !this.state.hovered })
+    }
+
+    leave = () => {
+        this.setState({ hovered: !this.state.hovered })
+    }
+
+    editAvatar = () => {
+        this.setState({ showModalTwo: !this.state.showModalTwo })
+    }
 
 
     render(){
         console.log('palette',this.props.profile)
-        if(!this.props.auth.uid) return <Redirect to='/cta'/>
+        if(!this.props.auth.uid) return <Redirect to='/cta'/>  
         return (
             <ProContainer>
             <InfoContainer>
                 <Header>
                   {this.props.profile.url ?
-                  <div style={{ margin: '3%', width: '300px', height: '300px', borderRadius: '50%'}} className='pro-cont'>
-                      <img src={this.props.profile.url} alt="Profile pic" style={{width: '300px', height: 'auto', borderRadius: '50%'}}/>
+                  <div style={{ margin: '3%', width: '300px', height: '300px', borderTopLeftRadius: '150px', borderBottomRightRadius: '150px', overflow: 'hidden', background: 'no-repeat center', backgroundSize: 'cover', boxSizing: 'border-box'}} className='pro-cont' onMouseEnter={this.enter} onMouseLeave={this.leave}>
+                      <img src={this.props.profile.url} alt="Profile pic" style={{width: '100%', height: 'auto', maxHeight: '300px', maxWidth: '300px',borderTopLeftRadius: '150px', borderBottomRightRadius: '150px', borderTopRightRadius: '150px', borderBottomLeftRadius: '150px' ,overflow: 'hidden'}}/>
+                      {
+                          this.state.hovered
+                          ?
+                          <Edit onClick={this.editAvatar}>
+                              + Edit
+                          </Edit>
+                          :
+                          null
+                      }
                   </div>
                   :
                   <Upload className='upload'>
@@ -154,11 +185,29 @@ class Profile extends React.Component{
                   </Information>
                   {this.state.showModal
                     ?
-                    <ModalContainer onClick={this.closeModal} ref={(element) => {
+                    <ModalContainer data-type='modal-container' onClick={this.closeModal} ref={(element) => {
                         this.modal = element;
                      }}>
                         <Modal>
                             <input type="text" value={this.state.firstName}/>
+                        </Modal>
+                    </ModalContainer>
+                    :
+                    null
+                  }
+                  {this.state.showModalTwo
+                    ?
+                    <ModalContainer data-type='modal-container-two' onClick={this.closeModal} ref={(element) => {
+                        this.modal = element;
+                     }}>
+                        <Modal>
+                            <Upload className='upload' style={{ positiion: 'relative' }}>
+                                <div className='upicon'>
+                                    <input type='file' name='file' id='file' onChange={this.handleChange} className='fileup'/>
+                                    <label htmlFor="file">Choose a file</label>
+                                    <button onClick={this.handleUpload}>Upload</button>
+                                </div>
+                            </Upload>
                         </Modal>
                     </ModalContainer>
                     :
@@ -178,6 +227,22 @@ class Profile extends React.Component{
     }
   
 }
+
+const Edit = styled.div`
+    position: absolute;
+    bottom: -40%;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    height: 150px;
+    width: 300px;
+    left: 35%;
+    border-bottom-right-radius: 150px;
+    border-bottom-left-radius: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.6rem;
+`;
 
 const Modal = styled.div`
     height: 700px;
@@ -310,6 +375,7 @@ const Header = styled.div`
         width: 300px;
         height: 300px;
     }
+    
 `;
 
 const Stats = styled.div`
