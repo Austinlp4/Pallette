@@ -64,7 +64,7 @@ const Nav = styled.div`
       width: 135px;
       justify-content: space-between;
   }
-  z-index: 3;
+  z-index: 6;
 `;
 
 const Links = styled.div`

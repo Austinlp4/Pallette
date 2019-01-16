@@ -129,6 +129,7 @@ const Select = styled.div`
         background-color: rgb(28,49,68);
         text-align: center;
     }
+    z-index: 6;
 `;
 
 const Container =styled.div`

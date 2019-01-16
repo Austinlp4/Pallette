@@ -41,7 +41,7 @@ class ProfileWorks extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{ width: '100%', maxWidth: '1000px' }}>
         {this.state.works ? (
           <Container>
             {Object.values(this.state.works).map(post => (
@@ -58,6 +58,7 @@ class ProfileWorks extends React.Component {
                     <h1>{post.title}</h1>
                     <h4>{post.artist}</h4>
                   </div>
+                  <Imgcont>
                   <div className='like-container'>
                     <img className="like" src={Like} alt="" />
                     <h4>{post.likes}</h4>
@@ -66,8 +67,8 @@ class ProfileWorks extends React.Component {
                     <img className="view" src={View} alt="" />
                     <h4>{post.views}</h4>
                   </div>
+                  </Imgcont>
                 </div>
-
                 {/* </NavLink> */}
               </Card>
             ))}
@@ -82,6 +83,12 @@ class ProfileWorks extends React.Component {
   }
 }
 
+const Imgcont = styled.div`
+    display: flex;
+    width: 110px;
+    justify-content: space-between;
+  `;
+
 const Card = styled.div`
   width: 325px;
   height: 325px;
@@ -91,7 +98,7 @@ const Card = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 3% 3%;
+  margin: 1% 1%;
   border-radius: 6px;
   position: relative;
   img {
@@ -100,16 +107,17 @@ const Card = styled.div`
     height: auto;
     background: no-repeat center;
     background-size: cover;
+    cursor: pointer;
   }
   .banner {
     box-sizing: border-box;
     position: absolute;
     z-index: 3;
-    background-color: white;
-    height: 60px;
+    background-color: rgb(28, 49, 68);
+    height: 80px;
     width: 100%;
     bottom: 0;
-    border: 1px solid lightgrey;
+    border: 1px solid rgb(28, 49, 68);
     border-top: none;
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
@@ -120,12 +128,12 @@ const Card = styled.div`
     left: 0;
     h1 {
       font-size: 1.2rem;
-      color: rgb(45, 54, 98);
+      color: rgb(255,218,99);
       margin: 0;
     }
     h4 {
       font-size: 0.9rem;
-      color: rgb(45, 54, 98);
+      color: rgb(255,218,99);
       margin: 0;
     }
     .view-container{
@@ -134,6 +142,9 @@ const Card = styled.div`
         justify-content: center;
         align-items: center;
         width: 50px;
+        height: 40px;
+        border-radius: 6px;
+        background-color: rgb(21, 37, 51);
         h4{
             align-self: center;
         }
@@ -141,22 +152,27 @@ const Card = styled.div`
     .view {
       width: 30px;
       height: 20px;
+      cursor: pointer;
     }
     .like-container{
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      width: 50px;
-      h4{
-          align-self: center;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width: 50px;
+        height: 40px;
+        border-radius: 6px;
+        background-color: rgb(21, 37, 51);
+        h4{
+            align-self: center;
+        }
       }
+    .like {
+      width: 25px;
+      height: 20px;
+      margin-right: 4%;
+      cursor: pointer;
     }
-  .like {
-    width: 25px;
-    height: 20px;
-    margin-right: 4%;
-  }
     .title {
       display: flex;
       flex-direction: column;
@@ -171,6 +187,8 @@ const Card = styled.div`
 const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
+  max-width: 1000px;
 `;
 
 const mapStateToProps = state => {

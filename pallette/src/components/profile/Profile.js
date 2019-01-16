@@ -114,11 +114,11 @@ class Profile extends React.Component{
     }
 
     enter = () => {
-        this.setState({ hovered: !this.state.hovered })
+        this.setState(prevState => ({ hovered: !prevState.hovered }))
     }
 
     leave = () => {
-        this.setState({ hovered: !this.state.hovered })
+        this.setState(prevState => ({ hovered: !prevState.hovered }))
     }
 
     editAvatar = () => {
@@ -134,9 +134,9 @@ class Profile extends React.Component{
             <InfoContainer>
                 <Header>
                   {this.props.profile.url ?
-                  <div style={{ margin: '3%', width: '300px', height: '300px', borderTopLeftRadius: '150px', borderBottomRightRadius: '150px', overflow: 'hidden', background: 'no-repeat center', backgroundSize: 'cover', boxSizing: 'border-box'}} className='pro-cont' onMouseEnter={this.enter} onMouseLeave={this.leave}>
-                      <img src={this.props.profile.url} alt="Profile pic" style={{width: '100%', height: 'auto', maxHeight: '300px', maxWidth: '300px',borderTopLeftRadius: '150px', borderBottomRightRadius: '150px', borderTopRightRadius: '150px', borderBottomLeftRadius: '150px' ,overflow: 'hidden'}}/>
-                      {
+                 <ProfilePicCont onMouseEnter={this.enter} onMouseLeave={this.leave}>
+                    <ProfilePic image={this.props.profile.url} >
+                    {
                           this.state.hovered
                           ?
                           <Edit onClick={this.editAvatar}>
@@ -145,7 +145,10 @@ class Profile extends React.Component{
                           :
                           null
                       }
-                  </div>
+                  </ProfilePic>
+              
+                    
+                    </ProfilePicCont>
                   :
                   <Upload className='upload'>
                       <div className='upicon'>
@@ -214,7 +217,7 @@ class Profile extends React.Component{
                     null
                   }
                   </InfoContainer>
-                  <div>
+                  <div style={{ width: '100%', maxWidth: '1000px' }}>
                       <Card>
                       <input type='file' name='file' accept='image/*' id='filetwo' onChange={this.handlePhotoChange} className={this.state.photo ? 'fileup go' : 'fileup'}/>
                       <label htmlFor="filetwo" >{this.state.photo ? <input className='pic-title' type="text" value={this.state.title} name='title' onChange={this.handleTitle} placeholder='Add Title..'/> : 'Add Artwork' }</label>
@@ -228,14 +231,34 @@ class Profile extends React.Component{
   
 }
 
-const Edit = styled.div`
+const ProfilePicCont = styled.div`
+   
+`;
+
+const ProfilePic = styled.div`
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background-image: ${props => (props.image ? `url(${props.image})` : 'null')};
+    background-repeat: no-repeat;
+    background-position: top;
+    background-size: cover;
     position: absolute;
     bottom: -40%;
-    color: white;
+    left: 35%;
+   
+`;
+
+const Edit = styled.div`
+    position: absolute;
+    bottom: 0;
+    color: rgb(255, 218, 99);
+    font-weight: 300;
+    cursor: pointer;
     background-color: rgba(0, 0, 0, 0.6);
     height: 150px;
     width: 300px;
-    left: 35%;
+    left: 0;
     border-bottom-right-radius: 150px;
     border-bottom-left-radius: 150px;
     display: flex;
@@ -367,6 +390,7 @@ const Header = styled.div`
     display: flex;
     position: relative;
     justify-content: flex-end;
+    height: 400px;
     img{
         position: absolute;
         bottom: -40%;

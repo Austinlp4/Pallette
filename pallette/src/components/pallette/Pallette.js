@@ -57,6 +57,11 @@ const PalletteContainer = styled.div`
   justify-content: center;
   margin: 0 auto;
   border: none;
+  position: fixed;
+  margin-left: 95px;
+  z-index: 6;
+  margin-top: 4px;
+  
 `;
 
 const Pallete = styled.div`
