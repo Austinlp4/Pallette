@@ -6,7 +6,7 @@ import { Upload,
          ProContainer,
          Info,
          Card } from './ProfileStyles.js';
-import { addPhoto, uploadAvatar, addBio } from '../../store/actions/projectActions';
+import { addPhoto, uploadAvatar, addBio, editInfo } from '../../store/actions/projectActions';
 import moment from 'moment';
 import analyze from 'rgbaster';
 import styled from 'styled-components';
@@ -132,6 +132,15 @@ class Profile extends React.Component{
     }
 
     editSettings = () => {
+        const firstName = this.state.firstName;
+        const lastName = this.state.lastName;
+        const bio = this.state.bio;
+        const facebook = this.state.facebook;
+        const instagram = this.state.instagram;
+        const twitter = this.state.twitter;
+        const uid = this.props.auth.uid;
+        this.props.editInfo(firstName, lastName, bio, facebook, instagram, twitter, uid)
+        this.props.history.push('/profile')
         
     }
     render(){
@@ -213,7 +222,7 @@ class Profile extends React.Component{
                                 </div>
                             </div>
                                 <h3>Bio: </h3>
-                                <textarea type="text" name ='bio' body={this.state.bio} onChange={this.handleInputChange} style = {{ width: '400px', height: '100px' }}/>
+                                <textarea type="text" name ='bio' value={this.state.bio} onChange={this.handleInputChange} style = {{ width: '400px', height: '100px' }}/>
                                 <h3>Facebook: </h3>
                                 <SettingsInput type="text" name ='facebook' value={this.state.facebook} onChange={this.handleInputChange}/>
                                 <h3>Instagram</h3>
@@ -445,7 +454,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         addPhoto: (photo, uid, title, artist, created, palette) => dispatch(addPhoto(photo, uid, title, artist, created, palette)),
         uploadAvatar: (image, uid) => dispatch(uploadAvatar(image, uid)),
-        addBio: (bio, uid) => dispatch(addBio(bio, uid))
+        addBio: (bio, uid) => dispatch(addBio(bio, uid)),
+        editInfo: (firstName, lastName, bio, facebook, instagram, twitter, uid) => dispatch(editInfo(firstName, lastName, bio, facebook, instagram, twitter, uid))
     }
 }
 

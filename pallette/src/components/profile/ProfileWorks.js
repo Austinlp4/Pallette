@@ -34,8 +34,8 @@ class ProfileWorks extends React.Component {
     });
   }
 
-  pageFlip = key => {
-    this.props.history.push(`${this.props.match.path}/${key}`);
+  pageFlip = (key, uid)=> {
+    this.props.history.push(`/${uid}/${key}`);
     
   };
 
@@ -49,7 +49,7 @@ class ProfileWorks extends React.Component {
                 id={post.key}
                 key={post.key}
                 post={post}
-                onClick={() => this.pageFlip(post.key)}
+                onClick={() => this.pageFlip(post.key, post.uid)}
               >
                 {/* <NavLink to={`${this.props.match.path}/${post.key}`}> */}
                 <img src={post.url} alt="" />

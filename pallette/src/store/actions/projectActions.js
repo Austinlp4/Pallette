@@ -106,3 +106,19 @@ export const addBio = (bio, uid) => {
             }) 
     }
 }
+
+export const editInfo = (firstName, lastName, bio, facebook, instagram, twitter, uid) => {
+    return (dispatch, getState, { getFirebase }) => {
+        const firebase = getFirebase();
+        const ref = firebase.database().ref(`users/${uid}`);
+        ref.update({ 
+            firstName: firstName,
+            lastName: lastName,
+            bio: bio,
+            facebook: facebook,
+            instagram: instagram,
+            twitter: twitter
+         })
+         
+    }
+}
