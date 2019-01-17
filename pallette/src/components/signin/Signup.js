@@ -34,16 +34,6 @@ class SignUp extends React.Component {
     event.preventDefault();
     this.props.signUp(this.state)
     this.props.history.push('/');
-    // const { email, password } = this.state;
-    // firebase
-    //   .auth()
-    //   .createUserWithEmailAndPassword(email, password)
-    //   .then(user => {
-    //     this.props.history.push('/register');
-    //   })
-    //   .catch(error => {
-    //     this.setState({ error: error });
-    //   });
   };
 
   googleSign = event => {

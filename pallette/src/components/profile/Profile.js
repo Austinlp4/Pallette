@@ -24,7 +24,7 @@ class Profile extends React.Component{
             image: null,
             url: '',
             progress: 0,
-            bio: '',
+            bio: this.props.profile.bio || '',
             user: '',
             photo: null,
             title: '',
@@ -33,8 +33,12 @@ class Profile extends React.Component{
             hovered: false,
             upload: false,
             showModalTwo: false,
-            firstName: this.props.profile.firstName,
-            lastName: this.props.profile.lastName
+            firstName: this.props.profile.firstName || '',
+            lastName: this.props.profile.lastName || '',
+            facebook: this.props.profile.facebook || '',
+            instagram: this.props.profile.instagram || '',
+            twitter: this.props.profile.twitter || ''
+
         };
         this.colorThief = new ColorThief();
     }
@@ -127,7 +131,9 @@ class Profile extends React.Component{
         this.setState({ showModalTwo: !this.state.showModalTwo })
     }
 
-
+    editSettings = () => {
+        
+    }
     render(){
         console.log('palette',this.props.profile)
         if(!this.props.auth.uid) return <Redirect to='/cta'/>  
@@ -195,13 +201,26 @@ class Profile extends React.Component{
                      }}>
                         <Modal className='settings-modal'>
                             <h3>Edit Settings</h3>
-                            <form action="">
-                                <h3>FirstName: </h3>
-                                <SettingsInput type="text" name='firstName' body={this.state.firstName} onChange={this.handleChange}/>
-                                <h3>LastName: </h3>
-                                <SettingsInput type="text" name ='lastName' body={this.state.lastName} onChange={this.handleChange}/>
+                            <form action="" onSubmit={this.editSettings}>
+                            <div className='names' style={{ display: 'flex', justifyContent: 'space-between', width: '90%' }}>
+                            <div>
+                                <h3>FirstName</h3>
+                                <SettingsInput type="text" name='firstName' value={this.state.firstName} placeholder={this.props.profile.firstName} onChange={this.handleInputChange}/>
+                                </div>
+                                <div>
+                                <h3>LastName</h3>
+                                <SettingsInput type="text" name ='lastName' value={this.state.lastName} onChange={this.handleInputChange}/>
+                                </div>
+                            </div>
                                 <h3>Bio: </h3>
-                                <textarea type="text" name ='bio' body={this.state.bio} onChange={this.handleChange}/>
+                                <textarea type="text" name ='bio' body={this.state.bio} onChange={this.handleInputChange} style = {{ width: '400px', height: '100px' }}/>
+                                <h3>Facebook: </h3>
+                                <SettingsInput type="text" name ='facebook' value={this.state.facebook} onChange={this.handleInputChange}/>
+                                <h3>Instagram</h3>
+                                <SettingsInput type="text" name ='instagram' value={this.state.instagram} onChange={this.handleInputChange}/>
+                                <h3>Twitter</h3>
+                                <SettingsInput type="text" name ='twitter' value={this.state.twitter} onChange={this.handleInputChange}/>
+                                <button>Save</button>
                             </form>
                         </Modal>
                     </ModalContainer>
@@ -227,7 +246,7 @@ class Profile extends React.Component{
                     null
                   }
                   </InfoContainer>
-                  <div style={{ width: '100%', maxWidth: '1000px' }}>
+                  <div style={{ width: '100%', maxWidth: '1200px'}}>
                       <Card>
                       <input type='file' name='file' accept='image/*' id='filetwo' onChange={this.handlePhotoChange} className={this.state.photo ? 'fileup go' : 'fileup'}/>
                       <label htmlFor="filetwo" >{this.state.photo ? <input className='pic-title' type="text" value={this.state.title} name='title' onChange={this.handleTitle} placeholder='Add Title..'/> : 'Add Artwork' }</label>
@@ -262,7 +281,8 @@ const ProfilePic = styled.div`
     position: absolute;
     bottom: -40%;
     left: 35%;
-   
+    border: 7px solid rgb(28,49,68);
+    box-shadow: 0 4px 2px -2px black;
 `;
 
 const Edit = styled.div`
@@ -273,7 +293,7 @@ const Edit = styled.div`
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.6);
     height: 150px;
-    width: 300px;
+    width: 287px;
     left: 0;
     border-bottom-right-radius: 150px;
     border-bottom-left-radius: 150px;
@@ -305,19 +325,6 @@ const ModalContainer = styled.div`
     z-index: 10;
 `;
 
-// const Info = styled.div`
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: center;
-//   align-items: center;
-//   width: 100%;
-//   max-width: 400px;
-//   background-color: rgb(28, 49, 68);
-//   color: rgb(255,218,99);
-//   h2{
-//       font-size: 2rem;
-//   }
-// `;
 
 const Settings = styled.button`
     border: none;

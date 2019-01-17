@@ -41,7 +41,7 @@ class ProfileWorks extends React.Component {
 
   render() {
     return (
-      <div style={{ width: '100%', maxWidth: '1000px' }}>
+      <div style={{ width: '100%', maxWidth: '1200px', display: 'flex', justifyContent: 'center'}}>
         {this.state.works ? (
           <Container>
             {Object.values(this.state.works).map(post => (
@@ -188,7 +188,8 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
+  justify-content: center;
 `;
 
 const mapStateToProps = state => {
