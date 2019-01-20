@@ -203,9 +203,8 @@ class Profile extends React.Component{
         
     }
     render(){
-        if(!this.props.auth.uid) return <Redirect to='/cta'/>  
+        if(!this.props.auth.uid) return <Redirect to='/signup'/>  
         const {previews} = this.state;
-
         const thumbs = previews.map(file => (
         <div style={thumb} key={file.name}>
             <div style={thumbInner}>
@@ -217,6 +216,8 @@ class Profile extends React.Component{
             </div>
         </div>
         ));
+        // let followerSize = Object.keys(this.props.profile.followers).length;
+        // let followingSize = Object.keys(this.props.profile.following).length;
         return (
             <ProContainer>
             <InfoContainer>
@@ -246,6 +247,16 @@ class Profile extends React.Component{
                       </div>
                   </Upload>
                   }
+                  {/* <div>
+                      <div>
+                          <div>Following</div>
+                          <div>{followingSize}</div>
+                      </div>
+                      <div>
+                          <div>Followers</div>
+                          <div>{followerSize}</div>
+                      </div>
+                  </div> */}
                   <Settings onClick={this.showModal}>
                       Settings
                   </Settings>

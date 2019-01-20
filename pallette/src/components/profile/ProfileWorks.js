@@ -50,6 +50,7 @@ class ProfileWorks extends React.Component {
                 key={post.key}
                 post={post}
                 onClick={() => this.pageFlip(post.key, post.uid)}
+                style={{ backgroundColor: 'rgb(28, 49, 68)' }}
               >
                 {/* <NavLink to={`${this.props.match.path}/${post.key}`}> */}
                 <img src={post.url} alt="" />

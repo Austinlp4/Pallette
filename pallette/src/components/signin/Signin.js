@@ -18,10 +18,10 @@ handleInputChange = (event) => {
  };
 
 handleSubmit = (event) => {
+   event.preventDefault();
    const { email, password } = this.state;
    const creds = {email,password};
-    this.props.signIn(creds)
-    this.props.history.push('/')
+   this.props.signIn(creds)
 
  };
  render() {
@@ -76,7 +76,7 @@ const SigninContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 10% 0;
+  margin: 13% 0;
   border-radius: 8px;
   background-color: rgb(45,54,98);
   .reroute{

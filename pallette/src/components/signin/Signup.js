@@ -112,7 +112,7 @@ const SignupContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 10% 0;
+    margin: 13% 0;
     border-radius: 8px;
     background-color: rgb(45,54,98);
     .reroute{

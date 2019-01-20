@@ -117,6 +117,7 @@ class All extends React.Component {
         id={item.id}
         key={item.id}
         post={item}
+        style={{ backgroundColor: 'rgb(28, 49, 68)' }}
       >
         {/* <NavLink to={`${this.props.match.path}/${post.key}`}> */}
         

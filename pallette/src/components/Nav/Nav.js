@@ -10,7 +10,7 @@ import Logout from '../../images/logout.png';
 const NavBar = (props) => {
     return(
         <Nav>
-            <div className='logo'>
+            <div className='logo' style={{ cursor: 'pointer' }}>
                 <img src={Logo} alt="" style={{ width: '200px' }} onClick={() => {props.history.push('/')}} />
             </div>
             {props.auth.uid
