@@ -279,9 +279,9 @@ class Profile extends React.Component{
                     <ModalContainer data-type='modal-container' onClick={this.closeModal} ref={(element) => {
                         this.modal = element;
                      }}>
-                        <Modal className='settings-modal'>
+                        <Modal className='settings-modal' style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', height: '750px'}}>
                             <h3>Edit Settings</h3>
-                            <form action="" onSubmit={this.editSettings}>
+                            <form action="" onSubmit={this.editSettings} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%'}}>
                             <div className='names' style={{ display: 'flex', justifyContent: 'space-between', width: '90%' }}>
                             <div>
                                 <h3>FirstName</h3>
@@ -293,14 +293,14 @@ class Profile extends React.Component{
                                 </div>
                             </div>
                                 <h3>Bio: </h3>
-                                <textarea type="text" name ='bio' value={this.state.bio} onChange={this.handleInputChange} style = {{ width: '400px', height: '100px' }}/>
+                                <textarea type="text" name ='bio' value={this.state.bio} onChange={this.handleInputChange} style = {{ width: '90%', height: '100px' }}/>
                                 <h3>Facebook: </h3>
-                                <SettingsInput type="text" name ='facebook' value={this.state.facebook} onChange={this.handleInputChange}/>
+                                <SettingsInput type="text" name ='facebook' value={this.state.facebook} onChange={this.handleInputChange} style = {{ width: '90%'}}/>
                                 <h3>Instagram</h3>
-                                <SettingsInput type="text" name ='instagram' value={this.state.instagram} onChange={this.handleInputChange}/>
+                                <SettingsInput type="text" name ='instagram' value={this.state.instagram} onChange={this.handleInputChange} style = {{ width: '90%'}}/>
                                 <h3>Twitter</h3>
-                                <SettingsInput type="text" name ='twitter' value={this.state.twitter} onChange={this.handleInputChange}/>
-                                <button>Save</button>
+                                <SettingsInput type="text" name ='twitter' value={this.state.twitter} onChange={this.handleInputChange} style = {{ width: '90%'}}/>
+                                <Settings style={{ width: '90%', marginTop: '35px' }}>Save</Settings>
                             </form>
                         </Modal>
                     </ModalContainer>
@@ -413,7 +413,9 @@ const UploadCont = styled.div`
 const SettingsInput = styled.input`
     height: 40px; 
     width: 300px;
-
+    border: .5px solid rgb(45, 54, 98);
+    padding-left: 5px;
+    border-radius: 6px;
 `;
 
 const ProfilePicCont = styled.div`

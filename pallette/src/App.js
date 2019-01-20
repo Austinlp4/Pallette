@@ -43,7 +43,7 @@ class App extends Component {
 
 
     colors = () => {
-      let count = 6;
+      let count = 7;
       const pallete = colors[count]
       this.props.addPalette(pallete)
       return pallete;

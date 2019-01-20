@@ -20,16 +20,30 @@ class SingleCard extends React.Component{
                   ...data.val()
             
             }
+            },() => {
+                this.setState({ 
+                    paletteOne: this.state.post.palette[0],
+                    paletteTwo: this.state.post.palette[1],
+                    paletteThree: this.state.post.palette[2],
+                    paletteFour: this.state.post.palette[3],
+                    paletteFive: this.state.post.palette[4],
+                })
             })
         })
     }
 
     render(){
         const post = this.state.post;
-
         return (
             <Container onClick={() => {this.props.history.push('/')}}>
                 <Modal>
+                <div style={{ width: '40px', height: '700px' , display: 'flex', flexDirection: 'column'}}>
+                    <div className='uno' style={{ backgroundColor: `${this.state.paletteOne}` , height: '20%', width: '40px'}}></div>
+                    <div className='dos' style={{ backgroundColor: `${this.state.paletteTwo}` , height: '20%', width: '40px'}}></div>
+                    <div className='tres' style={{ backgroundColor: `${this.state.paletteThree}` , height: '20%', width: '40px'}}></div>
+                    <div className='quatro' style={{ backgroundColor: `${this.state.paletteFour}` , height: '20%', width: '40px'}}></div>
+                    <div className='cinco' style={{ backgroundColor: `${this.state.paletteFive}` , height: '20%', width: '40px'}}></div>
+                </div>
                     <div className='image-cont'><Image src={post.url} alt="" /> </div>
                 <Info>
                     <h2>{post.title}</h2>
