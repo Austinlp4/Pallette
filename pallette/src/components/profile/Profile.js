@@ -15,6 +15,43 @@ import Instagram from '../../images/instagram.png';
 import Twitter from '../../images/twitter.png';
 import ColorThief from '../../ColorThief';
 import { Redirect } from 'react-router-dom';
+import Dropzone from 'react-dropzone';
+
+const thumbsContainer = {
+    display: 'flex',
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginTop: 16,
+    width: '90%',
+    height: '90%',
+    justifyContent: 'center',
+    alignItems: 'center'
+
+  };
+  
+  const thumb = {
+    display: 'inline-flex',
+    borderRadius: 2,
+    border: '1px solid #eaeaea',
+    marginBottom: 8,
+    marginRight: 8,
+    width: '90%',
+    height: '90%',
+    padding: 4,
+    boxSizing: 'border-box'
+  };
+  
+  const thumbInner = {
+    display: 'flex',
+    minWidth: 0,
+    overflow: 'hidden'
+  }
+  
+  const img = {
+    display: 'block',
+    width: 'auto',
+    height: '100%'
+  };
 
 
 class Profile extends React.Component{
@@ -37,11 +74,28 @@ class Profile extends React.Component{
             lastName: this.props.profile.lastName || '',
             facebook: this.props.profile.facebook || '',
             instagram: this.props.profile.instagram || '',
-            twitter: this.props.profile.twitter || ''
+            twitter: this.props.profile.twitter || '',
+            files: [],
+            previews: []
 
         };
         this.colorThief = new ColorThief();
     }
+
+    onDrop(files) {
+        console.log(files[0])
+        this.setState({
+            files: files[0],
+          previews: files.map(file => Object.assign(file, {
+            preview: URL.createObjectURL(file)
+          }))
+        });
+      }
+    
+      componentWillUnmount() {
+        // Make sure to revoke the data uris to avoid memory leaks
+        this.state.files.forEach(file => URL.revokeObjectURL(file.preview))
+      }
 
 
     handleChange = event => {
@@ -61,9 +115,9 @@ class Profile extends React.Component{
 
 
     handleUpload = () => {
-        const {image} = this.state;
+        const { files } = this.state
         const uid = this.props.auth.uid;
-        this.props.uploadAvatar(image, uid)
+        this.props.uploadAvatar(files, uid)
         if(this.state.showModalTwo){
             this.setState({ showModalTwo: !this.state.showModalTwo })
         }
@@ -144,8 +198,20 @@ class Profile extends React.Component{
         
     }
     render(){
-        console.log('palette',this.props.profile)
         if(!this.props.auth.uid) return <Redirect to='/cta'/>  
+        const {previews} = this.state;
+
+        const thumbs = previews.map(file => (
+        <div style={thumb} key={file.name}>
+            <div style={thumbInner}>
+            <img
+                src={file.preview}
+                style={img}
+                alt=''
+            />
+            </div>
+        </div>
+        ));
         return (
             <ProContainer>
             <InfoContainer>
@@ -242,13 +308,28 @@ class Profile extends React.Component{
                         this.modal = element;
                      }}>
                         <Modal>
-                            <Upload className='upload' style={{ positiion: 'relative' }}>
-                                <div className='upicon'>
-                                    <input type='file' name='file' id='file' onChange={this.handleChange} className='fileup'/>
-                                    <label htmlFor="file">Choose a file</label>
-                                    <button onClick={this.handleUpload}>Upload</button>
-                                </div>
-                            </Upload>
+                          {!this.state.previews[0]
+                          ?
+                        <Dropzone
+                            accept="image/*"
+                            onDrop={this.onDrop.bind(this)}
+                            >
+                            {({getRootProps, getInputProps}) => (
+                                <UploadCont {...getRootProps()} >
+                                <input {...getInputProps()} />
+                                <p>Drop files here</p>
+                                <h1>+</h1>
+                                </UploadCont>
+                            )}
+                            </Dropzone>
+                            :
+                            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '90%'}}>
+                            <div style={thumbsContainer}>
+                            {thumbs}
+                            </div>
+                            <Settings onClick={this.handleUpload} style={{ width: '90%' }}>Upload</Settings>
+                            </div>
+                            }
                         </Modal>
                     </ModalContainer>
                     :
@@ -268,6 +349,24 @@ class Profile extends React.Component{
     }
   
 }
+
+const UploadCont = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid white;
+    border-radius: 6px;
+    height: 90%;
+    width: 90%;
+    margin: 20px auto;
+    flex-direction: column;
+    color: white;
+    h1{
+        font-size: 4rem;
+        font-weight: 300;
+        margin-top: 10px;
+    }
+`;
 
 const SettingsInput = styled.input`
     height: 40px; 
@@ -453,7 +552,7 @@ const InfoContainer = styled.div`
 const mapDispatchToProps = (dispatch) => {
     return {
         addPhoto: (photo, uid, title, artist, created, palette) => dispatch(addPhoto(photo, uid, title, artist, created, palette)),
-        uploadAvatar: (image, uid) => dispatch(uploadAvatar(image, uid)),
+        uploadAvatar: (files, uid) => dispatch(uploadAvatar(files, uid)),
         addBio: (bio, uid) => dispatch(addBio(bio, uid)),
         editInfo: (firstName, lastName, bio, facebook, instagram, twitter, uid) => dispatch(editInfo(firstName, lastName, bio, facebook, instagram, twitter, uid))
     }
