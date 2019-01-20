@@ -119,8 +119,10 @@ class All extends React.Component {
         post={item}
       >
         {/* <NavLink to={`${this.props.match.path}/${post.key}`}> */}
+        
         <img src={item.url} alt="" onClick={() => this.pageFlip(item.id, item.uid)}/>
         <div className="banner">
+        <div style={{ display: 'flex', justifyContent: 'space-between', width: '100%', padding: '5px 5px 0 5px' }}>
           <div className="title">
             <h1>{item.title}</h1>
             <h4>{item.artist}</h4>
@@ -135,8 +137,17 @@ class All extends React.Component {
             <h4>{item.views}</h4>
           </div>
           </Imgcont>
+          </div>
+          <div style={{ width: '100%', height: '6px' , display: 'flex', bottom: '0'}}>
+            <div className='uno' style={{ backgroundColor: `${item.palette[0]}` , width: '20%', height: '6px'}}></div>
+            <div className='dos' style={{ backgroundColor: `${item.palette[1]}` , width: '20%', height: '6px'}}></div>
+            <div className='tres' style={{ backgroundColor: `${item.palette[2]}` , width: '20%', height: '6px'}}></div>
+            <div className='quatro' style={{ backgroundColor: `${item.palette[3]}` , width: '20%', height: '6px'}}></div>
+            <div className='cinco' style={{ backgroundColor: `${item.palette[4]}` , width: '20%', height: '6px'}}></div>
+          </div>
         </div>
-
+       
+        
         {/* </NavLink> */}
       </Card>
       ))}
@@ -173,6 +184,7 @@ class All extends React.Component {
   margin: 1% 1%;
   border-radius: 6px;
   position: relative;
+  flex-direction: column;
   img {
     position: relative;
     width: 500px;
@@ -186,17 +198,16 @@ class All extends React.Component {
     position: absolute;
     z-index: 3;
     background-color: rgb(28, 49, 68);
-    height: 60px;
+    height: 65px;
     width: 100%;
     bottom: 0;
-    border: 1px solid rgb(28, 49, 68);
     border-top: none;
     border-bottom-right-radius: 6px;
     border-bottom-left-radius: 6px;
     display: flex;
+    flex-direction:column;
     justify-content: space-between;
     align-items: center;
-    padding: 3%;
     left: 0;
     h1 {
       font-size: 1.2rem;

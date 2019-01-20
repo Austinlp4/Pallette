@@ -38,7 +38,8 @@ const thumbsContainer = {
     width: '90%',
     height: '90%',
     padding: 4,
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
+    justifyContent: 'center'
   };
   
   const thumbInner = {
@@ -76,7 +77,8 @@ class Profile extends React.Component{
             instagram: this.props.profile.instagram || '',
             twitter: this.props.profile.twitter || '',
             files: [],
-            previews: []
+            previews: [],
+            showModalThree: false
 
         };
         this.colorThief = new ColorThief();
@@ -92,10 +94,10 @@ class Profile extends React.Component{
         });
       }
     
-      componentWillUnmount() {
+    componentWillUnmount() {
         // Make sure to revoke the data uris to avoid memory leaks
-        this.state.files.forEach(file => URL.revokeObjectURL(file.preview))
-      }
+        this.state.previews.forEach(file => URL.revokeObjectURL(file.preview))
+    }
 
 
     handleChange = event => {
@@ -125,16 +127,17 @@ class Profile extends React.Component{
     }
 
     addPhoto = (e) => {
+        console.log('fired');
         e.preventDefault();
-        e.stopPropagation();
-        let {photo, title} = this.state;
+        let {files, title} = this.state;
+        console.log(files)
         const uid = this.props.auth.uid;
         const artist = `${this.props.profile.firstName} ${this.props.profile.lastName}`
         const created = moment().calendar();
         const palette = this.props.palette.palette
-        if(this.state.photo){
-        this.props.addPhoto(photo, uid, title, artist, created, palette);
-        this.setState({photo: null, title: ''})
+        if(this.state.files){
+        this.props.addPhoto(files, uid, title, artist, created, palette);
+        this.setState({photo: null, title: '', showModalThree: !this.state.showModalThree})
         }
             
     }
@@ -163,11 +166,13 @@ class Profile extends React.Component{
     }
 
     closeModal = event => {
-        if (event.target.dataset.type === 'modal-container' || event.target.dataset.type === 'modal-container-two') {
+        if (event.target.dataset.type === 'modal-container' || event.target.dataset.type === 'modal-container-two' || event.target.dataset.type === 'modal-container-three') {
             if(event.target.dataset.type === 'modal-container'){
                 this.setState({  showModal: !this.state.showModal})
-            } else {
+            } else if(event.target.dataset.type === 'modal-container-two'){
                 this.setState({  showModalTwo: !this.state.showModalTwo})
+            } else {
+                this.setState({ showModalThree: !this.state.showModalThree })
             }
             
           }
@@ -264,7 +269,7 @@ class Profile extends React.Component{
                     }
                     </General>
                     <Social>
-                        <img src={Facebook} alt="" className='facebook'/>
+                        <a href={this.props.profile.facebook}><img src={Facebook} alt="" className='facebook'/></a>
                         <img src={Instagram} alt="" className='instagram'/>
                         <img src={Twitter} alt="" className='twitter'/>
                     </Social>
@@ -336,12 +341,49 @@ class Profile extends React.Component{
                     null
                   }
                   </InfoContainer>
-                  <div style={{ width: '100%', maxWidth: '1200px'}}>
-                      <Card>
+                  <div style={{ width: '100%', maxWidth: '1200px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                      {/* <Card>
                       <input type='file' name='file' accept='image/*' id='filetwo' onChange={this.handlePhotoChange} className={this.state.photo ? 'fileup go' : 'fileup'}/>
                       <label htmlFor="filetwo" >{this.state.photo ? <input className='pic-title' type="text" value={this.state.title} name='title' onChange={this.handleTitle} placeholder='Add Title..'/> : 'Add Artwork' }</label>
                       <button onClick={this.addPhoto}>Add</button>
-                      </Card>
+                      </Card> */}
+                     
+                    <Settings style={{ width: '85%', margin: '10px auto' }} onClick={() => {this.setState({ showModalThree: !this.state.showModalThree })}}>Submit a peice of your Artwork</Settings>
+               
+                      {this.state.showModalThree
+                    ?
+                    <ModalContainer data-type='modal-container-three' onClick={this.closeModal} ref={(element) => {
+                        this.modal = element;
+                     }}>
+                        <Modal>
+                          {!this.state.previews[0]
+                          ?
+                        <Dropzone
+                            accept="image/*"
+                            onDrop={this.onDrop.bind(this)}
+                            >
+                            {({getRootProps, getInputProps}) => (
+                                <UploadCont {...getRootProps()} >
+                                <input {...getInputProps()} />
+                                <p>Drop files here</p>
+                                <h1>+</h1>
+                                </UploadCont>
+                            )}
+                            </Dropzone>
+                            :
+                            <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '80%', paddingTop: '20px'}}>
+                            <input value={this.state.title} name='title' onChange={this.handleTitle} placeholder='Add Title..' style={{ height: '30px', width: '300px', border: '.5px solid rgb(45, 54, 98)', borderRadius: '6px' , paddingLeft: '5px'}}/>
+                            <div style={thumbsContainer}>
+                            {thumbs}
+                            </div>
+                            <Settings onClick={this.addPhoto} style={{ width: '90%' }}>Upload</Settings>
+                            </div>
+                            }
+                        </Modal>
+                    </ModalContainer>
+                    :
+                    null
+                  }
                       <ProfileWorks {...this.props}/>
                   </div>
                   </ProContainer>
@@ -521,7 +563,7 @@ const Header = styled.div`
     display: flex;
     position: relative;
     justify-content: flex-end;
-    height: 400px;
+    height: 300px;
     img{
         position: absolute;
         bottom: -40%;
@@ -543,7 +585,7 @@ const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  max-width: 1000px;
+  max-width: 1020px;
 `;
 
 
@@ -551,7 +593,7 @@ const InfoContainer = styled.div`
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        addPhoto: (photo, uid, title, artist, created, palette) => dispatch(addPhoto(photo, uid, title, artist, created, palette)),
+        addPhoto: (files, uid, title, artist, created, palette) => dispatch(addPhoto(files, uid, title, artist, created, palette)),
         uploadAvatar: (files, uid) => dispatch(uploadAvatar(files, uid)),
         addBio: (bio, uid) => dispatch(addBio(bio, uid)),
         editInfo: (firstName, lastName, bio, facebook, instagram, twitter, uid) => dispatch(editInfo(firstName, lastName, bio, facebook, instagram, twitter, uid))
