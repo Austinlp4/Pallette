@@ -76,6 +76,24 @@ export const addView = (key, uid) => {
     }
 }
 
+export const addComment = (key, uid, name, url, comment, useruid) => {
+    return (dispatch, getState, { getFirebase }) => {
+        const firebase = getFirebase();
+        let commentObj = {
+            useruid,
+            url,
+            name, 
+            comment
+        };
+        let rootRef = firebase.database().ref(`photos/${uid}/${key}/comments`);
+        // rootRef.on('value', data => {
+        //     comments = data.val().views + 1;
+        // })
+        console.log('comment', commentObj)
+        rootRef.push(commentObj);
+    }
+}
+
 export const addLike = (key, uid, auth) => {
     return (dispatch, getState, { getFirebase }) => {
         const firebase = getFirebase();
