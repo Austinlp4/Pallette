@@ -94,6 +94,14 @@ export const addComment = (key, uid, name, url, comment, useruid) => {
     }
 }
 
+export const removePhoto = (key, uid) => {
+    return (dispatch, getState, { getFirebase }) => {
+        const firebase = getFirebase();
+        let rootRef = firebase.database().ref(`photos/${uid}/${key}`);
+        rootRef.remove();
+    }
+}
+
 export const addLike = (key, uid, auth) => {
     return (dispatch, getState, { getFirebase }) => {
         const firebase = getFirebase();
