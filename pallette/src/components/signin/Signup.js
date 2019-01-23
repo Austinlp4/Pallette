@@ -20,14 +20,22 @@ class SignUp extends React.Component {
       followers: 0,
       facebook: '',
       instagram: '',
-      twitter: ''
+      twitter: '',
+      passValid: false
     };
   }
 
   onChange = event => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+    if(event.target.value.length > 0 && event.target.value.length < 8){
+      this.setState({
+        [event.target.name]: event.target.value,
+        passValid: true
+      })
+    }else{
+      this.setState({
+        [event.target.name]: event.target.value,
+      })
+    }
   };
 
   onSubmit = event => {
@@ -85,6 +93,12 @@ class SignUp extends React.Component {
                 value={this.state.password}
                 onChange={this.onChange}
               />
+              {this.state.passValid
+              ?
+                <p>Password must be at least 6 characters</p>
+                :
+                null
+            }
               <Button children="Register" />
               <div>
                 {this.props.authError ? <p>{this.props.authError}</p> : null}
