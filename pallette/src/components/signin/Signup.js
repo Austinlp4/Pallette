@@ -26,7 +26,7 @@ class SignUp extends React.Component {
   }
 
   onChange = event => {
-    if(event.target.value.length > 0 && event.target.value.length < 8){
+    if(event.target.value.length > 0 && event.target.value.length < 6){
       this.setState({
         [event.target.name]: event.target.value,
         passValid: true

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import firebase from '../../firebase';
 import styled from 'styled-components';
 import { addComment} from '../../store/actions/projectActions.js';
-
+import Avatar from '../../images/avatar-profile.png';
 
 class SingleCard extends React.Component{
     constructor(props){
@@ -106,7 +106,13 @@ class SingleCard extends React.Component{
                                 return (
                                     <div>
                                         <div style={{ display: 'flex', width: '180px', justifyContent: 'space-between' , alignItems: 'center'}}>
-                                    <img src={comment.url} alt="" style={{ width: '30px', height: '30px' , borderRadius: '50px'}}/>
+                                        {comment.url
+                                        ?
+                                        <img src={comment.url} alt="" style={{ width: '30px', height: '30px' , borderRadius: '50px'}}/>
+                                        :
+                                        <img src={Avatar} alt="" style={{ width: '30px', height: '30px' , borderRadius: '50px'}}/>
+                                    }
+                                    
                                     <h3 style={{ fontSize: '1.1rem' , fontWeight: '300'}}>{comment.name}</h3>
                                     </div>
                                     <p style={{ margin: '2px auto', color: 'white' }}>{comment.comment}</p>
