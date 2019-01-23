@@ -239,13 +239,17 @@ class Profile extends React.Component{
                     
                     </ProfilePicCont>
                   :
-                  <Upload className='upload'>
-                      <div className='upicon'>
-                          <input type='file' name='file' id='file' onChange={this.handleChange} className='fileup'/>
-                          <label htmlFor="file">Choose a file</label>
-                          <button onClick={this.handleUpload}>Upload</button>
-                      </div>
-                  </Upload>
+                  <ProfilePicCont>
+                      <ProfilePic>
+                    
+                          <Edit onClick={this.editAvatar}>
+                              + Edit
+                          </Edit>
+                          
+                  </ProfilePic>
+              
+                    
+                    </ProfilePicCont>
                   }
                   {/* <div>
                       <div>
