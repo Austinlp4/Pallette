@@ -96,7 +96,10 @@ class Profile extends React.Component{
     
     componentWillUnmount() {
         // Make sure to revoke the data uris to avoid memory leaks
-        this.state.previews.forEach(file => URL.revokeObjectURL(file.preview))
+        if(this.state.previews){
+            this.state.previews.forEach(file => URL.revokeObjectURL(file.preview))
+        }
+        
     }
 
 

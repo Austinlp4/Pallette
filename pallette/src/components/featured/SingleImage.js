@@ -52,9 +52,15 @@ class SingleCard extends React.Component{
         this.setState({ comment: '' })
     }
 
-    closeModal = event => {
+    closeModal = (event) => {
+        console.log('uids', event.target.id, this.props.auth.uid)
         if (event.target.dataset.type === 'modal-container') {
-            this.props.history.push('/')
+            if(event.target.id === this.props.auth.uid){
+                this.props.history.push('/profile')
+            } else {
+                this.props.history.push('/')
+            }
+            
           }
     }
 
@@ -73,9 +79,9 @@ class SingleCard extends React.Component{
 
     render(){
         const post = this.state.post;
-        console.log('params', this.props.match.params)
+        console.log('uid', post.uid)
         return (
-            <Container data-type='modal-container' onClick={this.closeModal}>
+            <Container data-type='modal-container' id={post.uid} onClick={this.closeModal}>
                 <Modal>
                 <div style={{ width: '40px', height: '700px' , display: 'flex', flexDirection: 'column'}}>
                     <div className='uno' style={{ backgroundColor: `${this.state.paletteOne}` , height: '20%', width: '40px'}}></div>
