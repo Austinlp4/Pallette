@@ -9,6 +9,10 @@ import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { Route, withRouter, NavLink } from 'react-router-dom';
 import Arrow from '../../images/down-arrow.png';
+import SearchIcon from '../../images/searchicon.png';
+import FilterIcon from '../../images/filtericon.png';
+import Question from '../../images/questionsicon.png';
+
 
 
 class MainPage extends React.Component{
@@ -48,10 +52,15 @@ class MainPage extends React.Component{
 
     render(){
         if(!this.props.auth.uid) return <Redirect to='/signup'/>
+        let colorOne = this.props.palette.palette[0];
+        let colorTwo = this.props.palette.palette[1];
+        let colorThree = this.props.palette.palette[2];
+        let colorFour = this.props.palette.palette[3];
+        let colorFive = this.props.palette.palette[4];
         return (
             <Container>
                 <Header>
-                    <Select >
+                    {/* <Select >
                         <div className='choice' onClick={this.showMenu}>
                             {this.state.choice}
                             <img src={Arrow} alt=""/>
@@ -73,7 +82,18 @@ class MainPage extends React.Component{
                                 null
                                 )
                         }
-                    </Select>
+                    </Select> */}
+                    <SideNav>
+                        <div className="box" style={{ borderRight: `5px solid ${colorOne}` }} >
+                            <img src={SearchIcon} alt=""/>
+                        </div>
+                        <div className="box" style={{ borderRight: `5px solid ${colorTwo}` }}><img src={FilterIcon} alt=""/>
+                        </div>
+                        <div className="box" style={{ borderRight: `5px solid ${colorThree}` }}>
+                        </div>
+                        <div className="box" style={{ borderRight: `5px solid ${colorFour}` }}></div>
+                        <div className="box last-box" style={{ borderRight: `5px solid ${colorFive}` }}><img src={Question} alt=""/></div>
+                    </SideNav>
                     <Pallette />
                 </Header>
               
@@ -99,6 +119,39 @@ class MainPage extends React.Component{
         )
     }
 }
+
+const SideNav = styled.div`
+    height: 500px;
+    width: 100px;
+    background-color: rgb(255, 218, 99);
+    position: fixed;
+    left: 0;
+    top: 20%;
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
+    .box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+        width: 100%;
+        border-bottom: .1px solid rgb(210, 190, 85);
+        img{
+            width: 50px;
+            height: auto;
+        }
+        &:hover{
+            background-color: rgb(255, 225, 110);
+        }
+    }
+    .last-box{ 
+        border-bottom: none;
+        img{
+            width: 45px;
+        }
+     }
+     
+`;
 
 const Header = styled.div`
   display: flex;
