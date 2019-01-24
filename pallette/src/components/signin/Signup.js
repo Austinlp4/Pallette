@@ -6,7 +6,7 @@ import Register from './Register';
 import { signUp, signUpWithGoogle } from '../../store/actions/authActions.js';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
-
+import Reg from '../../images/reg.png';
 
 
 class SignUp extends React.Component {
@@ -54,10 +54,10 @@ class SignUp extends React.Component {
   render() {
     return (
       <SignupContainer>
-        <div>
-          <div>
-            <h3>Register</h3>
-            <NavLink to='/signin' className='reroute'>
+        <div >
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div><img src={Reg} alt="" style={{ width: '300px', height: 'auto' }}/></div>
+            <NavLink to='/signin' className='reroute' style={{ alignSelf: 'center' }}>
               Already a user? Sign in here!
            </NavLink>
           </div>
@@ -95,7 +95,9 @@ class SignUp extends React.Component {
               />
               {this.state.passValid
               ?
-                <p>Password must be at least 6 characters</p>
+                <p 
+                style={{ margin: '0 0', fontSize: '.8rem', color: 'red' }}
+                >Password must be at least 6 characters</p>
                 :
                 null
             }
@@ -121,7 +123,7 @@ class SignUp extends React.Component {
 const SignupContainer = styled.div`
     height: 500px;
     width: 400px;
-    border: 1px solid rgb(255, 0, 198);
+    border: none;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -129,6 +131,7 @@ const SignupContainer = styled.div`
     margin: 13% 0;
     border-radius: 8px;
     background-color: rgb(45,54,98);
+    box-shadow: 0 4px 2px -2px rgba(28, 49, 68, 0.6);
     .reroute{
       color: white;
       &:hover{
@@ -171,8 +174,9 @@ const Button = styled.button`
   width: 250px;
   border: none;
   border-radius: 6px;
-  background-color: rgb(255, 0, 198);
-  color:  rgb(45,54,98);
+  background-color: rgb(255,102,79);
+  color: rgba(255, 218, 99, 0.9);
+  box-shadow: 0 4px 2px -2px rgba(28, 49, 68, 0.6);
   &:hover{
     background-color: rgb(255,126,70);
   }

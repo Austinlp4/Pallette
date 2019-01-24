@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { signIn } from '../../store/actions/authActions';
 import { Redirect, NavLink } from 'react-router-dom';
+import SignIcon from '../../images/signin.png';
 
 
 class Login extends Component {
@@ -32,7 +33,8 @@ handleSubmit = (event) => {
      <SigninContainer>
        <div>
          <div>
-           <h3>Log In</h3>
+           <div> <img src={SignIcon} alt="" style={{ width: '250px', height: 'auto' }}/></div>
+           
            <NavLink to='/signup' className='reroute'>
               New? Sign Up Here!
            </NavLink>
@@ -71,7 +73,7 @@ handleSubmit = (event) => {
 const SigninContainer = styled.div`
   height: 500px;
   width: 400px;
-  border: 1px solid rgb(255, 0, 198);
+  border: none;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -79,6 +81,7 @@ const SigninContainer = styled.div`
   margin: 13% 0;
   border-radius: 8px;
   background-color: rgb(45,54,98);
+  box-shadow: 0 4px 2px -2px rgba(28, 49, 68, 0.6);
   .reroute{
     color: white;
     &:hover{
@@ -120,10 +123,11 @@ const Button = styled.button`
   width: 250px;
   border: none;
   border-radius: 6px;
-  background-color: rgb(255, 0, 198);
-  color:  rgb(45,54,98);
+  background-color: rgb(255,102,79);
+  color: rgba(255, 218, 99, 0.9);
+  box-shadow: 0 4px 2px -2px rgba(28, 49, 68, 0.6);
   &:hover{
-    background-color: rgb(255,126,70);
+    background-color: rgba(255,102,79, 0.8);
   }
 `;
 

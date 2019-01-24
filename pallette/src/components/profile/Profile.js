@@ -121,7 +121,11 @@ class Profile extends React.Component{
         const uid = this.props.auth.uid;
         this.props.uploadAvatar(files, uid)
         if(this.state.showModalTwo){
-            this.setState({ showModalTwo: !this.state.showModalTwo })
+            this.setState({ showModalTwo: !this.state.showModalTwo },() => {
+                if(this.state.previews){
+                    this.setState({ files: '', previews: '' })
+                }
+            })
         }
         
     }
@@ -205,17 +209,21 @@ class Profile extends React.Component{
     render(){
         if(!this.props.auth.uid) return <Redirect to='/signup'/>  
         const {previews} = this.state;
-        const thumbs = previews.map(file => (
-        <div style={thumb} key={file.name}>
-            <div style={thumbInner}>
-            <img
-                src={file.preview}
-                style={img}
-                alt=''
-            />
-            </div>
-        </div>
-        ));
+        let thumbs = []
+        if(previews){
+            thumbs = previews.map(file => (
+                <div style={thumb} key={file.name}>
+                    <div style={thumbInner}>
+                    <img
+                        src={file.preview}
+                        style={img}
+                        alt=''
+                    />
+                    </div>
+                </div>
+                ));
+        }
+        
         // let followerSize = Object.keys(this.props.profile.followers).length;
         // let followingSize = Object.keys(this.props.profile.following).length;
         return (
