@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="https://www.pallet-app.com/static/media/pallete-logo.0365ef85.png">
+  <img src="https://www.pallet-app.com/static/media/pallete-logo.1d92eb32.png">
   <br><br>
 </p>
 
