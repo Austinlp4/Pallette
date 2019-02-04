@@ -41,8 +41,13 @@ class SignUp extends React.Component {
   onSubmit = event => {
     event.preventDefault();
     this.props.signUp(this.state)
-    this.props.history.push('/');
+    this.historyPush()
   };
+
+  historyPush = () => {
+    this.props.history.push('/')
+  }
+  
 
   googleSign = event => {
     event.preventDefault();

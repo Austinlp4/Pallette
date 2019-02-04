@@ -51,7 +51,7 @@ class MainPage extends React.Component{
     }
 
     render(){
-        if(!this.props.auth.uid) return <Redirect to='/signup'/>
+        // if(!this.props.auth.uid) return <Redirect to='/signup'/>
         let colorOne = this.props.palette.palette[0];
         let colorTwo = this.props.palette.palette[1];
         let colorThree = this.props.palette.palette[2];
