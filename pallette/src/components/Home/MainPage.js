@@ -12,7 +12,7 @@ import Arrow from '../../images/down-arrow.png';
 import SearchIcon from '../../images/searchicon.png';
 import FilterIcon from '../../images/filtericon.png';
 import Question from '../../images/questionsicon.png';
-
+import firebase from '../../firebase';
 
 
 class MainPage extends React.Component{
@@ -20,16 +20,8 @@ class MainPage extends React.Component{
         super(props);
         this.state = {
             choice: 'All',
-            showMenu: false
+            showMenu: false,
         };
-    }
-
-    componentDidMount() {
-        
-    }
-
-    select = (e) => {
-        
     }
 
     showMenu = event => {
@@ -51,7 +43,7 @@ class MainPage extends React.Component{
     }
 
     render(){
-        // if(!this.props.auth.uid) return <Redirect to='/signup'/>
+        if(!this.props.auth.uid) return <Redirect to='/signup'/>
         let colorOne = this.props.palette.palette[0];
         let colorTwo = this.props.palette.palette[1];
         let colorThree = this.props.palette.palette[2];
@@ -60,29 +52,6 @@ class MainPage extends React.Component{
         return (
             <Container>
                 <Header>
-                    {/* <Select >
-                        <div className='choice' onClick={this.showMenu}>
-                            {this.state.choice}
-                            <img src={Arrow} alt=""/>
-                        </div>
-                        {
-                            this.state.showMenu
-                                ? (
-                                <div className="menu"
-                                     ref={(element) => {
-                                        this.dropdownMenu = element;
-                                     }}
-                                >
-                                    <div onClick={() => {this.setState({ choice: 'All' })}}> All </div>
-                                    <div onClick={() => {this.setState({ choice: 'Most Popular'})}}> Most Popular </div>
-                                    <div onClick={() => {this.setState({ choice: 'Most Viewed'})}}> Most Viewed</div>
-                                </div>
-                                )
-                                : (
-                                null
-                                )
-                        }
-                    </Select> */}
                     <SideNav>
                         <div className="box" style={{ borderRight: `5px solid ${colorOne}` }} >
                             <img src={SearchIcon} alt=""/>
@@ -96,12 +65,11 @@ class MainPage extends React.Component{
                     </SideNav>
                     <Pallette />
                 </Header>
-              
-              {/* <h1>Most Popular</h1> */}
+
               <div>
                         { (this.state.choice === 'All')
                          ?
-                        <All {...this.props} />
+                        <All {...this.props} photos={this.state.photos}/>
                         :
                         (this.state.choice === 'Most Popular')
                         ?
@@ -111,7 +79,7 @@ class MainPage extends React.Component{
                         ?
                         <MostViewed {...this.props}/>
                         :
-                        <All {...this.props}/>
+                        <All {...this.props} photos={this.state.photos}/>
                         }
                     </div>
               
