@@ -140,7 +140,7 @@ const Home = styled.div`
   align-items: center;
   padding-top: 5px;
   z-index: 4;
-  background: linear-gradient(rgb(196,252,250), rgb(78,107,140));
+  background: rgb(242, 243, 247);
   padding-top: 0;
   .one, .two, .three{
     box-shadow: 0 9px 0px 0px white, 

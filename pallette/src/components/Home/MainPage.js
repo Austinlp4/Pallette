@@ -43,7 +43,7 @@ class MainPage extends React.Component{
     }
 
     render(){
-        if(!this.props.auth.uid) return <Redirect to='/signup'/>
+        // if(!this.props.auth.uid) return <Redirect to='/signup'/>
         let colorOne = this.props.palette.palette[0];
         let colorTwo = this.props.palette.palette[1];
         let colorThree = this.props.palette.palette[2];
@@ -52,7 +52,7 @@ class MainPage extends React.Component{
         return (
             <Container>
                 <Header>
-                    <SideNav>
+                    {/* <SideNav>
                         <div className="box" style={{ borderRight: `5px solid ${colorOne}` }} >
                             <img src={SearchIcon} alt=""/>
                         </div>
@@ -62,12 +62,12 @@ class MainPage extends React.Component{
                         </div>
                         <div className="box" style={{ borderRight: `5px solid ${colorFour}` }}></div>
                         <div className="box last-box" style={{ borderRight: `5px solid ${colorFive}` }}><img src={Question} alt=""/></div>
-                    </SideNav>
+                    </SideNav> */}
                     <Pallette />
                 </Header>
 
               <div>
-                        { (this.state.choice === 'All')
+                        {/* { (this.state.choice === 'All')
                          ?
                         <All {...this.props} photos={this.state.photos}/>
                         :
@@ -80,7 +80,8 @@ class MainPage extends React.Component{
                         <MostViewed {...this.props}/>
                         :
                         <All {...this.props} photos={this.state.photos}/>
-                        }
+                        } */}
+                        <All {...this.props} photos={this.state.photos}/>
                     </div>
               
             </Container>

@@ -11,7 +11,7 @@ const NavBar = (props) => {
     return(
         <Nav>
             <div className='logo' style={{ cursor: 'pointer' }}>
-                <img src={Logo} alt="" style={{ width: '200px' }} onClick={() => {props.history.push('/')}} />
+                <img src={Logo} alt="" style={{ width: '125px' }} onClick={() => {props.history.push('/')}} />
             </div>
             {props.auth.uid
             ? 
