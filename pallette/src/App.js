@@ -22,7 +22,8 @@ class App extends Component {
     super();
     this.state = {
       userCred: null,
-      user: ''
+      user: '',
+      photos: []
     }
   }
 
@@ -38,6 +39,31 @@ class App extends Component {
         })
       } 
     });
+    // let itemsRef = firebase.database().ref(`photos`);
+    // itemsRef.on('value', data => {
+    //   let works = [];
+    //   data = Object.values(data.val());
+    //   console.log('data', data)
+    //   data.forEach((child) => {
+    //     works.push(
+    //       Object.values(child)
+    //     );
+    //   });
+    //   let newWorks = Object.values(works);
+    //   console.log('newWorks', works)
+    //   let photos = [];
+    //   newWorks.map((child, i) => 
+    //     child.map((obj, i) => 
+    //       photos.push(
+    //         obj
+    //       )
+    //     )
+    //   )
+    //   this.shuffleArray(photos);
+    //   this.setState({
+    //     photos: photos,
+    //   });
+    // });
     this.colors();
     }
 
@@ -86,7 +112,7 @@ class App extends Component {
             <div className="three"> */}
               <Route exact path={ROUTES.LANDING} 
               render={props => (
-                <MainPage {...props} />
+                <MainPage {...props} photos={this.state.photos}/>
               )}/>
               <Route path='/cta' 
                   render={props => (

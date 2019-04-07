@@ -29,7 +29,7 @@ const NavBar = (props) => {
                 <div onClick={props.signOut}><img src={Logout} alt="" style={{ width: '40px', height: '30px', cursor: 'pointer' }} title='Logout'/></div>
             </Links>
             :
-            <div className='auth'>
+            <div className='auth' style={{ height: '64px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '150px', justifyItems: 'center' }}>
             <NavLink to='/signup'>
                 Sign Up
             </NavLink>
