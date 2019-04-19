@@ -35,7 +35,7 @@ class All extends React.Component {
       console.log('newWorks', works);
       let photos = [];
       newWorks.map((child, i) => child.map((obj, i) => photos.push(obj)));
-      this.shuffleArray(photos);
+      // this.shuffleArray(photos);
       this.setState({
         photos: photos,
       });

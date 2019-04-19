@@ -41,7 +41,7 @@ class SignUp extends React.Component {
   onSubmit = event => {
     event.preventDefault();
     this.props.signUp(this.state)
-    this.historyPush()
+    this.props.history.push('/signin');
   };
 
   historyPush = () => {

@@ -178,8 +178,7 @@ class SingleCard extends React.Component {
                           <div
                             style={{
                               display: 'flex',
-                              width: '180px',
-                              justifyContent: 'space-between',
+                              width: '300px',
                               alignItems: 'center',
                             }}
                           >
@@ -191,6 +190,7 @@ class SingleCard extends React.Component {
                                   width: '30px',
                                   height: '30px',
                                   borderRadius: '50px',
+                                  marginRight: '20px'
                                 }}
                               />
                             ) : (
@@ -201,6 +201,7 @@ class SingleCard extends React.Component {
                                   width: '30px',
                                   height: '30px',
                                   borderRadius: '50px',
+                                  marginRight: '20px'
                                 }}
                               />
                             )}

@@ -30,7 +30,6 @@ class App extends Component {
   componentDidMount() {
     this.removeAuthListener = firebase.auth().onAuthStateChanged(user=>{
       if(user){
-        // console.log(user.uid)
         this.itemsRef = firebase.database().ref(`users/${user.uid}`)
         this.itemsRef.on('value', data => {
           this.setState({ 
@@ -39,31 +38,7 @@ class App extends Component {
         })
       } 
     });
-    // let itemsRef = firebase.database().ref(`photos`);
-    // itemsRef.on('value', data => {
-    //   let works = [];
-    //   data = Object.values(data.val());
-    //   console.log('data', data)
-    //   data.forEach((child) => {
-    //     works.push(
-    //       Object.values(child)
-    //     );
-    //   });
-    //   let newWorks = Object.values(works);
-    //   console.log('newWorks', works)
-    //   let photos = [];
-    //   newWorks.map((child, i) => 
-    //     child.map((obj, i) => 
-    //       photos.push(
-    //         obj
-    //       )
-    //     )
-    //   )
-    //   this.shuffleArray(photos);
-    //   this.setState({
-    //     photos: photos,
-    //   });
-    // });
+    
     this.colors();
     }
 
@@ -107,9 +82,6 @@ class App extends Component {
     return (
       <Home className="App" style={{ minWidth: '1000px' }}>
         <NavBar {...this.props}/>
-        {/* <div className="one">
-          <div className="two">
-            <div className="three"> */}
               <Route exact path={ROUTES.LANDING} 
               render={props => (
                 <MainPage {...props} photos={this.state.photos}/>
