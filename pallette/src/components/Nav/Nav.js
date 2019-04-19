@@ -65,6 +65,7 @@ const Nav = styled.div`
       justify-content: space-between;
   }
   z-index: 6;
+  height: 80px;
 `;
 
 const Links = styled.div`

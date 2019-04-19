@@ -60,7 +60,7 @@ const PalletteContainer = styled.div`
   position: fixed;
   margin-left: 95px;
   z-index: 6;
-  margin-top: 4px;
+  margin-top: 20px;
   
 `;
 
