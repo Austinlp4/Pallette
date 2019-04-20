@@ -13,7 +13,7 @@ import SearchIcon from '../../images/searchicon.png';
 import FilterIcon from '../../images/filtericon.png';
 import Question from '../../images/questionsicon.png';
 import firebase from '../../firebase';
-import hero from '../../images/hero.png';
+import hero from '../../images/hero2.png';
 
 class MainPage extends React.Component {
   constructor(props) {
@@ -51,7 +51,14 @@ class MainPage extends React.Component {
         <Header>
           <Pallette />
         </Header>
-        {!this.props.auth.uid ? <Hero hero={hero} /> : null}
+        {!this.props.auth.uid ? 
+        <Hero hero={hero}>
+          <Cta>
+            <h2 className='main'>Use the palette at the top to create and showcase your work.</h2>
+            <h2>Everyone is waiting to see!</h2>
+            <Ctabutton onClick={()=>{this.props.history.push('./signup')}}>Get Started</Ctabutton>
+          </Cta>
+        </Hero>: null}
         <div>
           <All {...this.props} photos={this.state.photos} />
         </div>
@@ -59,6 +66,35 @@ class MainPage extends React.Component {
     );
   }
 }
+
+const Ctabutton = styled.div`
+  width: 200px;
+  height: 50px;
+  background-color: rgb(255,218,99);
+  color: rgb(28, 49, 68);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  border-radius: 6px;
+`;
+
+const Cta = styled.div`
+  display: flex;
+  margin-top: 200px;
+  flex-direction: column;
+  margin-left: 15%;
+  max-width: 700px;
+  h2{
+    font-size: 2rem;
+    font-weight: lighter;
+  }
+  .main{
+    font-size: 3rem;
+    font-weight: lighter;
+    margin-bottom: 20px;
+  }
+`;
 
 const Hero = styled.div`
   background-image: url(${hero});

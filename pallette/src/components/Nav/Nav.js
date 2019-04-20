@@ -26,7 +26,7 @@ const NavBar = (props) => {
                 <img src={Avatar} alt="" style={{ width: '40px', height: '40px' }}/>
                 }
                 </NavLink>
-                <div onClick={props.signOut}><img src={Logout} alt="" style={{ width: '40px', height: '30px', cursor: 'pointer' }} title='Logout'/></div>
+                <div onClick={props.signOut}><img src={Logout} alt="" style={{ width: '40px', height: '25px', cursor: 'pointer' }} title='Logout'/></div>
             </Links>
             :
             <div className='auth' style={{ height: '64px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '150px', justifyItems: 'center' }}>
