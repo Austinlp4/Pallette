@@ -10,7 +10,7 @@ export const Container = styled.div`
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    max-width: 1100px;
+    max-width: 1400px;
     margin: 100px auto;
     justify-content: center;
   `;

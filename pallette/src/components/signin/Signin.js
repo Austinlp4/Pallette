@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { signIn } from '../../store/actions/authActions';
 import { Redirect, NavLink } from 'react-router-dom';
 import SignIcon from '../../images/signin.png';
-
+import Art from '../../images/signin-art.jpg';
 
 class Login extends Component {
  state = {
@@ -30,6 +30,10 @@ handleSubmit = (event) => {
    const { email, password, error } = this.state;
    if(this.props.auth.uid) return <Redirect to='/' />
    return (
+    <div style={{ display: 'flex', flexDirection: 'row', width: '650px', margin: '200px auto', borderRadius: '8px'}}>
+    <div>
+      <img src={Art} alt="" style={{ width: '300px', height: '500px' }}/>
+    </div>
      <SigninContainer>
        <div>
          <div>
@@ -66,6 +70,7 @@ handleSubmit = (event) => {
          </div>
        </div>
      </SigninContainer>
+     </div>
    );
  }
 }
@@ -78,8 +83,6 @@ const SigninContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: 13% 0;
-  border-radius: 8px;
   background-color: rgb(45,54,98);
   box-shadow: 0 4px 2px -2px rgba(28, 49, 68, 0.6);
   .reroute{

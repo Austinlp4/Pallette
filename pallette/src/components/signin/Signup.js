@@ -7,7 +7,7 @@ import { signUp, signUpWithGoogle } from '../../store/actions/authActions.js';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import Reg from '../../images/reg.png';
-
+import Art from '../../images/art-register.jpg';
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -58,6 +58,10 @@ class SignUp extends React.Component {
   
   render() {
     return (
+      <div style={{ display: 'flex', flexDirection: 'row', width: '650px', margin: '200px auto', borderRadius: '8px'}}>
+        <div>
+          <img src={Art} alt="" style={{ width: '300px', height: '500px' }}/>
+        </div>
       <SignupContainer>
         <div >
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -121,6 +125,7 @@ class SignUp extends React.Component {
             )}
           />
       </SignupContainer>
+      </div>
     );
   }
 }
@@ -133,8 +138,6 @@ const SignupContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 13% 0;
-    border-radius: 8px;
     background-color: rgb(45,54,98);
     box-shadow: 0 4px 2px -2px rgba(28, 49, 68, 0.6);
     .reroute{
