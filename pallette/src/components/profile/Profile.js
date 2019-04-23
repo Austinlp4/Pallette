@@ -206,7 +206,9 @@ class Profile extends React.Component{
         const twitter = this.state.twitter;
         const uid = this.props.auth.uid;
         this.props.editInfo(firstName, lastName, bio, facebook, instagram, twitter, uid)
-        this.props.history.push('/profile')
+        this.setState({
+            showModal: !this.state.showModal
+        })
         
     }
     render(){
