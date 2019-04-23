@@ -201,11 +201,4 @@ const mapStateToProps = state => {
   };
 };
 
-// const mapDispatchToProps = (dispatch) => {
-//     return {
-//         addView: (key, uid) => dispatch(addView(key, uid)),
-        
-//     }
-// }
-
 export default connect(mapStateToProps)(ProfileWorks);
