@@ -58,10 +58,10 @@ class SignUp extends React.Component {
   
   render() {
     return (
-      <div style={{ display: 'flex', flexDirection: 'row', width: '650px', margin: '200px auto', borderRadius: '8px'}}>
-        <div>
+      <OverallContainer >
+        <ImgCont>
           <img src={Art} alt="" style={{ width: '300px', height: '500px' }}/>
-        </div>
+        </ImgCont>
       <SignupContainer>
         <div >
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -125,10 +125,30 @@ class SignUp extends React.Component {
             )}
           />
       </SignupContainer>
-      </div>
+      </OverallContainer>
     );
   }
 }
+
+const ImgCont = styled.div`
+  @media(max-width: 690px){
+    display: none;
+  }
+`;
+
+const OverallContainer = styled.div`
+  display: flex;
+  flexDirection: row;
+  width: 650px;
+  margin: 200px auto;
+  borderRadius: 8px;
+  @media(max-width: 690px){
+    justify-content: center;
+    width: 100%;
+    margin: 125px auto;
+  }
+
+`;
 
 const SignupContainer = styled.div`
     height: 500px;

@@ -30,10 +30,10 @@ handleSubmit = (event) => {
    const { email, password, error } = this.state;
    if(this.props.auth.uid) return <Redirect to='/' />
    return (
-    <div style={{ display: 'flex', flexDirection: 'row', width: '650px', margin: '200px auto', borderRadius: '8px'}}>
-    <div>
+    <OverallContainer>
+    <ImgCont>
       <img src={Art} alt="" style={{ width: '300px', height: '500px' }}/>
-    </div>
+    </ImgCont>
      <SigninContainer>
        <div>
          <div>
@@ -70,11 +70,29 @@ handleSubmit = (event) => {
          </div>
        </div>
      </SigninContainer>
-     </div>
+     </OverallContainer>
    );
  }
 }
 
+const ImgCont = styled.div`
+  @media(max-width: 690px){
+    display: none;
+  }
+`;
+
+const OverallContainer = styled.div`
+  display: flex;
+  flexDirection: row;
+  width: 650px;
+  margin: 200px auto;
+  borderRadius: 8px;
+  @media(max-width: 690px){
+    justify-content: center;
+    width: 100%;
+    margin: 125px auto;
+  }
+`;
 const SigninContainer = styled.div`
   height: 500px;
   width: 400px;

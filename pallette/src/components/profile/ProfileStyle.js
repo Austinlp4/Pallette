@@ -43,6 +43,23 @@ export const ProfilePic = styled.div`
     left: 35%;
     border: 7px solid rgb(28,49,68);
     box-shadow: 0 4px 2px -2px black;
+    @media(max-width: 1130px){
+        width: 275px;
+        height: 275px;
+        bottom: 5%;
+    }
+    @media(max-width: 920px){
+        left: 30%;
+    }
+    @media(max-width: 750px){
+        left: 25%;
+    }
+    @media(max-width: 700px){
+        left: 20%;
+    }
+    @media(max-width: 550px){
+        left: 15%;
+    }
 `;
 
 export const Edit = styled.div`
@@ -156,6 +173,12 @@ export const General = styled.div`
         p{
             color: rgb(255,218,99);
         }
+        @media(max-width: 1130px){
+            width: 80%;
+        }
+        @media(max-width: 600px){
+            width: 100%;
+        }
     }
 `;
 
@@ -182,7 +205,9 @@ export const Header = styled.div`
         width: 300px;
         height: 300px;
     }
-    
+    @media(max-width: 1130px){
+        height: 320px;
+    }
 `;
 
 export const Stats = styled.div`

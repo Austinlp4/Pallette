@@ -27,6 +27,10 @@ export const Cta = styled.div`
     font-weight: lighter;
     margin-bottom: 20px;
   }
+  @media(max-width: 1005px){
+    margin-left: 10%;
+    margin-top: 100px;
+  }
 `;
 
 

@@ -67,7 +67,7 @@ class App extends Component {
 
   render() {
     return (
-      <Home className="App" style={{ minWidth: '1000px' }}>
+      <Home className="App" >
         <NavBar {...this.props} />
         <Route
           exact

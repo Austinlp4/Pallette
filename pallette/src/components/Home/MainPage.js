@@ -79,6 +79,9 @@ const Hero = styled.div`
   width: 100%;
   top: 0;
   margin-top: 0;
+  @media(max-width: 1005px){
+    display: none;
+  }
 `;
 
 const mapStateToProps = state => {
