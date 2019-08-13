@@ -33,41 +33,8 @@ import {
   ProfilePicCont,
 } from './ProfileStyle.js';
 
-const thumbsContainer = {
-  display: 'flex',
-  flexDirection: 'row',
-  flexWrap: 'wrap',
-  marginTop: 16,
-  width: '90%',
-  height: '90%',
-  justifyContent: 'center',
-  alignItems: 'center',
-};
+import { thumbsContainer, thumb, thumbInner, img } from './thumbStyles';
 
-const thumb = {
-  display: 'inline-flex',
-  borderRadius: 2,
-  border: '1px solid #eaeaea',
-  marginBottom: 8,
-  marginRight: 8,
-  width: '90%',
-  height: '90%',
-  padding: 4,
-  boxSizing: 'border-box',
-  justifyContent: 'center',
-};
-
-const thumbInner = {
-  display: 'flex',
-  minWidth: 0,
-  overflow: 'hidden',
-};
-
-const img = {
-  display: 'block',
-  width: 'auto',
-  height: '100%',
-};
 
 class Profile extends React.Component {
   constructor(props) {
@@ -177,12 +144,6 @@ class Profile extends React.Component {
     this.props.addBio(bio, uid);
   };
 
-  handleTitle = event => {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
-  };
-
   showModal = event => {
     this.setState({ showModal: !this.state.showModal });
   };
@@ -203,11 +164,7 @@ class Profile extends React.Component {
     }
   };
 
-  enter = () => {
-    this.setState(prevState => ({ hovered: !prevState.hovered }));
-  };
-
-  leave = () => {
+  toggle = () => {
     this.setState(prevState => ({ hovered: !prevState.hovered }));
   };
 
@@ -216,12 +173,7 @@ class Profile extends React.Component {
   };
 
   editSettings = () => {
-    const firstName = this.state.firstName;
-    const lastName = this.state.lastName;
-    const bio = this.state.bio;
-    const facebook = this.state.facebook;
-    const instagram = this.state.instagram;
-    const twitter = this.state.twitter;
+    const { firstName, lastName, bio, facebook, instagram, twitter } = this.state;
     const uid = this.props.auth.uid;
     this.props.editInfo(
       firstName,
@@ -256,8 +208,8 @@ class Profile extends React.Component {
           <Header>
             {this.props.profile.url ? (
               <ProfilePicCont
-                onMouseEnter={this.enter}
-                onMouseLeave={this.leave}
+                onMouseEnter={this.toggle}
+                onMouseLeave={this.toggle}
               >
                 <ProfilePic image={this.props.profile.url}>
                   {this.state.hovered ? (
@@ -488,7 +440,7 @@ class Profile extends React.Component {
                     <input
                       value={this.state.title}
                       name="title"
-                      onChange={this.handleTitle}
+                      onChange={this.handleInputChange}
                       placeholder="Add Title.."
                       style={{
                         height: '30px',
