@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { Route, withRouter, NavLink } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import styled from 'styled-components';
-import Logo from './images/pallete-logo.png';
 import SignUp from './components/signin/Signup';
 import Login from './components/signin/Signin';
 import MainPage from './components/Home/MainPage';
 import Register from './components/signin/Register';
 import * as ROUTES from '../src/components/routes';
-import firebase, { auth } from './firebase';
+import firebase from './firebase';
 import Profile from './components/profile/Profile';
 import { connect } from 'react-redux';
 import NavBar from './components/Nav/Nav.js';

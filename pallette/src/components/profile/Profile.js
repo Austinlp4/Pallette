@@ -1,8 +1,7 @@
 import React from 'react';
-import firebase, { storage } from '../../firebase';
 import ProfileWorks from './ProfileWorks';
 import { connect } from 'react-redux';
-import { Upload, ProContainer, Info, Card } from './ProfileStyles.js';
+import { ProContainer} from './ProfileStyles.js';
 import {
   addPhoto,
   uploadAvatar,
@@ -13,27 +12,22 @@ import moment from 'moment';
 import Facebook from '../../images/facebook.png';
 import Instagram from '../../images/instagram.png';
 import Twitter from '../../images/twitter.png';
-import ColorThief from '../../ColorThief';
 import { Redirect } from 'react-router-dom';
 import Dropzone from 'react-dropzone';
 import {
   InfoContainer,
-  Stats,
-  Header,
   Information,
   General,
   Social,
-  Settings,
   ModalContainer,
   Modal,
-  Edit,
-  ProfilePic,
-  SettingsInput,
   UploadCont,
-  ProfilePicCont,
+  SettingsInput,
+  SettingsCont
 } from './ProfileStyle.js';
-
+import Header from './Header';
 import { thumbsContainer, thumb, thumbInner, img } from './thumbStyles';
+// import Settings from './Settings';
 
 
 class Profile extends React.Component {
@@ -61,7 +55,6 @@ class Profile extends React.Component {
       previews: [],
       showModalThree: false,
     };
-    this.colorThief = new ColorThief();
   }
 
   onDrop(files) {
@@ -205,27 +198,12 @@ class Profile extends React.Component {
     return (
       <ProContainer>
         <InfoContainer>
-          <Header>
-            {this.props.profile.url ? (
-              <ProfilePicCont
-                onMouseEnter={this.toggle}
-                onMouseLeave={this.toggle}
-              >
-                <ProfilePic image={this.props.profile.url}>
-                  {this.state.hovered ? (
-                    <Edit onClick={this.editAvatar}>+ Edit</Edit>
-                  ) : null}
-                </ProfilePic>
-              </ProfilePicCont>
-            ) : (
-              <ProfilePicCont>
-                <ProfilePic>
-                  <Edit onClick={this.editAvatar}>+ Edit</Edit>
-                </ProfilePic>
-              </ProfilePicCont>
-            )}
-            <Settings onClick={this.showModal}>Settings</Settings>
-          </Header>
+          <Header 
+            toggle={this.toggle}
+            editAvatar={this.editAvatar}
+            showModal={this.showModal}
+            hovered={this.state.hovered}
+          />
           <Information>
             <General>
               <h1>
@@ -340,9 +318,9 @@ class Profile extends React.Component {
                     onChange={this.handleInputChange}
                     style={{ width: '90%' }}
                   />
-                  <Settings style={{ width: '90%', marginTop: '35px' }}>
+                  <SettingsCont style={{ width: '90%', marginTop: '35px' }}>
                     Save
-                  </Settings>
+                  </SettingsCont>
                 </form>
               </Modal>
             </ModalContainer>
@@ -377,12 +355,12 @@ class Profile extends React.Component {
                     }}
                   >
                     <div style={thumbsContainer}>{thumbs}</div>
-                    <Settings
+                    <SettingsCont
                       onClick={this.handleUpload}
                       style={{ width: '90%' }}
                     >
                       Upload
-                    </Settings>
+                    </SettingsCont>
                   </div>
                 )}
               </Modal>
@@ -398,14 +376,14 @@ class Profile extends React.Component {
             alignItems: 'center',
           }}
         >
-          <Settings
+          <SettingsCont
             style={{ width: '85%', margin: '10px auto' }}
             onClick={() => {
               this.setState({ showModalThree: !this.state.showModalThree });
             }}
           >
             Submit a peice of your Artwork
-          </Settings>
+          </SettingsCont>
 
           {this.state.showModalThree ? (
             <ModalContainer
@@ -451,9 +429,9 @@ class Profile extends React.Component {
                       }}
                     />
                     <div style={thumbsContainer}>{thumbs}</div>
-                    <Settings onClick={this.addPhoto} style={{ width: '90%' }}>
+                    <SettingsCont onClick={this.addPhoto} style={{ width: '90%' }}>
                       Upload
-                    </Settings>
+                    </SettingsCont>
                   </div>
                 )}
               </Modal>

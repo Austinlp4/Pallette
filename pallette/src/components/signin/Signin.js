@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import firebase, { auth } from '../../firebase';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { signIn } from '../../store/actions/authActions';

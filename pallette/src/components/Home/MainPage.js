@@ -3,14 +3,11 @@ import styled from 'styled-components';
 import Pallette from '../pallette/Pallette';
 import All from '../featured/All';
 import { connect } from 'react-redux';
-import { Redirect } from 'react-router-dom';
-import { Route, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import hero from '../../images/hero2.png';
 import {
   Container,
-  Select,
   Header,
-  SideNav,
   Cta,
   Ctabutton,
 } from './MainPageStyle.js';

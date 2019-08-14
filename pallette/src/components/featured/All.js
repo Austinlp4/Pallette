@@ -136,46 +136,14 @@ class All extends React.Component {
                   bottom: '0',
                 }}
               >
-                <div
-                  className="uno"
-                  style={{
-                    backgroundColor: `${item.palette[0]}`,
-                    width: '20%',
-                    height: '6px',
-                  }}
-                />
-                <div
-                  className="dos"
-                  style={{
-                    backgroundColor: `${item.palette[1]}`,
-                    width: '20%',
-                    height: '6px',
-                  }}
-                />
-                <div
-                  className="tres"
-                  style={{
-                    backgroundColor: `${item.palette[2]}`,
-                    width: '20%',
-                    height: '6px',
-                  }}
-                />
-                <div
-                  className="quatro"
-                  style={{
-                    backgroundColor: `${item.palette[3]}`,
-                    width: '20%',
-                    height: '6px',
-                  }}
-                />
-                <div
-                  className="cinco"
-                  style={{
-                    backgroundColor: `${item.palette[4]}`,
-                    width: '20%',
-                    height: '6px',
-                  }}
-                />
+                {item.palette.map(color => 
+                <div style={{
+                  backgroundColor: `${color}`,
+                  width: '20%',
+                  height: '6px'
+                }}>
+                </div>
+                )}
               </div>
             </div>
           </Card>

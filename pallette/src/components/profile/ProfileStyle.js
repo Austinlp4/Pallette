@@ -103,7 +103,7 @@ export const ModalContainer = styled.div`
 `;
 
 
-export const Settings = styled.button`
+export const SettingsCont = styled.button`
     border: none;
     border-radius: 6px;
     box-shadow: 0 4px 2px -2px rgba(28, 49, 68, 0.6);
@@ -191,7 +191,7 @@ export const Information = styled.div`
     
 `;
 
-export const Header = styled.div`
+export const HeaderCont = styled.div`
     background-color: rgb(78, 107, 140);
     display: flex;
     position: relative;

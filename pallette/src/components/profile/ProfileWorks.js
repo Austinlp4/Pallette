@@ -1,9 +1,8 @@
 import React from 'react';
-import firebase, { storage } from '../../firebase';
+import firebase from '../../firebase';
 import { connect } from 'react-redux';
 import View from '../../images/view.png';
 import Like from '../../images/heart.png';
-import ColorThief from '../../ColorThief';
 import { Container, Card, Imgcont } from './ProfileWorksStyle.js';
 
 class ProfileWorks extends React.Component {
@@ -12,7 +11,6 @@ class ProfileWorks extends React.Component {
     this.state = {
       works: [],
     };
-    this.colorThief = new ColorThief();
   }
 
   componentDidMount() {

@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import colors from 'nice-color-palettes';
 import { addPalette } from '../../store/actions/paletteActions';
 import { connect } from 'react-redux';
 
@@ -12,24 +11,8 @@ class Pallette extends React.Component{
         };
     }
 
-    // componentDidMount() {
-    //     this.setState({
-    //         pallete: colors[4]
-    //     });
-    // }
-
-
-    // colors = () => {
-    //     let count = 16;
-    //     const pallete = colors[count]
-    //     this.props.addPalette(pallete)
-    //     return pallete;
-    // }
 
     render(){
-        // const pallete = this.colors();
-        
-        console.log('palette', this.props.palette.palette)
         let colorOne = this.props.palette.palette[0];
         let colorTwo = this.props.palette.palette[1];
         let colorThree = this.props.palette.palette[2];
