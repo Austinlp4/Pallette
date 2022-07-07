@@ -5,7 +5,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "firebase-tools": "^6.2.2",
-    "moment": "^2.23.0",
+    "moment": "^2.29.4",
     "nice-color-palettes": "^2.0.0",
     "nuka-carousel": "^4.4.3",
     "react": "^16.6.0",
